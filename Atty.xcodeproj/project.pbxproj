@@ -86,8 +86,7 @@
 		777027A02AE28F5E007CA2B7 /* Atty */ = {
 			isa = PBXGroup;
 			children = (
-				777027A12AE28F5E007CA2B7 /* AppDelegate.swift */,
-				777027A32AE28F5E007CA2B7 /* SceneDelegate.swift */,
+				77E1B7132AE2A5220050C868 /* Aplication */,
 				777027A52AE28F5E007CA2B7 /* ViewController.swift */,
 				777027A72AE28F5E007CA2B7 /* Main.storyboard */,
 				777027AA2AE28F61007CA2B7 /* Assets.xcassets */,
@@ -95,6 +94,15 @@
 				777027AF2AE28F61007CA2B7 /* Info.plist */,
 			);
 			path = Atty;
+			sourceTree = "<group>";
+		};
+		77E1B7132AE2A5220050C868 /* Aplication */ = {
+			isa = PBXGroup;
+			children = (
+				777027A12AE28F5E007CA2B7 /* AppDelegate.swift */,
+				777027A32AE28F5E007CA2B7 /* SceneDelegate.swift */,
+			);
+			path = Aplication;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
