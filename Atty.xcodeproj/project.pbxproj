@@ -10,12 +10,15 @@
 		777027A22AE28F5E007CA2B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777027A12AE28F5E007CA2B7 /* AppDelegate.swift */; };
 		777027A42AE28F5E007CA2B7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777027A32AE28F5E007CA2B7 /* SceneDelegate.swift */; };
 		777027A62AE28F5E007CA2B7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777027A52AE28F5E007CA2B7 /* ViewController.swift */; };
-		777027A92AE28F5E007CA2B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 777027A72AE28F5E007CA2B7 /* Main.storyboard */; };
 		777027AB2AE28F61007CA2B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 777027AA2AE28F61007CA2B7 /* Assets.xcassets */; };
 		777027AE2AE28F61007CA2B7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 777027AC2AE28F61007CA2B7 /* LaunchScreen.storyboard */; };
 		777027B72AE29050007CA2B7 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 777027B62AE29050007CA2B7 /* Realm */; };
 		777027B92AE29050007CA2B7 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 777027B82AE29050007CA2B7 /* RealmSwift */; };
 		777027C12AE2910D007CA2B7 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 777027C02AE2910D007CA2B7 /* Alamofire */; };
+		77DB26F52AE5537400944822 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB26F42AE5537400944822 /* SignInView.swift */; };
+		77DB26FB2AE5671900944822 /* DS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB26FA2AE5671900944822 /* DS.swift */; };
+		77DB26FE2AE56D3600944822 /* AuthTFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB26FD2AE56D3600944822 /* AuthTFView.swift */; };
+		77DB27012AE5814D00944822 /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB27002AE5814D00944822 /* AuthButton.swift */; };
 		77E1B6FB2AE2A0290050C868 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 77E1B6FA2AE2A0290050C868 /* SnapKit */; };
 		77E1B6FE2AE2A43B0050C868 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 77E1B6FD2AE2A43B0050C868 /* FirebaseAnalytics */; };
 		77E1B7002AE2A43B0050C868 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 77E1B6FF2AE2A43B0050C868 /* FirebaseAnalyticsSwift */; };
@@ -35,10 +38,20 @@
 		777027A12AE28F5E007CA2B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		777027A32AE28F5E007CA2B7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		777027A52AE28F5E007CA2B7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		777027A82AE28F5E007CA2B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		777027AA2AE28F61007CA2B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		777027AD2AE28F61007CA2B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		777027AF2AE28F61007CA2B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		77DB26F42AE5537400944822 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		77DB26FA2AE5671900944822 /* DS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DS.swift; sourceTree = "<group>"; };
+		77DB26FD2AE56D3600944822 /* AuthTFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTFView.swift; sourceTree = "<group>"; };
+		77DB27002AE5814D00944822 /* AuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
+		77DB27032AE58F1A00944822 /* Manrope-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Regular.ttf"; sourceTree = "<group>"; };
+		77DB27042AE58F1B00944822 /* Manrope-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Light.ttf"; sourceTree = "<group>"; };
+		77DB27052AE58F1B00944822 /* Manrope-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-ExtraLight.ttf"; sourceTree = "<group>"; };
+		77DB27062AE58F1B00944822 /* Manrope-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Bold.ttf"; sourceTree = "<group>"; };
+		77DB27072AE58F1B00944822 /* Manrope-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-ExtraBold.ttf"; sourceTree = "<group>"; };
+		77DB27082AE58F1B00944822 /* Manrope-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Medium.ttf"; sourceTree = "<group>"; };
+		77DB27092AE58F1B00944822 /* Manrope-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-SemiBold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,13 +100,71 @@
 			isa = PBXGroup;
 			children = (
 				77E1B7132AE2A5220050C868 /* Aplication */,
+				77DB26F62AE5577400944822 /* Helpers */,
+				77DB26F32AE5531000944822 /* Views */,
 				777027A52AE28F5E007CA2B7 /* ViewController.swift */,
-				777027A72AE28F5E007CA2B7 /* Main.storyboard */,
+				77DB26F92AE55C5000944822 /* SupportingFiles */,
+			);
+			path = Atty;
+			sourceTree = "<group>";
+		};
+		77DB26F32AE5531000944822 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				77DB26F42AE5537400944822 /* SignInView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		77DB26F62AE5577400944822 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				77DB26FF2AE5812C00944822 /* CustomComponents */,
+				77DB26FC2AE56D1100944822 /* CustomViews */,
+				77DB26FA2AE5671900944822 /* DS.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		77DB26F92AE55C5000944822 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				77DB27022AE58EE600944822 /* Font */,
 				777027AA2AE28F61007CA2B7 /* Assets.xcassets */,
 				777027AC2AE28F61007CA2B7 /* LaunchScreen.storyboard */,
 				777027AF2AE28F61007CA2B7 /* Info.plist */,
 			);
-			path = Atty;
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		77DB26FC2AE56D1100944822 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				77DB26FD2AE56D3600944822 /* AuthTFView.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		77DB26FF2AE5812C00944822 /* CustomComponents */ = {
+			isa = PBXGroup;
+			children = (
+				77DB27002AE5814D00944822 /* AuthButton.swift */,
+			);
+			path = CustomComponents;
+			sourceTree = "<group>";
+		};
+		77DB27022AE58EE600944822 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				77DB27062AE58F1B00944822 /* Manrope-Bold.ttf */,
+				77DB27072AE58F1B00944822 /* Manrope-ExtraBold.ttf */,
+				77DB27052AE58F1B00944822 /* Manrope-ExtraLight.ttf */,
+				77DB27042AE58F1B00944822 /* Manrope-Light.ttf */,
+				77DB27082AE58F1B00944822 /* Manrope-Medium.ttf */,
+				77DB27032AE58F1A00944822 /* Manrope-Regular.ttf */,
+				77DB27092AE58F1B00944822 /* Manrope-SemiBold.ttf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 		77E1B7132AE2A5220050C868 /* Aplication */ = {
@@ -188,7 +259,6 @@
 			files = (
 				777027AE2AE28F61007CA2B7 /* LaunchScreen.storyboard in Resources */,
 				777027AB2AE28F61007CA2B7 /* Assets.xcassets in Resources */,
-				777027A92AE28F5E007CA2B7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,8 +269,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77DB26FE2AE56D3600944822 /* AuthTFView.swift in Sources */,
+				77DB27012AE5814D00944822 /* AuthButton.swift in Sources */,
 				777027A62AE28F5E007CA2B7 /* ViewController.swift in Sources */,
 				777027A22AE28F5E007CA2B7 /* AppDelegate.swift in Sources */,
+				77DB26F52AE5537400944822 /* SignInView.swift in Sources */,
+				77DB26FB2AE5671900944822 /* DS.swift in Sources */,
 				777027A42AE28F5E007CA2B7 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -208,14 +282,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		777027A72AE28F5E007CA2B7 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				777027A82AE28F5E007CA2B7 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		777027AC2AE28F61007CA2B7 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -350,11 +416,11 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HHTA648R26;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Atty/Info.plist;
+				INFOPLIST_FILE = Atty/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Atty;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -380,11 +446,11 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HHTA648R26;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Atty/Info.plist;
+				INFOPLIST_FILE = Atty/SupportingFiles/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Atty;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;

@@ -16,10 +16,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AttyLogo" translatesAutoresizingMaskIntoConstraints="NO" id="DTW-8o-Qkv">
-                                <rect key="frame" x="60" y="371.33333333333331" width="273" height="109.33333333333331"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreenLogo" translatesAutoresizingMaskIntoConstraints="NO" id="DTW-8o-Qkv">
+                                <rect key="frame" x="60" y="357.66666666666669" width="273" height="136.66666666666669"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="DTW-8o-Qkv" secondAttribute="height" multiplier="127:51" id="YeM-bn-a4y"/>
+                                    <constraint firstAttribute="width" secondItem="DTW-8o-Qkv" secondAttribute="height" multiplier="2:1" id="YeM-bn-a4y"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -39,6 +40,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="AttyLogo" width="128" height="51"/>
+        <image name="LaunchScreenLogo" width="1000" height="500"/>
     </resources>
 </document>
