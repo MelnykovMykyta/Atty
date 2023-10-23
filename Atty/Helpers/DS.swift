@@ -21,17 +21,15 @@ enum DS {
     
     enum Constraints {
         static var authLogoLeadingTrailing = 60
-        static var authLabelBottomInset = 60
-        static var authStackViewLeadinTrailing = 16
+        static var authLabelBottomInset = 20
+        static var authViewLeadinTrailing = 16
         static var authTFInsets = 20
+        static var authTFSpacing = 8
         static var safeAreaInset = 12
-
     }
     
     enum Sizes {
         static var halfSize = 0.5
         static var authTFHeight = 60
-
-
     }
 }

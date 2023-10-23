@@ -9,9 +9,10 @@ import Foundation
 import UIKit
 
 class AuthTFView: UIView {
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         setupView()
     }
     
@@ -30,6 +31,4 @@ extension AuthTFView {
         layer.cornerCurve = .continuous
         clipsToBounds = true
     }
-    
-    
 }
