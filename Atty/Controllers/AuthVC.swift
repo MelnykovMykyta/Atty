@@ -13,6 +13,7 @@ class AuthVC: UIViewController, UITextFieldDelegate {
     
     private var baseView = AuthBaseView()
     private var authView: UIView!
+    private var viewModel = AuthViewModel()
     
     private var authSwitch: Bool = true {
         didSet {
@@ -64,35 +65,22 @@ private extension AuthVC {
             $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
         }
     }
-    
 }
 
 extension AuthVC {
     
     @objc private func tapAuthButton() {
+        
         switch authSwitch {
-            
         case true:
-            guard let authView_ = authView as? SignInView else { return }
-            let email = authView_.userEmailTF.text
-            let password = authView_.userPasswordTF.text
-            
-            guard let email_ = email, let password_ = password else { return }
-            print("\(email_) - \(password_)")
-            
+            viewModel.signInUser(view: authView)
         case false:
-            guard let authView_ = authView as? SignUpView else { return }
-            let name = authView_.userNameTF.text
-            let email = authView_.userEmailTF.text
-            let password = authView_.userPasswordTF.text
-            
-            guard let name_ = name, let email_ = email, let password_ = password else { return }
-            print("\(name_) - \(email_) - \(password_)")
+            viewModel.signUpUser(view: authView)
         }
     }
     
     @objc private func tapForgotPasswordButton() {
-        print("FORGOT")
+        viewModel.forgotPassword()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

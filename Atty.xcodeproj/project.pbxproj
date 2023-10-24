@@ -26,11 +26,11 @@
 		77DB27162AE5923400944822 /* Manrope-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 77DB270F2AE5923400944822 /* Manrope-SemiBold.ttf */; };
 		77DB27172AE5923400944822 /* Manrope-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 77DB27102AE5923400944822 /* Manrope-ExtraBold.ttf */; };
 		77DB27192AE597F400944822 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB27182AE597F400944822 /* SignUpView.swift */; };
-		77DB27212AE59ECD00944822 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB27202AE59ECD00944822 /* SignInViewModel.swift */; };
-		77DB27232AE59EE500944822 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB27222AE59EE500944822 /* SignUpViewModel.swift */; };
 		77DB272D2AE5B18200944822 /* UIViewController + DismissGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB272C2AE5B18200944822 /* UIViewController + DismissGesture.swift */; };
 		77DB27332AE5DFD600944822 /* AuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB27322AE5DFD600944822 /* AuthVC.swift */; };
 		77DB27352AE5E0AB00944822 /* AuthBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB27342AE5E0AB00944822 /* AuthBaseView.swift */; };
+		77DB273B2AE724DB00944822 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB273A2AE724DB00944822 /* AuthViewModel.swift */; };
+		77DB273D2AE72E9D00944822 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB273C2AE72E9D00944822 /* Alert.swift */; };
 		77E1B6FB2AE2A0290050C868 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 77E1B6FA2AE2A0290050C868 /* SnapKit */; };
 		77E1B6FE2AE2A43B0050C868 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 77E1B6FD2AE2A43B0050C868 /* FirebaseAnalytics */; };
 		77E1B7002AE2A43B0050C868 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 77E1B6FF2AE2A43B0050C868 /* FirebaseAnalyticsSwift */; };
@@ -64,11 +64,11 @@
 		77DB270F2AE5923400944822 /* Manrope-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-SemiBold.ttf"; sourceTree = "<group>"; };
 		77DB27102AE5923400944822 /* Manrope-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-ExtraBold.ttf"; sourceTree = "<group>"; };
 		77DB27182AE597F400944822 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
-		77DB27202AE59ECD00944822 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
-		77DB27222AE59EE500944822 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		77DB272C2AE5B18200944822 /* UIViewController + DismissGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + DismissGesture.swift"; sourceTree = "<group>"; };
 		77DB27322AE5DFD600944822 /* AuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthVC.swift; sourceTree = "<group>"; };
 		77DB27342AE5E0AB00944822 /* AuthBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthBaseView.swift; sourceTree = "<group>"; };
+		77DB273A2AE724DB00944822 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		77DB273C2AE72E9D00944822 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				77DB27002AE5814D00944822 /* AuthButton.swift */,
+				77DB273C2AE72E9D00944822 /* Alert.swift */,
 			);
 			path = CustomComponents;
 			sourceTree = "<group>";
@@ -192,8 +193,7 @@
 		77DB271A2AE59D3900944822 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				77DB27202AE59ECD00944822 /* SignInViewModel.swift */,
-				77DB27222AE59EE500944822 /* SignUpViewModel.swift */,
+				77DB273A2AE724DB00944822 /* AuthViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -336,11 +336,11 @@
 				77DB27192AE597F400944822 /* SignUpView.swift in Sources */,
 				77DB27332AE5DFD600944822 /* AuthVC.swift in Sources */,
 				77DB26F52AE5537400944822 /* SignInView.swift in Sources */,
+				77DB273D2AE72E9D00944822 /* Alert.swift in Sources */,
 				77DB26FB2AE5671900944822 /* DS.swift in Sources */,
-				77DB27212AE59ECD00944822 /* SignInViewModel.swift in Sources */,
+				77DB273B2AE724DB00944822 /* AuthViewModel.swift in Sources */,
 				777027A42AE28F5E007CA2B7 /* SceneDelegate.swift in Sources */,
 				77DB272D2AE5B18200944822 /* UIViewController + DismissGesture.swift in Sources */,
-				77DB27232AE59EE500944822 /* SignUpViewModel.swift in Sources */,
 				77DB27352AE5E0AB00944822 /* AuthBaseView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -487,8 +487,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -517,8 +516,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

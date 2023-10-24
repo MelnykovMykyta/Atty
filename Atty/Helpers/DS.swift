@@ -32,4 +32,11 @@ enum DS {
         static var halfSize = 0.5
         static var authTFHeight = 60
     }
+    
+    enum AlertMessages {
+        static var attention = "Увага!"
+        static var emptyLine = "Заповніть всі поля!"
+        static var wrongEmail = "Введіть коректну адресу електронної пошти!"
+        static var forgotPassword = "На Вашу електронну пошту надіслано посилання для відновлення паролю"
+    }
 }

@@ -56,6 +56,7 @@ extension SignInView {
         userEmailTF = UITextField()
         userEmailTF.backgroundColor = .clear
         userEmailTF.placeholder = "Адреса електронної пошти"
+        userEmailTF.autocapitalizationType = .none
         userEmailTF.textContentType = .emailAddress
         userEmailTF.keyboardType = .emailAddress
         emailView.addSubview(userEmailTF)
@@ -66,6 +67,7 @@ extension SignInView {
         userPasswordTF = UITextField()
         userPasswordTF.backgroundColor = .clear
         userPasswordTF.placeholder = "Пароль"
+        userPasswordTF.autocapitalizationType = .none
         userPasswordTF.textContentType = .password
         userPasswordTF.isSecureTextEntry = true
         passwordView.addSubview(userPasswordTF)

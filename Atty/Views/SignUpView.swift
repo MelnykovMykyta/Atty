@@ -56,6 +56,7 @@ extension SignUpView {
         userNameTF = UITextField()
         userNameTF.backgroundColor = .clear
         userNameTF.placeholder = "Введіть ім'я"
+        userNameTF.autocapitalizationType = .none
         userNameTF.textContentType = .emailAddress
         userNameTF.keyboardType = .emailAddress
         nameView.addSubview(userNameTF)
@@ -66,6 +67,7 @@ extension SignUpView {
         userEmailTF = UITextField()
         userEmailTF.backgroundColor = .clear
         userEmailTF.placeholder = "Введіть електронну пошту"
+        userEmailTF.autocapitalizationType = .none
         userEmailTF.textContentType = .emailAddress
         userEmailTF.keyboardType = .emailAddress
         emailView.addSubview(userEmailTF)
@@ -76,6 +78,7 @@ extension SignUpView {
         userPasswordTF = UITextField()
         userPasswordTF.backgroundColor = .clear
         userPasswordTF.placeholder = "Введіть пароль"
+        userPasswordTF.autocapitalizationType = .none
         userPasswordTF.textContentType = .password
         userPasswordTF.isSecureTextEntry = true
         passwordView.addSubview(userPasswordTF)
