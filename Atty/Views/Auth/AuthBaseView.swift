@@ -53,7 +53,6 @@ private extension AuthBaseView {
         
         signTypeButton = UIButton(type: .system)
         signTypeButton.setTitle("Реєстрація", for: .normal)
-        signTypeButton.semanticContentAttribute = .forceRightToLeft
         signTypeButton.setTitleColor(DS.Colors.standartTextColor, for: .normal)
         signTypeButton.titleLabel?.font = UIFont(name: "Manrope-SemiBold", size: 14)
         signTypeButton.backgroundColor = .clear

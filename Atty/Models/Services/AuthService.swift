@@ -48,12 +48,21 @@ class AuthService {
         if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
             if let window = scene.windows.first {
                 UIView.transition(with: window, duration: 0.6, options: .transitionCrossDissolve, animations: {
+                    if let previousController = window.rootViewController {
+                        previousController.dismiss(animated: false, completion: nil)
+                    }
                     let vc = vc
                     let nav = UINavigationController(rootViewController: vc)
                     nav.modalPresentationStyle = .fullScreen
                     window.rootViewController = nav
                 }, completion: nil)
             }
+        }
+    }
+    
+    func resetPassword(email: String) {
+        Auth.auth().sendPasswordReset(withEmail: email) { (error) in
+            print("GGGGJLKJDLJSLKJSDLJSLDJSDJSIDJWOIDJSOIDJWODJWID")
         }
     }
 }

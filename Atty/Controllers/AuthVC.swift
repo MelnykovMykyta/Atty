@@ -18,10 +18,11 @@ class AuthVC: UIViewController, UITextFieldDelegate {
     private var authSwitch: Bool = true {
         didSet {
             
-            if authSwitch {
+            switch authSwitch {
+            case true:
                 baseView.signTypeLabel.text = "Ще не маєте аккаунт?"
                 baseView.signTypeButton.setTitle("Реєстрація", for: .normal)
-            } else {
+            case false:
                 baseView.signTypeLabel.text = "Маєте акаунт?"
                 baseView.signTypeButton.setTitle("Вхід", for: .normal)
             }
@@ -84,7 +85,8 @@ extension AuthVC {
     }
     
     @objc private func tapForgotPasswordButton() {
-        viewModel.forgotPassword()
+        let vc = ResetPasswordVC()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

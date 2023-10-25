@@ -97,11 +97,11 @@ extension SignInView {
         
         emailView.snp.makeConstraints { $0.height.equalTo(DS.Sizes.authTFHeight) }
         
-        userEmailTF.snp.makeConstraints { $0.edges.equalToSuperview().inset(DS.Constraints.authTFInsets)}
+        userEmailTF.snp.makeConstraints { $0.edges.equalToSuperview().inset(DS.Constraints.authTFInsets) }
         
         passwordView.snp.makeConstraints { $0.height.equalTo(DS.Sizes.authTFHeight) }
         
-        userPasswordTF.snp.makeConstraints { $0.edges.equalToSuperview().inset(DS.Constraints.authTFInsets)}
+        userPasswordTF.snp.makeConstraints { $0.edges.equalToSuperview().inset(DS.Constraints.authTFInsets) }
         
         forgotPasswordButton.snp.makeConstraints {
             $0.height.equalTo(DS.Sizes.authTFHeight)

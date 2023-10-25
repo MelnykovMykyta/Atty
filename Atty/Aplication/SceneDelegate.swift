@@ -29,31 +29,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window?.backgroundColor = DS.Colors.mainBackgroundColor
     }
     
-    public func checkAuthentication() {
-
+    private func checkAuthentication() {
+        
         if Auth.auth().currentUser == nil {
-            self.goToController(with: AuthVC())
+            AuthService.shared.changeVCAuth(vc: AuthVC())
         } else {
-            self.goToController(with: MainVC())
-        }
-    }
-    
-    
-    private func goToController(with viewController: UIViewController) {
-        DispatchQueue.main.async { [weak self] in
-            UIView.animate(withDuration: 0.3) {
-                self?.window?.layer.opacity = 0
-                
-            } completion: { [weak self] _ in
-                
-                let nav = UINavigationController(rootViewController: viewController)
-                nav.modalPresentationStyle = .fullScreen
-                self?.window?.rootViewController = nav
-                
-                UIView.animate(withDuration: 0.3) { [weak self] in
-                    self?.window?.layer.opacity = 1
-                }
-            }
+            AuthService.shared.changeVCAuth(vc: MainVC())
         }
     }
     

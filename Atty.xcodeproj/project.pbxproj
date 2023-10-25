@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		772D35972AE94F1100038AA6 /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D35962AE94F1100038AA6 /* ResetPasswordVC.swift */; };
+		772D359A2AE9DB4C00038AA6 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D35992AE9DB4C00038AA6 /* ResetPasswordView.swift */; };
 		777027A22AE28F5E007CA2B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777027A12AE28F5E007CA2B7 /* AppDelegate.swift */; };
 		777027A42AE28F5E007CA2B7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777027A32AE28F5E007CA2B7 /* SceneDelegate.swift */; };
 		777027AB2AE28F61007CA2B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 777027AA2AE28F61007CA2B7 /* Assets.xcassets */; };
@@ -49,6 +51,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		772D35962AE94F1100038AA6 /* ResetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
+		772D35992AE9DB4C00038AA6 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		7770279E2AE28F5E007CA2B7 /* Atty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Atty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		777027A12AE28F5E007CA2B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		777027A32AE28F5E007CA2B7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +107,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		772D35982AE9DB0B00038AA6 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				77DB26F42AE5537400944822 /* SignInView.swift */,
+				77DB27182AE597F400944822 /* SignUpView.swift */,
+				77DB27342AE5E0AB00944822 /* AuthBaseView.swift */,
+				772D35992AE9DB4C00038AA6 /* ResetPasswordView.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
 		777027952AE28F5E007CA2B7 = {
 			isa = PBXGroup;
 			children = (
@@ -153,9 +168,7 @@
 		77DB26F32AE5531000944822 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				77DB26F42AE5537400944822 /* SignInView.swift */,
-				77DB27182AE597F400944822 /* SignUpView.swift */,
-				77DB27342AE5E0AB00944822 /* AuthBaseView.swift */,
+				772D35982AE9DB0B00038AA6 /* Auth */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -226,6 +239,7 @@
 			children = (
 				77DB27322AE5DFD600944822 /* AuthVC.swift */,
 				7795AD9B2AE826E1007FC870 /* MainVC.swift */,
+				772D35962AE94F1100038AA6 /* ResetPasswordVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -351,6 +365,7 @@
 				77DB26FE2AE56D3600944822 /* AuthTFView.swift in Sources */,
 				77DB27012AE5814D00944822 /* AuthButton.swift in Sources */,
 				777027A22AE28F5E007CA2B7 /* AppDelegate.swift in Sources */,
+				772D359A2AE9DB4C00038AA6 /* ResetPasswordView.swift in Sources */,
 				77DB27192AE597F400944822 /* SignUpView.swift in Sources */,
 				77DB27332AE5DFD600944822 /* AuthVC.swift in Sources */,
 				77DB26F52AE5537400944822 /* SignInView.swift in Sources */,
@@ -359,6 +374,7 @@
 				77DB26FB2AE5671900944822 /* DS.swift in Sources */,
 				77DB273B2AE724DB00944822 /* AuthViewModel.swift in Sources */,
 				777027A42AE28F5E007CA2B7 /* SceneDelegate.swift in Sources */,
+				772D35972AE94F1100038AA6 /* ResetPasswordVC.swift in Sources */,
 				77DB272D2AE5B18200944822 /* UIViewController + DismissGesture.swift in Sources */,
 				77DB27352AE5E0AB00944822 /* AuthBaseView.swift in Sources */,
 				7795AD9C2AE826E1007FC870 /* MainVC.swift in Sources */,

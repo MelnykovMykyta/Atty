@@ -33,8 +33,17 @@ class AuthViewModel {
         }
     }
     
-    func forgotPassword() {
-        Alert.shared.showAlert(title: DS.AlertMessages.attention, message: DS.AlertMessages.forgotPassword)
+    func forgotPassword(view: UIView) {
+        
+        guard let view = view as? ResetPasswordView else { return }
+        guard let email = view.userEmailTF.text else { return }
+        
+        let checkTF = checkTextFields(textFields: [email])
+        let checkEmail = checkEmail(email: email)
+        
+        if checkTF && checkEmail {
+            AuthService.shared.resetPassword(email: email)
+        }
     }
     
     func checkTextFields(textFields: [String]) -> Bool {
@@ -58,7 +67,6 @@ class AuthViewModel {
         return true
     }
 }
-
 
 
 
