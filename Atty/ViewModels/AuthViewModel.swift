@@ -10,8 +10,6 @@ import UIKit
 
 class AuthViewModel {
     
-    private let alert = Alert()
-    
     func signInUser(view: UIView) {
         guard let view = view as? SignInView else { return }
         guard let email = view.userEmailTF.text, let password = view.userPasswordTF.text else { return }
@@ -19,7 +17,7 @@ class AuthViewModel {
         let checkEmail = checkEmail(email: email)
         
         if checkTF && checkEmail {
-            
+            AuthService.shared.signIn(email: email, password: password)
         }
     }
     
@@ -31,12 +29,12 @@ class AuthViewModel {
         let checkEmail = checkEmail(email: email)
         
         if checkTF && checkEmail {
-            
+            AuthService.shared.createUser(name: name, email: email, password: password)
         }
     }
     
     func forgotPassword() {
-        alert.showAlert(title: DS.AlertMessages.attention, message: DS.AlertMessages.forgotPassword)
+        Alert.shared.showAlert(title: DS.AlertMessages.attention, message: DS.AlertMessages.forgotPassword)
     }
     
     func checkTextFields(textFields: [String]) -> Bool {
@@ -45,7 +43,7 @@ class AuthViewModel {
         if emptyTextFieldsValue.isEmpty {
             return true
         } else {
-            alert.showAlert(title: DS.AlertMessages.attention, message: DS.AlertMessages.emptyLine)
+            Alert.shared.showAlert(title: DS.AlertMessages.attention, message: DS.AlertMessages.emptyLine)
             return false
         }
     }
@@ -54,7 +52,7 @@ class AuthViewModel {
         let checkEmail = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
         let emailChecker = NSPredicate(format: "SELF MATCHES %@", checkEmail)
         guard emailChecker.evaluate(with: email) else {
-            alert.showAlert(title: DS.AlertMessages.attention, message: DS.AlertMessages.wrongEmail)
+            Alert.shared.showAlert(title: DS.AlertMessages.attention, message: DS.AlertMessages.wrongEmail)
             return false
         }
         return true

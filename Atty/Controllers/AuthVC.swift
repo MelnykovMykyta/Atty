@@ -11,7 +11,7 @@ import SnapKit
 
 class AuthVC: UIViewController, UITextFieldDelegate {
     
-    private var baseView = AuthBaseView()
+    private var baseView: AuthBaseView!
     private var authView: UIView!
     private var viewModel = AuthViewModel()
     
@@ -19,11 +19,11 @@ class AuthVC: UIViewController, UITextFieldDelegate {
         didSet {
             
             if authSwitch {
-                baseView.signUpLabel.text = "Ще не маєте аккаунт?"
-                baseView.signUpButton.setTitle("Реєстрація", for: .normal)
+                baseView.signTypeLabel.text = "Ще не маєте аккаунт?"
+                baseView.signTypeButton.setTitle("Реєстрація", for: .normal)
             } else {
-                baseView.signUpLabel.text = "Маєте акаунт?"
-                baseView.signUpButton.setTitle("Вхід", for: .normal)
+                baseView.signTypeLabel.text = "Маєте акаунт?"
+                baseView.signTypeButton.setTitle("Вхід", for: .normal)
             }
         }
     }
@@ -31,17 +31,21 @@ class AuthVC: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.addSubview(baseView)
-        baseView.snp.makeConstraints { $0.edges.equalToSuperview() }
+        setupBaseView()
         setupAuthView()
-        
-        baseView.signUpButton.addTarget(self, action: #selector(switchAuthType), for: .touchUpInside)
         
         self.addKeyboardDismissGesture()
     }
 }
 
 private extension AuthVC {
+    
+    func setupBaseView() {
+        baseView = AuthBaseView()
+        baseView.signTypeButton.addTarget(self, action: #selector(switchAuthType), for: .touchUpInside)
+        view.addSubview(baseView)
+        baseView.snp.makeConstraints { $0.edges.equalToSuperview() }
+    }
     
     @objc func switchAuthType() {
         authSwitch.toggle()
@@ -87,4 +91,12 @@ extension AuthVC {
         textField.resignFirstResponder()
         return true
     }
+    
+//    private func authSceneRequest() {
+//        if let sceneDelegate = self.view.window?.windowScene?.delegate as? SceneDelegate {
+//            sceneDelegate.checkAuthentication()
+//        }
+//    }
 }
+
+

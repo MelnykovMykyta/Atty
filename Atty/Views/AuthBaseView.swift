@@ -12,9 +12,9 @@ import SnapKit
 class AuthBaseView: UIView {
     
     var icon: UIImageView!
-    private var signUpStackView: UIStackView!
-    var signUpLabel: UILabel!
-    var signUpButton: UIButton!
+    private var signTypeStackView: UIStackView!
+    var signTypeLabel: UILabel!
+    var signTypeButton: UIButton!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,24 +38,26 @@ private extension AuthBaseView {
         icon.image = UIImage(named: "LaunchScreenLogo")
         addSubview(icon)
         
-        signUpStackView = UIStackView()
-        signUpStackView.axis = .horizontal
-        signUpStackView.spacing = CGFloat(DS.Constraints.authTFSpacing)
-        signUpStackView.distribution = .equalCentering
-        addSubview(signUpStackView)
+        signTypeStackView = UIStackView()
+        signTypeStackView.axis = .horizontal
+        signTypeStackView.spacing = CGFloat(DS.Constraints.authTFSpacing)
+        signTypeStackView.distribution = .equalCentering
+        addSubview(signTypeStackView)
         
-        signUpLabel = UILabel ()
-        signUpLabel.text = "Ще не маєте аккаунт?"
-        signUpLabel.textColor = DS.Colors.standartTextColor
-        signUpLabel.font = UIFont(name: "Manrope-ExtraLight", size: 14)
-        signUpStackView.addArrangedSubview(signUpLabel)
+        signTypeLabel = UILabel ()
+        signTypeLabel.text = "Ще не маєте аккаунт?"
+        signTypeLabel.textAlignment = .right
+        signTypeLabel.textColor = DS.Colors.standartTextColor
+        signTypeLabel.font = UIFont(name: "Manrope-ExtraLight", size: 14)
+        signTypeStackView.addArrangedSubview(signTypeLabel)
         
-        signUpButton = UIButton(type: .system)
-        signUpButton.setTitle("Реєстрація", for: .normal)
-        signUpButton.setTitleColor(DS.Colors.standartTextColor, for: .normal)
-        signUpButton.titleLabel?.font = UIFont(name: "Manrope-SemiBold", size: 14)
-        signUpButton.backgroundColor = .clear
-        signUpStackView.addArrangedSubview(signUpButton)
+        signTypeButton = UIButton(type: .system)
+        signTypeButton.setTitle("Реєстрація", for: .normal)
+        signTypeButton.semanticContentAttribute = .forceRightToLeft
+        signTypeButton.setTitleColor(DS.Colors.standartTextColor, for: .normal)
+        signTypeButton.titleLabel?.font = UIFont(name: "Manrope-SemiBold", size: 14)
+        signTypeButton.backgroundColor = .clear
+        signTypeStackView.addArrangedSubview(signTypeButton)
     }
     
     func setupConstraintViews() {
@@ -65,7 +67,7 @@ private extension AuthBaseView {
             $0.height.equalTo(icon.snp.width).multipliedBy(DS.Sizes.halfSize)
         }
         
-        signUpStackView.snp.makeConstraints {
+        signTypeStackView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).inset(DS.Constraints.safeAreaInset)
         }

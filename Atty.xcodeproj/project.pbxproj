@@ -14,6 +14,9 @@
 		777027B72AE29050007CA2B7 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 777027B62AE29050007CA2B7 /* Realm */; };
 		777027B92AE29050007CA2B7 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 777027B82AE29050007CA2B7 /* RealmSwift */; };
 		777027C12AE2910D007CA2B7 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 777027C02AE2910D007CA2B7 /* Alamofire */; };
+		7795AD9A2AE82658007FC870 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7795AD992AE82658007FC870 /* AuthService.swift */; };
+		7795AD9C2AE826E1007FC870 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7795AD9B2AE826E1007FC870 /* MainVC.swift */; };
+		7795AD9E2AE8277E007FC870 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7795AD9D2AE8277E007FC870 /* GoogleService-Info.plist */; };
 		77DB26F52AE5537400944822 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB26F42AE5537400944822 /* SignInView.swift */; };
 		77DB26FB2AE5671900944822 /* DS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB26FA2AE5671900944822 /* DS.swift */; };
 		77DB26FE2AE56D3600944822 /* AuthTFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB26FD2AE56D3600944822 /* AuthTFView.swift */; };
@@ -52,6 +55,9 @@
 		777027AA2AE28F61007CA2B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		777027AD2AE28F61007CA2B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		777027AF2AE28F61007CA2B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7795AD992AE82658007FC870 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		7795AD9B2AE826E1007FC870 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
+		7795AD9D2AE8277E007FC870 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		77DB26F42AE5537400944822 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		77DB26FA2AE5671900944822 /* DS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DS.swift; sourceTree = "<group>"; };
 		77DB26FD2AE56D3600944822 /* AuthTFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTFView.swift; sourceTree = "<group>"; };
@@ -117,7 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				77E1B7132AE2A5220050C868 /* Aplication */,
-				77DB27262AE5A2E800944822 /* Models */,
+				7795AD972AE82635007FC870 /* Models */,
 				77DB26F32AE5531000944822 /* Views */,
 				77DB271A2AE59D3900944822 /* ViewModels */,
 				77DB271D2AE59D7F00944822 /* Controllers */,
@@ -126,6 +132,22 @@
 				77DB26F92AE55C5000944822 /* SupportingFiles */,
 			);
 			path = Atty;
+			sourceTree = "<group>";
+		};
+		7795AD972AE82635007FC870 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7795AD982AE8263D007FC870 /* Services */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7795AD982AE8263D007FC870 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				7795AD992AE82658007FC870 /* AuthService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		77DB26F32AE5531000944822 /* Views */ = {
@@ -151,6 +173,7 @@
 		77DB26F92AE55C5000944822 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				7795AD9D2AE8277E007FC870 /* GoogleService-Info.plist */,
 				77DB27022AE58EE600944822 /* Fonts */,
 				777027AA2AE28F61007CA2B7 /* Assets.xcassets */,
 				777027AC2AE28F61007CA2B7 /* LaunchScreen.storyboard */,
@@ -202,15 +225,9 @@
 			isa = PBXGroup;
 			children = (
 				77DB27322AE5DFD600944822 /* AuthVC.swift */,
+				7795AD9B2AE826E1007FC870 /* MainVC.swift */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		77DB27262AE5A2E800944822 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		77DB27292AE5B04900944822 /* Extensions */ = {
@@ -318,6 +335,7 @@
 				77DB27152AE5923400944822 /* Manrope-Bold.ttf in Resources */,
 				77DB27122AE5923400944822 /* Manrope-Medium.ttf in Resources */,
 				77DB27112AE5923400944822 /* Manrope-Regular.ttf in Resources */,
+				7795AD9E2AE8277E007FC870 /* GoogleService-Info.plist in Resources */,
 				77DB27162AE5923400944822 /* Manrope-SemiBold.ttf in Resources */,
 				77DB27132AE5923400944822 /* Manrope-Light.ttf in Resources */,
 			);
@@ -336,12 +354,14 @@
 				77DB27192AE597F400944822 /* SignUpView.swift in Sources */,
 				77DB27332AE5DFD600944822 /* AuthVC.swift in Sources */,
 				77DB26F52AE5537400944822 /* SignInView.swift in Sources */,
+				7795AD9A2AE82658007FC870 /* AuthService.swift in Sources */,
 				77DB273D2AE72E9D00944822 /* Alert.swift in Sources */,
 				77DB26FB2AE5671900944822 /* DS.swift in Sources */,
 				77DB273B2AE724DB00944822 /* AuthViewModel.swift in Sources */,
 				777027A42AE28F5E007CA2B7 /* SceneDelegate.swift in Sources */,
 				77DB272D2AE5B18200944822 /* UIViewController + DismissGesture.swift in Sources */,
 				77DB27352AE5E0AB00944822 /* AuthBaseView.swift in Sources */,
+				7795AD9C2AE826E1007FC870 /* MainVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

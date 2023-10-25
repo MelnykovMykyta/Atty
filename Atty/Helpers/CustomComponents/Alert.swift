@@ -10,6 +10,10 @@ import UIKit
 
 class Alert {
     
+    static let shared = Alert()
+    
+    private init() {}
+    
     func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "Ok", style: .default)

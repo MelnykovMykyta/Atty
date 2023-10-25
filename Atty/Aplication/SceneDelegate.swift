@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -14,35 +16,53 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
-        let vc = AuthVC()
-        let navigationController = UINavigationController(rootViewController: vc)
+        self.setupWindow(with: scene)
+        self.checkAuthentication()
+    }
+    
+    private func setupWindow(with scene: UIScene) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        
-        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
-        window?.windowScene = windowScene
-        window?.rootViewController = navigationController
-        window?.makeKeyAndVisible()
-        
+        let window = UIWindow(windowScene: windowScene)
+        self.window = window
+        self.window?.makeKeyAndVisible()
+        self.window?.overrideUserInterfaceStyle = .dark
     }
     
-    func sceneDidDisconnect(_ scene: UIScene) {
+    public func checkAuthentication() {
         
+        if Auth.auth().currentUser == nil {
+            self.goToController(with: AuthVC())
+        } else {
+            self.goToController(with: MainVC())
+        }
     }
     
-    func sceneDidBecomeActive(_ scene: UIScene) {
-        
+    private func goToController(with viewController: UIViewController) {
+        DispatchQueue.main.async { [weak self] in
+            UIView.animate(withDuration: 0.3) {
+                self?.window?.layer.opacity = 0
+                
+            } completion: { [weak self] _ in
+                
+                let nav = UINavigationController(rootViewController: viewController)
+                nav.modalPresentationStyle = .fullScreen
+                self?.window?.rootViewController = nav
+                
+                UIView.animate(withDuration: 0.3) { [weak self] in
+                    self?.window?.layer.opacity = 1
+                }
+            }
+        }
     }
     
-    func sceneWillResignActive(_ scene: UIScene) {
-        
-    }
+    func sceneDidDisconnect(_ scene: UIScene) { }
     
-    func sceneWillEnterForeground(_ scene: UIScene) {
-        
-    }
+    func sceneDidBecomeActive(_ scene: UIScene) { }
     
-    func sceneDidEnterBackground(_ scene: UIScene) {
-        
-    }
+    func sceneWillResignActive(_ scene: UIScene) { }
+    
+    func sceneWillEnterForeground(_ scene: UIScene) { }
+    
+    func sceneDidEnterBackground(_ scene: UIScene) { }
 }
 
