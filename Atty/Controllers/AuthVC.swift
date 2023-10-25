@@ -91,12 +91,6 @@ extension AuthVC {
         textField.resignFirstResponder()
         return true
     }
-    
-//    private func authSceneRequest() {
-//        if let sceneDelegate = self.view.window?.windowScene?.delegate as? SceneDelegate {
-//            sceneDelegate.checkAuthentication()
-//        }
-//    }
 }
 
 

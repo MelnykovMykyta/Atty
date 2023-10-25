@@ -26,16 +26,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
         self.window?.makeKeyAndVisible()
         self.window?.overrideUserInterfaceStyle = .dark
+        self.window?.backgroundColor = DS.Colors.mainBackgroundColor
     }
     
     public func checkAuthentication() {
-        
+
         if Auth.auth().currentUser == nil {
             self.goToController(with: AuthVC())
         } else {
             self.goToController(with: MainVC())
         }
     }
+    
     
     private func goToController(with viewController: UIViewController) {
         DispatchQueue.main.async { [weak self] in

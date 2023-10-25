@@ -28,8 +28,10 @@ private extension MainVC {
         
         view.backgroundColor = DS.Colors.mainBackgroundColor
         
+        let user = Auth.auth().currentUser?.email
+        
         label = UILabel()
-        label.text = "MAIN"
+        label.text = user
         label.font = UIFont(name: "Manrope-Bold", size: 50)
         label.textAlignment = .center
         view.addSubview(label)
@@ -46,18 +48,6 @@ private extension MainVC {
     }
     
     @objc func logouttap() {
-        let firebaseAuth = Auth.auth()
-        do {
-            try firebaseAuth.signOut()
-            if let sceneDelegate = self.view.window?.windowScene?.delegate as? SceneDelegate {
-                sceneDelegate.checkAuthentication()
-            }
-        } catch let signOutError as NSError {
-            print("Error signing out: %@", signOutError)
-        }
-        
-        if let sceneDelegate = self.view.window?.windowScene?.delegate as? SceneDelegate {
-            sceneDelegate.checkAuthentication()
-        }
+        AuthService.shared.logout()
     }
 }
