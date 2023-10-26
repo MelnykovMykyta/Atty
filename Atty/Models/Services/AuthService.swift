@@ -51,7 +51,6 @@ class AuthService {
                     if let previousController = window.rootViewController {
                         previousController.dismiss(animated: false, completion: nil)
                     }
-                    let vc = vc
                     let nav = UINavigationController(rootViewController: vc)
                     nav.modalPresentationStyle = .fullScreen
                     window.rootViewController = nav
@@ -62,7 +61,7 @@ class AuthService {
     
     func resetPassword(email: String) {
         Auth.auth().sendPasswordReset(withEmail: email) { (error) in
-            print("GGGGJLKJDLJSLKJSDLJSLDJSDJSIDJWOIDJSOIDJWODJWID")
+        
         }
     }
 }

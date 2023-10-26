@@ -39,7 +39,6 @@
 		77DB27192AE597F400944822 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB27182AE597F400944822 /* SignUpView.swift */; };
 		77DB272D2AE5B18200944822 /* UIViewController + DismissGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB272C2AE5B18200944822 /* UIViewController + DismissGesture.swift */; };
 		77DB27332AE5DFD600944822 /* AuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB27322AE5DFD600944822 /* AuthVC.swift */; };
-		77DB27352AE5E0AB00944822 /* AuthBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB27342AE5E0AB00944822 /* AuthBaseView.swift */; };
 		77DB273B2AE724DB00944822 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB273A2AE724DB00944822 /* AuthViewModel.swift */; };
 		77DB273D2AE72E9D00944822 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB273C2AE72E9D00944822 /* Alert.swift */; };
 		77E1B6FB2AE2A0290050C868 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 77E1B6FA2AE2A0290050C868 /* SnapKit */; };
@@ -88,7 +87,6 @@
 		77DB27182AE597F400944822 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		77DB272C2AE5B18200944822 /* UIViewController + DismissGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + DismissGesture.swift"; sourceTree = "<group>"; };
 		77DB27322AE5DFD600944822 /* AuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthVC.swift; sourceTree = "<group>"; };
-		77DB27342AE5E0AB00944822 /* AuthBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthBaseView.swift; sourceTree = "<group>"; };
 		77DB273A2AE724DB00944822 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		77DB273C2AE72E9D00944822 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,7 +122,6 @@
 			children = (
 				77DB26F42AE5537400944822 /* SignInView.swift */,
 				77DB27182AE597F400944822 /* SignUpView.swift */,
-				77DB27342AE5E0AB00944822 /* AuthBaseView.swift */,
 				772D35992AE9DB4C00038AA6 /* ResetPasswordView.swift */,
 			);
 			path = Auth;
@@ -448,7 +445,6 @@
 				772D35972AE94F1100038AA6 /* ResetPasswordVC.swift in Sources */,
 				77DB272D2AE5B18200944822 /* UIViewController + DismissGesture.swift in Sources */,
 				772D359C2AEA5DC700038AA6 /* NavigateTabBarController.swift in Sources */,
-				77DB27352AE5E0AB00944822 /* AuthBaseView.swift in Sources */,
 				7795AD9C2AE826E1007FC870 /* MainVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

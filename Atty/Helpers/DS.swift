@@ -33,6 +33,7 @@ enum DS {
     enum Sizes {
         static var halfSize = 0.5
         static var authTFHeight = 60
+        static var buttonSize = 50
     }
     
     enum AlertMessages {

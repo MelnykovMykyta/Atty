@@ -11,11 +11,15 @@ import SnapKit
 
 class SignInView: UIView {
     
+    var signTypeButton: UIButton!
     var userEmailTF: UITextField!
     var userPasswordTF: UITextField!
     var authButton: AuthButton!
     var forgotPasswordButton: UIButton!
     
+    private var icon: UIImageView!
+    private var signTypeStackView: UIStackView!
+    private var signTypeLabel: UILabel!
     private var signLabel: UILabel!
     private var authView: UIView!
     private var tfStackView: UIStackView!
@@ -38,7 +42,11 @@ extension SignInView {
     
     func setupViews() {
         
-        backgroundColor = DS.Colors.mainBackgroundColor
+        backgroundColor = .clear
+        
+        icon = UIImageView()
+        icon.image = UIImage(named: "LaunchScreenLogo")
+        addSubview(icon)
         
         signLabel = UILabel()
         signLabel.text = "Вхід"
@@ -83,16 +91,44 @@ extension SignInView {
         authButton.setTitle("Увійти", for: .normal)
         authButton.titleLabel?.font = UIFont(name: "Manrope-ExtraBold", size: 20)
         addSubview(authButton)
+        
+        signTypeStackView = UIStackView()
+        signTypeStackView.axis = .horizontal
+        signTypeStackView.spacing = CGFloat(DS.Constraints.authTFSpacing)
+        signTypeStackView.distribution = .equalCentering
+        addSubview(signTypeStackView)
+        
+        signTypeLabel = UILabel ()
+        signTypeLabel.text = "Ще не маєте аккаунт?"
+        signTypeLabel.textAlignment = .right
+        signTypeLabel.textColor = DS.Colors.standartTextColor
+        signTypeLabel.font = UIFont(name: "Manrope-ExtraLight", size: 14)
+        signTypeStackView.addArrangedSubview(signTypeLabel)
+        
+        signTypeButton = UIButton(type: .system)
+        signTypeButton.setTitle("Реєстрація", for: .normal)
+        signTypeButton.setTitleColor(DS.Colors.standartTextColor, for: .normal)
+        signTypeButton.titleLabel?.font = UIFont(name: "Manrope-SemiBold", size: 14)
+        signTypeButton.backgroundColor = .clear
+        signTypeStackView.addArrangedSubview(signTypeButton)
     }
     
     func setupConstraintViews() {
         
+        icon.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authLogoLeadingTrailing)
+            $0.height.equalTo(icon.snp.width).multipliedBy(DS.Sizes.halfSize)
+        }
         
-        signLabel.snp.makeConstraints { $0.top.leading.equalToSuperview() }
+        signLabel.snp.makeConstraints {
+            $0.top.equalTo(icon.snp.bottom).inset(-DS.Constraints.authLogoLeadingTrailing)
+            $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+        }
         
         tfStackView.snp.makeConstraints {
             $0.top.equalTo(signLabel.snp.bottom).inset(-DS.Constraints.authLabelBottomInset)
-            $0.leading.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
         }
         
         emailView.snp.makeConstraints { $0.height.equalTo(DS.Sizes.authTFHeight) }
@@ -106,13 +142,18 @@ extension SignInView {
         forgotPasswordButton.snp.makeConstraints {
             $0.height.equalTo(DS.Sizes.authTFHeight)
             $0.top.equalTo(tfStackView.snp.bottom)
-            $0.trailing.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
         }
         
         authButton.snp.makeConstraints {
             $0.height.equalTo(DS.Sizes.authTFHeight)
             $0.top.equalTo(forgotPasswordButton.snp.bottom)
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+        }
+        
+        signTypeStackView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(DS.Constraints.safeAreaInset)
         }
     }
 }

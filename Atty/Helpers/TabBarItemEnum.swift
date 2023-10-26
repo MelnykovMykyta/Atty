@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 enum Tabs: Int {
+    
     case projects
     case clients
     case main
@@ -31,6 +32,7 @@ enum Tabs: Int {
     }
     
     var itemBar: UITabBarItem {
+        
         switch self {
             
         case .projects:

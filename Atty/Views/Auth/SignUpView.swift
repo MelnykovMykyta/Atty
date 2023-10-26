@@ -11,12 +11,16 @@ import SnapKit
 
 class SignUpView: UIView {
     
+    var signTypeButton: UIButton!
     var userNameTF: UITextField!
     var userEmailTF: UITextField!
     var userPasswordTF: UITextField!
     var authButton: AuthButton!
     var signInButton: UIButton!
     
+    private var icon: UIImageView!
+    private var signTypeStackView: UIStackView!
+    private var signTypeLabel: UILabel!
     private var signLabel: UILabel!
     private var tfStackView: UIStackView!
     private var nameView: AuthTFView!
@@ -38,7 +42,12 @@ class SignUpView: UIView {
 extension SignUpView {
     
     func setupViews() {
-        backgroundColor = DS.Colors.mainBackgroundColor
+        
+        backgroundColor = .clear
+        
+        icon = UIImageView()
+        icon.image = UIImage(named: "LaunchScreenLogo")
+        addSubview(icon)
         
         signLabel = UILabel()
         signLabel.text = "Реєстрація"
@@ -87,15 +96,44 @@ extension SignUpView {
         authButton.setTitle("Зареєструвати", for: .normal)
         authButton.titleLabel?.font = UIFont(name: "Manrope-ExtraBold", size: 18)
         tfStackView.addArrangedSubview(authButton)
+        
+        signTypeStackView = UIStackView()
+        signTypeStackView.axis = .horizontal
+        signTypeStackView.spacing = CGFloat(DS.Constraints.authTFSpacing)
+        signTypeStackView.distribution = .equalCentering
+        addSubview(signTypeStackView)
+        
+        signTypeLabel = UILabel ()
+        signTypeLabel.text = "Вже маєте акаунт?"
+        signTypeLabel.textAlignment = .right
+        signTypeLabel.textColor = DS.Colors.standartTextColor
+        signTypeLabel.font = UIFont(name: "Manrope-ExtraLight", size: 14)
+        signTypeStackView.addArrangedSubview(signTypeLabel)
+        
+        signTypeButton = UIButton(type: .system)
+        signTypeButton.setTitle("Вхід", for: .normal)
+        signTypeButton.setTitleColor(DS.Colors.standartTextColor, for: .normal)
+        signTypeButton.titleLabel?.font = UIFont(name: "Manrope-SemiBold", size: 14)
+        signTypeButton.backgroundColor = .clear
+        signTypeStackView.addArrangedSubview(signTypeButton)
     }
     
     func setupConstraintViews() {
         
-        signLabel.snp.makeConstraints { $0.top.leading.equalToSuperview() }
+        icon.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authLogoLeadingTrailing)
+            $0.height.equalTo(icon.snp.width).multipliedBy(DS.Sizes.halfSize)
+        }
+        
+        signLabel.snp.makeConstraints {
+            $0.top.equalTo(icon.snp.bottom).inset(-DS.Constraints.authLogoLeadingTrailing)
+            $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+        }
         
         tfStackView.snp.makeConstraints {
             $0.top.equalTo(signLabel.snp.bottom).inset(-DS.Constraints.authLabelBottomInset)
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
         }
         
         nameView.snp.makeConstraints { $0.height.equalTo(DS.Sizes.authTFHeight) }
@@ -111,5 +149,10 @@ extension SignUpView {
         userPasswordTF.snp.makeConstraints { $0.edges.equalToSuperview().inset(DS.Constraints.authTFInsets) }
         
         authButton.snp.makeConstraints { $0.height.equalTo(DS.Sizes.authTFHeight) }
+        
+        signTypeStackView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(DS.Constraints.safeAreaInset)
+        }
     }
 }

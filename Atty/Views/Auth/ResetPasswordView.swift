@@ -11,11 +11,13 @@ import SnapKit
 
 class ResetPasswordView: UIView {
     
+    var closeButton: UIButton!
+    var userEmailTF: UITextField!
+    var resetButton: AuthButton!
+    
     private var resetLabel: UILabel!
     private var tfStackView: UIStackView!
     private var emailView: AuthTFView!
-    var userEmailTF: UITextField!
-    var resetButton: AuthButton!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,7 +36,12 @@ extension ResetPasswordView {
     
     func setupViews() {
         
-        backgroundColor = DS.Colors.mainBackgroundColor
+        backgroundColor = .clear
+        
+        closeButton = UIButton(type: .system)
+        closeButton.setImage(UIImage(named: "closeButton"), for: .normal)
+        closeButton.tintColor = DS.Colors.standartTextColor
+        addSubview(closeButton)
         
         resetLabel = UILabel()
         resetLabel.text = "Введіть електронну пошту"
@@ -63,14 +70,17 @@ extension ResetPasswordView {
         resetButton.titleLabel?.font = UIFont(name: "Manrope-ExtraBold", size: 20)
         tfStackView.addArrangedSubview(resetButton)
     }
-
+    
     func setupConstraintViews() {
         
-        resetLabel.snp.makeConstraints {$0.top.leading.trailing.equalToSuperview() }
+        closeButton.snp.makeConstraints {
+            $0.size.equalTo(DS.Sizes.buttonSize)
+            $0.top.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+        }
         
         tfStackView.snp.makeConstraints {
-            $0.top.equalTo(resetLabel.snp.bottom).inset(-DS.Constraints.authLabelBottomInset)
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.center.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
         }
         
         emailView.snp.makeConstraints { $0.height.equalTo(DS.Sizes.authTFHeight) }
@@ -78,6 +88,11 @@ extension ResetPasswordView {
         userEmailTF.snp.makeConstraints { $0.edges.equalToSuperview().inset(DS.Constraints.authTFInsets) }
         
         resetButton.snp.makeConstraints { $0.height.equalTo(DS.Sizes.authTFHeight) }
+        
+        resetLabel.snp.makeConstraints {
+            $0.bottom.equalTo(tfStackView.snp.top).inset(-DS.Constraints.authLogoLeadingTrailing)
+            $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+        }
     }
 }
 

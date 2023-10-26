@@ -13,6 +13,7 @@ class NavigateTabBarController: UITabBarController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         setupView()
+        self.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -48,5 +49,13 @@ private extension NavigateTabBarController {
         setViewControllers([projectsNavigationController, clientsNavigationController, mainNavigationController, courtCasesNavigationController, tasksNavigationController], animated: false)
         
         selectedIndex = Tabs.main.rawValue
+    }
+}
+
+extension NavigateTabBarController: UITabBarControllerDelegate {
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        let haptic = UIImpactFeedbackGenerator(style: .light)
+        haptic.impactOccurred()
     }
 }

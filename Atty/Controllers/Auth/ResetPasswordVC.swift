@@ -30,19 +30,24 @@ private extension ResetPasswordVC {
         
         view.addSubview(resetPasswordView)
         
-        resetPasswordView.resetButton.addTarget(self, action: #selector(tapResetPassword), for: .touchUpInside)
-        
         resetPasswordView.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(DS.Constraints.safeAreaInset)
         }
+        resetPasswordView.resetButton.addTarget(self, action: #selector(tapResetPassword), for: .touchUpInside)
+        resetPasswordView.closeButton.addTarget(self, action: #selector(tapClose), for: .touchUpInside)
     }
 }
 
 extension ResetPasswordVC {
     
-    @objc func tapResetPassword() {
+    @objc private func tapResetPassword() {
         viewModel.forgotPassword(view: resetPasswordView)
+    }
+    
+    @objc private func tapClose() {
+        navigationController?.popViewController(animated: true)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

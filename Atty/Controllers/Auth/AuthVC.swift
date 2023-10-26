@@ -11,42 +11,22 @@ import SnapKit
 
 class AuthVC: UIViewController, UITextFieldDelegate {
     
-    private var baseView: AuthBaseView!
     private var authView: UIView!
     private var viewModel = AuthViewModel()
     
-    private var authSwitch: Bool = true {
-        didSet {
-            
-            switch authSwitch {
-            case true:
-                baseView.signTypeLabel.text = "Ще не маєте аккаунт?"
-                baseView.signTypeButton.setTitle("Реєстрація", for: .normal)
-            case false:
-                baseView.signTypeLabel.text = "Маєте акаунт?"
-                baseView.signTypeButton.setTitle("Вхід", for: .normal)
-            }
-        }
-    }
+    private var authSwitch: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupBaseView()
         setupAuthView()
         
+        self.navigationController?.navigationBar.isHidden = true
         self.addKeyboardDismissGesture()
     }
 }
 
 private extension AuthVC {
-    
-    func setupBaseView() {
-        baseView = AuthBaseView()
-        baseView.signTypeButton.addTarget(self, action: #selector(switchAuthType), for: .touchUpInside)
-        view.addSubview(baseView)
-        baseView.snp.makeConstraints { $0.edges.equalToSuperview() }
-    }
     
     @objc func switchAuthType() {
         authSwitch.toggle()
@@ -60,14 +40,17 @@ private extension AuthVC {
         if let authView = authView as? SignInView {
             authView.authButton.addTarget(self, action: #selector(tapAuthButton), for: .touchUpInside)
             authView.forgotPasswordButton.addTarget(self, action: #selector(tapForgotPasswordButton), for: .touchUpInside)
+            authView.signTypeButton.addTarget(self, action: #selector(switchAuthType), for: .touchUpInside)
         } else if let authView = authView as? SignUpView {
             authView.authButton.addTarget(self, action: #selector(tapAuthButton), for: .touchUpInside)
+            authView.signTypeButton.addTarget(self, action: #selector(switchAuthType), for: .touchUpInside)
         }
         
         view.addSubview(authView)
         authView.snp.makeConstraints {
-            $0.top.equalTo(baseView.icon.snp.bottom).inset(-DS.Constraints.authLogoLeadingTrailing)
-            $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(DS.Constraints.safeAreaInset)
         }
     }
 }
