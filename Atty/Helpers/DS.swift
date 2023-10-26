@@ -12,6 +12,8 @@ enum DS {
     
     enum Colors {
         static var mainBackgroundColor = UIColor(red: 0.145, green: 0.145, blue: 0.145, alpha: 1)
+        static var tabBarColor = UIColor(red: 0.145, green: 0.145, blue: 0.145, alpha: 1)
+        static var tabBarUnselectTabColor = UIColor(red: 0.145, green: 0.145, blue: 0.145, alpha: 1)
         static var standartTextColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         static var darkedTextColor = UIColor(red: 0.675, green: 0.675, blue: 0.675, alpha: 1)
         static var authTFBorder = UIColor(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)

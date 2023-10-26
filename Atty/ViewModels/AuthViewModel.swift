@@ -43,6 +43,8 @@ class AuthViewModel {
         
         if checkTF && checkEmail {
             AuthService.shared.resetPassword(email: email)
+            AuthService.shared.changeVCAuth(vc: AuthVC())
+            Alert.shared.showAlert(title: DS.AlertMessages.attention, message: DS.AlertMessages.forgotPassword)
         }
     }
     

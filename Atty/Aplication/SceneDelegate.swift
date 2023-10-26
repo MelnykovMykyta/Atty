@@ -34,7 +34,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if Auth.auth().currentUser == nil {
             AuthService.shared.changeVCAuth(vc: AuthVC())
         } else {
-            AuthService.shared.changeVCAuth(vc: MainVC())
+            AuthService.shared.changeVCAuth(vc: NavigateTabBarController())
         }
     }
     

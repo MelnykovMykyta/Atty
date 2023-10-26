@@ -21,7 +21,7 @@ class AuthService {
                 Alert.shared.showAlert(title: DS.AlertMessages.attention, message: error.localizedDescription)
             } else {
                 self.signIn(email: email, password: password)
-                self.changeVCAuth(vc: MainVC())
+                self.changeVCAuth(vc: NavigateTabBarController())
             }
         }
     }
@@ -29,7 +29,7 @@ class AuthService {
     func signIn(email: String, password: String) {
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
             guard let strongSelf = self else { return }
-            self?.changeVCAuth(vc: MainVC())
+            self?.changeVCAuth(vc: NavigateTabBarController())
         }
     }
     

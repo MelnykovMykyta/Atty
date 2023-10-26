@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		772D35972AE94F1100038AA6 /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D35962AE94F1100038AA6 /* ResetPasswordVC.swift */; };
 		772D359A2AE9DB4C00038AA6 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D35992AE9DB4C00038AA6 /* ResetPasswordView.swift */; };
+		772D359C2AEA5DC700038AA6 /* NavigateTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D359B2AEA5DC700038AA6 /* NavigateTabBarController.swift */; };
+		772D359E2AEA82CC00038AA6 /* ProjectsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D359D2AEA82CC00038AA6 /* ProjectsVC.swift */; };
+		772D35A32AEA83D400038AA6 /* ClientsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D35A22AEA83D400038AA6 /* ClientsVC.swift */; };
+		772D35A72AEA845300038AA6 /* CourtCasesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D35A62AEA845300038AA6 /* CourtCasesVC.swift */; };
+		772D35AA2AEA84CC00038AA6 /* TasksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D35A92AEA84CC00038AA6 /* TasksVC.swift */; };
+		772D35AC2AEA871700038AA6 /* TabBarItemEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D35AB2AEA871700038AA6 /* TabBarItemEnum.swift */; };
 		777027A22AE28F5E007CA2B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777027A12AE28F5E007CA2B7 /* AppDelegate.swift */; };
 		777027A42AE28F5E007CA2B7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777027A32AE28F5E007CA2B7 /* SceneDelegate.swift */; };
 		777027AB2AE28F61007CA2B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 777027AA2AE28F61007CA2B7 /* Assets.xcassets */; };
@@ -53,6 +59,12 @@
 /* Begin PBXFileReference section */
 		772D35962AE94F1100038AA6 /* ResetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
 		772D35992AE9DB4C00038AA6 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
+		772D359B2AEA5DC700038AA6 /* NavigateTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigateTabBarController.swift; sourceTree = "<group>"; };
+		772D359D2AEA82CC00038AA6 /* ProjectsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsVC.swift; sourceTree = "<group>"; };
+		772D35A22AEA83D400038AA6 /* ClientsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsVC.swift; sourceTree = "<group>"; };
+		772D35A62AEA845300038AA6 /* CourtCasesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourtCasesVC.swift; sourceTree = "<group>"; };
+		772D35A92AEA84CC00038AA6 /* TasksVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksVC.swift; sourceTree = "<group>"; };
+		772D35AB2AEA871700038AA6 /* TabBarItemEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItemEnum.swift; sourceTree = "<group>"; };
 		7770279E2AE28F5E007CA2B7 /* Atty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Atty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		777027A12AE28F5E007CA2B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		777027A32AE28F5E007CA2B7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +130,55 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
+		772D359F2AEA82D700038AA6 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				77DB27322AE5DFD600944822 /* AuthVC.swift */,
+				772D35962AE94F1100038AA6 /* ResetPasswordVC.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		772D35A02AEA830500038AA6 /* Projects */ = {
+			isa = PBXGroup;
+			children = (
+				772D359D2AEA82CC00038AA6 /* ProjectsVC.swift */,
+			);
+			path = Projects;
+			sourceTree = "<group>";
+		};
+		772D35A12AEA83BD00038AA6 /* Clients */ = {
+			isa = PBXGroup;
+			children = (
+				772D35A22AEA83D400038AA6 /* ClientsVC.swift */,
+			);
+			path = Clients;
+			sourceTree = "<group>";
+		};
+		772D35A42AEA842300038AA6 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				7795AD9B2AE826E1007FC870 /* MainVC.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		772D35A52AEA843600038AA6 /* CourtCases */ = {
+			isa = PBXGroup;
+			children = (
+				772D35A62AEA845300038AA6 /* CourtCasesVC.swift */,
+			);
+			path = CourtCases;
+			sourceTree = "<group>";
+		};
+		772D35A82AEA84A800038AA6 /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				772D35A92AEA84CC00038AA6 /* TasksVC.swift */,
+			);
+			path = Tasks;
+			sourceTree = "<group>";
+		};
 		777027952AE28F5E007CA2B7 = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +240,7 @@
 				77DB26FA2AE5671900944822 /* DS.swift */,
 				77DB26FF2AE5812C00944822 /* CustomComponents */,
 				77DB26FC2AE56D1100944822 /* CustomViews */,
+				772D35AB2AEA871700038AA6 /* TabBarItemEnum.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -237,9 +299,13 @@
 		77DB271D2AE59D7F00944822 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				77DB27322AE5DFD600944822 /* AuthVC.swift */,
-				7795AD9B2AE826E1007FC870 /* MainVC.swift */,
-				772D35962AE94F1100038AA6 /* ResetPasswordVC.swift */,
+				772D35A82AEA84A800038AA6 /* Tasks */,
+				772D35A42AEA842300038AA6 /* Main */,
+				772D359F2AEA82D700038AA6 /* Auth */,
+				772D35A12AEA83BD00038AA6 /* Clients */,
+				772D35A02AEA830500038AA6 /* Projects */,
+				772D35A52AEA843600038AA6 /* CourtCases */,
+				772D359B2AEA5DC700038AA6 /* NavigateTabBarController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -368,14 +434,20 @@
 				772D359A2AE9DB4C00038AA6 /* ResetPasswordView.swift in Sources */,
 				77DB27192AE597F400944822 /* SignUpView.swift in Sources */,
 				77DB27332AE5DFD600944822 /* AuthVC.swift in Sources */,
+				772D35A72AEA845300038AA6 /* CourtCasesVC.swift in Sources */,
+				772D359E2AEA82CC00038AA6 /* ProjectsVC.swift in Sources */,
+				772D35A32AEA83D400038AA6 /* ClientsVC.swift in Sources */,
+				772D35AC2AEA871700038AA6 /* TabBarItemEnum.swift in Sources */,
 				77DB26F52AE5537400944822 /* SignInView.swift in Sources */,
 				7795AD9A2AE82658007FC870 /* AuthService.swift in Sources */,
+				772D35AA2AEA84CC00038AA6 /* TasksVC.swift in Sources */,
 				77DB273D2AE72E9D00944822 /* Alert.swift in Sources */,
 				77DB26FB2AE5671900944822 /* DS.swift in Sources */,
 				77DB273B2AE724DB00944822 /* AuthViewModel.swift in Sources */,
 				777027A42AE28F5E007CA2B7 /* SceneDelegate.swift in Sources */,
 				772D35972AE94F1100038AA6 /* ResetPasswordVC.swift in Sources */,
 				77DB272D2AE5B18200944822 /* UIViewController + DismissGesture.swift in Sources */,
+				772D359C2AEA5DC700038AA6 /* NavigateTabBarController.swift in Sources */,
 				77DB27352AE5E0AB00944822 /* AuthBaseView.swift in Sources */,
 				7795AD9C2AE826E1007FC870 /* MainVC.swift in Sources */,
 			);
