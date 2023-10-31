@@ -1,17 +1,17 @@
 //
-//  AuthService.swift
+//  FirebaseAuthService.swift
 //  Atty
 //
-//  Created by Nikita Melnikov on 24.10.2023.
+//  Created by Nikita Melnikov on 27.10.2023.
 //
 
 import Foundation
 import FirebaseAuth
 import UIKit
 
-class AuthService {
+class FirebaseAuthService {
     
-    static let shared = AuthService()
+    static let shared = FirebaseAuthService()
     
     private init() {}
     
@@ -28,7 +28,7 @@ class AuthService {
     
     func signIn(email: String, password: String) {
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
-            guard let strongSelf = self else { return }
+            guard self != nil else { return }
             self?.changeVCAuth(vc: NavigateTabBarController())
         }
     }
@@ -37,7 +37,7 @@ class AuthService {
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
-            AuthService.shared.changeVCAuth(vc: AuthVC())
+            FirebaseAuthService.shared.changeVCAuth(vc: AuthVC())
             
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
@@ -51,7 +51,7 @@ class AuthService {
                     if let previousController = window.rootViewController {
                         previousController.dismiss(animated: false, completion: nil)
                     }
-                    let nav = UINavigationController(rootViewController: vc)
+                    let nav = NavigationBarController(rootViewController: vc)
                     nav.modalPresentationStyle = .fullScreen
                     window.rootViewController = nav
                 }, completion: nil)
@@ -61,10 +61,11 @@ class AuthService {
     
     func resetPassword(email: String) {
         Auth.auth().sendPasswordReset(withEmail: email) { (error) in
-        
+            
         }
     }
 }
+
 
 
 

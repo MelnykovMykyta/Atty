@@ -19,6 +19,7 @@ enum DS {
         static var authTFBorder = UIColor(red: 0.851, green: 0.851, blue: 0.851, alpha: 1)
         static var authButtonTextColor = UIColor(red: 0.145, green: 0.145, blue: 0.145, alpha: 1)
         static var authButtonColor = UIColor(red: 0.871, green: 0.871, blue: 0.871, alpha: 1)
+        static var mainViewColor = UIColor(red: 0.102, green: 0.102, blue: 0.102, alpha: 1)
     }
     
     enum Constraints {
@@ -28,6 +29,7 @@ enum DS {
         static var authTFInsets = 20
         static var authTFSpacing = 8
         static var safeAreaInset = 12
+        static var navigationBarItem = 20
     }
     
     enum Sizes {

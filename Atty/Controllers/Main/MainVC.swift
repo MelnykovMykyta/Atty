@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import FirebaseAuth
 
-class MainVC: UIViewController, UITextFieldDelegate {
+class MainVC: BaseViewContoller, UITextFieldDelegate {
     
     private var label: UILabel!
     private var logout: UIButton!
@@ -18,36 +18,29 @@ class MainVC: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupBaseView()
+        addViews()
+        setupConstraints()
     }
 }
 
 private extension MainVC {
     
-    func setupBaseView() {
+    func addViews() {
         
-        view.backgroundColor = DS.Colors.mainBackgroundColor
-        
-        let user = Auth.auth().currentUser?.email
-        
-        label = UILabel()
-        label.text = user
-        label.font = UIFont(name: "Manrope-Bold", size: 50)
-        label.textAlignment = .center
-        view.addSubview(label)
-        label.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(200)
-        }
+        navigationBar.addUser(name: "Микита Мельников", status: "Адвокат", icon: nil)
         
         logout = UIButton(type: .system)
         logout.setTitle("Вихід", for: .normal)
         logout.addTarget(self, action: #selector(logouttap), for: .touchUpInside)
-        view.addSubview(logout)
+        contentView.addSubview(logout)
+    }
+    
+    func setupConstraints() {
+        
         logout.snp.makeConstraints { $0.center.equalToSuperview() }
     }
     
     @objc func logouttap() {
-        AuthService.shared.logout()
+        FirebaseAuthService.shared.logout()
     }
 }

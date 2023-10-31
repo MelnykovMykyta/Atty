@@ -17,6 +17,7 @@ enum Tabs: Int {
     case tasks
     
     var icon: UIImage {
+        
         switch self {
         case .projects:
             return UIImage(named: "projectsIcon") ?? UIImage()

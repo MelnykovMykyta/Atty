@@ -32,9 +32,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private func checkAuthentication() {
         
         if Auth.auth().currentUser == nil {
-            AuthService.shared.changeVCAuth(vc: AuthVC())
+            FirebaseAuthService.shared.changeVCAuth(vc: AuthVC())
         } else {
-            AuthService.shared.changeVCAuth(vc: NavigateTabBarController())
+            FirebaseAuthService.shared.changeVCAuth(vc: NavigateTabBarController())
         }
     }
     

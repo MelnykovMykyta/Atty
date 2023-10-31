@@ -17,7 +17,7 @@ class AuthViewModel {
         let checkEmail = checkEmail(email: email)
         
         if checkTF && checkEmail {
-            AuthService.shared.signIn(email: email, password: password)
+            FirebaseAuthService.shared.signIn(email: email, password: password)
         }
     }
     
@@ -29,7 +29,7 @@ class AuthViewModel {
         let checkEmail = checkEmail(email: email)
         
         if checkTF && checkEmail {
-            AuthService.shared.createUser(name: name, email: email, password: password)
+            FirebaseAuthService.shared.createUser(name: name, email: email, password: password)
         }
     }
     
@@ -42,8 +42,8 @@ class AuthViewModel {
         let checkEmail = checkEmail(email: email)
         
         if checkTF && checkEmail {
-            AuthService.shared.resetPassword(email: email)
-            AuthService.shared.changeVCAuth(vc: AuthVC())
+            FirebaseAuthService.shared.resetPassword(email: email)
+            FirebaseAuthService.shared.changeVCAuth(vc: AuthVC())
             Alert.shared.showAlert(title: DS.AlertMessages.attention, message: DS.AlertMessages.forgotPassword)
         }
     }

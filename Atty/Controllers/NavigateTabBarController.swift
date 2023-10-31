@@ -10,20 +10,18 @@ import UIKit
 
 class NavigateTabBarController: UITabBarController {
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        setupView()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupViews()
         self.delegate = self
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
 
 private extension NavigateTabBarController {
     
-    func setupView() {
+    func setupViews() {
+        
         tabBar.tintColor = DS.Colors.standartTextColor
         tabBar.barTintColor = DS.Colors.tabBarUnselectTabColor
         tabBar.backgroundColor = DS.Colors.mainBackgroundColor
@@ -34,11 +32,11 @@ private extension NavigateTabBarController {
         let courtCases = CourtCasesVC()
         let tasks = TasksVC()
         
-        let projectsNavigationController = UINavigationController(rootViewController: projects)
-        let clientsNavigationController = UINavigationController(rootViewController: clients)
-        let mainNavigationController = UINavigationController(rootViewController: main)
-        let courtCasesNavigationController = UINavigationController(rootViewController: courtCases)
-        let tasksNavigationController = UINavigationController(rootViewController: tasks)
+        let projectsNavigationController = NavigationBarController(rootViewController: projects)
+        let clientsNavigationController = NavigationBarController(rootViewController: clients)
+        let mainNavigationController = NavigationBarController(rootViewController: main)
+        let courtCasesNavigationController = NavigationBarController(rootViewController: courtCases)
+        let tasksNavigationController = NavigationBarController(rootViewController: tasks)
         
         projectsNavigationController.tabBarItem = Tabs.projects.itemBar
         clientsNavigationController.tabBarItem = Tabs.clients.itemBar

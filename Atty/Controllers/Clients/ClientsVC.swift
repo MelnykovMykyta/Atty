@@ -10,34 +10,22 @@ import UIKit
 import SnapKit
 import FirebaseAuth
 
-class ClientsVC: UIViewController, UITextFieldDelegate {
+class ClientsVC: BaseViewContoller {
     
-    private var label: UILabel!
+    private var nextbtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupBaseView()
+        addViews()
     }
 }
 
 private extension ClientsVC {
     
-    func setupBaseView() {
+    func addViews() {
         
-        view.backgroundColor = DS.Colors.mainBackgroundColor
-        
-        label = UILabel()
-        label.text = "ClientsVC"
-        label.font = UIFont(name: "Manrope-Bold", size: 50)
-        label.textAlignment = .center
-        view.addSubview(label)
-        label.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(200)
-        }
-        
-       
+        navigationBar.addTitle(with: "Клієнти")
     }
 }
 

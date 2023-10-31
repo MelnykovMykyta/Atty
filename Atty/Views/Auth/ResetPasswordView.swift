@@ -75,7 +75,7 @@ extension ResetPasswordView {
         
         closeButton.snp.makeConstraints {
             $0.size.equalTo(DS.Sizes.buttonSize)
-            $0.top.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+            $0.top.trailing.equalToSuperview().inset(DS.Constraints.navigationBarItem)
         }
         
         tfStackView.snp.makeConstraints {

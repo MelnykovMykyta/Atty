@@ -15,6 +15,10 @@
 		772D35A72AEA845300038AA6 /* CourtCasesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D35A62AEA845300038AA6 /* CourtCasesVC.swift */; };
 		772D35AA2AEA84CC00038AA6 /* TasksVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D35A92AEA84CC00038AA6 /* TasksVC.swift */; };
 		772D35AC2AEA871700038AA6 /* TabBarItemEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D35AB2AEA871700038AA6 /* TabBarItemEnum.swift */; };
+		772D35AE2AEB2D8C00038AA6 /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D35AD2AEB2D8C00038AA6 /* FirebaseAuthService.swift */; };
+		772D35BA2AF05BE500038AA6 /* NavigationBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D35B92AF05BE500038AA6 /* NavigationBarController.swift */; };
+		772D35BC2AF05FB500038AA6 /* BaseNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D35BB2AF05FB500038AA6 /* BaseNavBarView.swift */; };
+		772D35BE2AF0648F00038AA6 /* BaseViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D35BD2AF0648F00038AA6 /* BaseViewContoller.swift */; };
 		777027A22AE28F5E007CA2B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777027A12AE28F5E007CA2B7 /* AppDelegate.swift */; };
 		777027A42AE28F5E007CA2B7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777027A32AE28F5E007CA2B7 /* SceneDelegate.swift */; };
 		777027AB2AE28F61007CA2B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 777027AA2AE28F61007CA2B7 /* Assets.xcassets */; };
@@ -22,7 +26,6 @@
 		777027B72AE29050007CA2B7 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 777027B62AE29050007CA2B7 /* Realm */; };
 		777027B92AE29050007CA2B7 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 777027B82AE29050007CA2B7 /* RealmSwift */; };
 		777027C12AE2910D007CA2B7 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 777027C02AE2910D007CA2B7 /* Alamofire */; };
-		7795AD9A2AE82658007FC870 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7795AD992AE82658007FC870 /* AuthService.swift */; };
 		7795AD9C2AE826E1007FC870 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7795AD9B2AE826E1007FC870 /* MainVC.swift */; };
 		7795AD9E2AE8277E007FC870 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7795AD9D2AE8277E007FC870 /* GoogleService-Info.plist */; };
 		77DB26F52AE5537400944822 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB26F42AE5537400944822 /* SignInView.swift */; };
@@ -64,13 +67,16 @@
 		772D35A62AEA845300038AA6 /* CourtCasesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourtCasesVC.swift; sourceTree = "<group>"; };
 		772D35A92AEA84CC00038AA6 /* TasksVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksVC.swift; sourceTree = "<group>"; };
 		772D35AB2AEA871700038AA6 /* TabBarItemEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItemEnum.swift; sourceTree = "<group>"; };
+		772D35AD2AEB2D8C00038AA6 /* FirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
+		772D35B92AF05BE500038AA6 /* NavigationBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarController.swift; sourceTree = "<group>"; };
+		772D35BB2AF05FB500038AA6 /* BaseNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavBarView.swift; sourceTree = "<group>"; };
+		772D35BD2AF0648F00038AA6 /* BaseViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewContoller.swift; sourceTree = "<group>"; };
 		7770279E2AE28F5E007CA2B7 /* Atty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Atty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		777027A12AE28F5E007CA2B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		777027A32AE28F5E007CA2B7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		777027AA2AE28F61007CA2B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		777027AD2AE28F61007CA2B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		777027AF2AE28F61007CA2B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7795AD992AE82658007FC870 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		7795AD9B2AE826E1007FC870 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		7795AD9D2AE8277E007FC870 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		77DB26F42AE5537400944822 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
@@ -218,7 +224,7 @@
 		7795AD982AE8263D007FC870 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				7795AD992AE82658007FC870 /* AuthService.swift */,
+				772D35AD2AEB2D8C00038AA6 /* FirebaseAuthService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -258,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				77DB26FD2AE56D3600944822 /* AuthTFView.swift */,
+				772D35BB2AF05FB500038AA6 /* BaseNavBarView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -296,13 +303,15 @@
 		77DB271D2AE59D7F00944822 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				772D35A82AEA84A800038AA6 /* Tasks */,
-				772D35A42AEA842300038AA6 /* Main */,
 				772D359F2AEA82D700038AA6 /* Auth */,
-				772D35A12AEA83BD00038AA6 /* Clients */,
+				772D35A42AEA842300038AA6 /* Main */,
 				772D35A02AEA830500038AA6 /* Projects */,
+				772D35A12AEA83BD00038AA6 /* Clients */,
 				772D35A52AEA843600038AA6 /* CourtCases */,
+				772D35A82AEA84A800038AA6 /* Tasks */,
 				772D359B2AEA5DC700038AA6 /* NavigateTabBarController.swift */,
+				772D35B92AF05BE500038AA6 /* NavigationBarController.swift */,
+				772D35BD2AF0648F00038AA6 /* BaseViewContoller.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -429,6 +438,7 @@
 				77DB27012AE5814D00944822 /* AuthButton.swift in Sources */,
 				777027A22AE28F5E007CA2B7 /* AppDelegate.swift in Sources */,
 				772D359A2AE9DB4C00038AA6 /* ResetPasswordView.swift in Sources */,
+				772D35AE2AEB2D8C00038AA6 /* FirebaseAuthService.swift in Sources */,
 				77DB27192AE597F400944822 /* SignUpView.swift in Sources */,
 				77DB27332AE5DFD600944822 /* AuthVC.swift in Sources */,
 				772D35A72AEA845300038AA6 /* CourtCasesVC.swift in Sources */,
@@ -436,16 +446,18 @@
 				772D35A32AEA83D400038AA6 /* ClientsVC.swift in Sources */,
 				772D35AC2AEA871700038AA6 /* TabBarItemEnum.swift in Sources */,
 				77DB26F52AE5537400944822 /* SignInView.swift in Sources */,
-				7795AD9A2AE82658007FC870 /* AuthService.swift in Sources */,
 				772D35AA2AEA84CC00038AA6 /* TasksVC.swift in Sources */,
+				772D35BA2AF05BE500038AA6 /* NavigationBarController.swift in Sources */,
 				77DB273D2AE72E9D00944822 /* Alert.swift in Sources */,
 				77DB26FB2AE5671900944822 /* DS.swift in Sources */,
 				77DB273B2AE724DB00944822 /* AuthViewModel.swift in Sources */,
 				777027A42AE28F5E007CA2B7 /* SceneDelegate.swift in Sources */,
 				772D35972AE94F1100038AA6 /* ResetPasswordVC.swift in Sources */,
+				772D35BE2AF0648F00038AA6 /* BaseViewContoller.swift in Sources */,
 				77DB272D2AE5B18200944822 /* UIViewController + DismissGesture.swift in Sources */,
 				772D359C2AEA5DC700038AA6 /* NavigateTabBarController.swift in Sources */,
 				7795AD9C2AE826E1007FC870 /* MainVC.swift in Sources */,
+				772D35BC2AF05FB500038AA6 /* BaseNavBarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
