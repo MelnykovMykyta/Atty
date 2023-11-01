@@ -26,6 +26,14 @@ private extension ProjectsVC {
     func addViews() {
         
         navigationBar.addTitle(with: Tabs.projects.itemTitle)
+        infoView.setInfoWithValueFrom(title: "Завершені", value: 2, from: 4)
+        infoView.setAddView(title: "Додати проєкт")
+        infoView.addInfoButton()
+        infoView.infoButton.addTarget(self, action: #selector(addProject), for: .touchUpInside)
+    }
+    
+    @objc func addProject() {
+        print("addProject")
     }
 }
 

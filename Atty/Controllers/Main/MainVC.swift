@@ -28,8 +28,10 @@ private extension MainVC {
     func addViews() {
         
         navigationBar.addUser(name: "Микита Мельников", status: "Адвокат", icon: nil)
-        infoView.addTodayInfo(date: "31 жовтня 2023", todayTasksValue: 2, todayCourtMeets: 2)
-        infoView.addCostsView()
+        infoView.setMainTodayInfo(date: "31 жовтня 2023", todayTasksValue: 2, todayCourtMeets: 2)
+        infoView.setCostsView()
+        infoView.addInfoButton()
+        infoView.infoButton.addTarget(self, action: #selector(tapCostsInfo), for: .touchUpInside)
         
         logout = UIButton(type: .system)
         logout.setTitle("Вихід", for: .normal)
@@ -44,5 +46,9 @@ private extension MainVC {
     
     @objc func logouttap() {
         FirebaseAuthService.shared.logout()
+    }
+    
+    @objc func tapCostsInfo() {
+        print("Soon")
     }
 }

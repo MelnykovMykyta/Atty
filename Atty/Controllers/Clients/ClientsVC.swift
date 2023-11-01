@@ -26,6 +26,13 @@ private extension ClientsVC {
     func addViews() {
         
         navigationBar.addTitle(with: Tabs.clients.itemTitle)
+        infoView.setInfo(title: "Кількість", value: 4)
+        infoView.setAddView(title: "Додати клієнта")
+        infoView.addInfoButton()
+        infoView.infoButton.addTarget(self, action: #selector(addClient), for: .touchUpInside)
+    }
+    
+    @objc func addClient() {
+        print("addClient")
     }
 }
-

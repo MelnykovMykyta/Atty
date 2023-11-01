@@ -34,12 +34,24 @@ enum DS {
         static var safeAreaInset = 12
         static var navigationBarItem = 20
         static var baseInsetViews = 8
+        static var infoViewLabelInset = 4
     }
     
     enum Sizes {
-        static var halfSize = 0.5
         static var authTFHeight = 60
         static var buttonSize = 40
+    }
+    
+    enum SizeMultipliers {
+        static var halfSize = 0.5
+        static var mainInfoViewWidth = 0.55
+        static var mainInfoViewHeidht = 0.6
+        static var fifteenPercent = 0.15
+        static var twentyPercent = 0.2
+        static var quarterSize = 0.25
+        static var fortyPercent = 0.4
+        static var eightyPercent = 0.8
+        
     }
     
     enum AlertMessages {
@@ -52,7 +64,6 @@ enum DS {
     
     enum CornerRadius {
         static var baseCornerRadiusLayers = 20.0
-        
     }
     
 }

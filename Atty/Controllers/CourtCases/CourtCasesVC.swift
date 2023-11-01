@@ -26,5 +26,13 @@ private extension CourtCasesVC {
     func addViews() {
         
         navigationBar.addTitle(with: Tabs.courtCases.itemTitle)
+        infoView.setInfo(title: "Відстежується", value: 3)
+        infoView.setAddView(title: "Додати")
+        infoView.addInfoButton()
+        infoView.infoButton.addTarget(self, action: #selector(addCourt), for: .touchUpInside)
+    }
+    
+    @objc func addCourt() {
+        print("addCourt")
     }
 }

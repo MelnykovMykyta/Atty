@@ -244,8 +244,8 @@
 			isa = PBXGroup;
 			children = (
 				77DB26FA2AE5671900944822 /* DS.swift */,
-				77DB26FF2AE5812C00944822 /* CustomComponents */,
 				772D35AB2AEA871700038AA6 /* TabBarItemEnum.swift */,
+				77DB26FF2AE5812C00944822 /* CustomComponents */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";

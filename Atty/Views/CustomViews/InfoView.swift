@@ -11,6 +11,7 @@ import SnapKit
 
 class InfoView: UIView {
     
+    var infoButton = UIButton()
     private var mainInfoView: UIView!
     private var additionallyInfoView: UIView!
     
@@ -49,8 +50,8 @@ extension InfoView {
         
         mainInfoView.snp.makeConstraints {
             $0.top.leading.bottom.equalToSuperview().inset(DS.Constraints.baseInsetViews)
-            $0.width.equalToSuperview().multipliedBy(0.55)
-            $0.height.equalTo(mainInfoView.snp.width).multipliedBy(0.6)
+            $0.width.equalToSuperview().multipliedBy(DS.SizeMultipliers.mainInfoViewWidth)
+            $0.height.equalTo(mainInfoView.snp.width).multipliedBy(DS.SizeMultipliers.mainInfoViewHeidht)
         }
         
         additionallyInfoView.snp.makeConstraints {
@@ -59,7 +60,7 @@ extension InfoView {
         }
     }
     
-    func addTodayInfo(date: String, todayTasksValue: Int, todayCourtMeets: Int) {
+    func setMainTodayInfo(date: String, todayTasksValue: Int, todayCourtMeets: Int) {
         
         let dateLabel = UILabel()
         dateLabel.text = date
@@ -120,12 +121,12 @@ extension InfoView {
         mainInfoView.addSubview(courtMeetsValue)
         
         dateLabel.snp.makeConstraints {
-            $0.height.equalToSuperview().multipliedBy(0.2)
+            $0.height.equalToSuperview().multipliedBy(DS.SizeMultipliers.twentyPercent)
             $0.top.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
         }
         
         labelsStackView.snp.makeConstraints {
-            $0.height.equalToSuperview().multipliedBy(0.15)
+            $0.height.equalToSuperview().multipliedBy(DS.SizeMultipliers.fifteenPercent)
             $0.centerY.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
         }
@@ -136,9 +137,9 @@ extension InfoView {
         }
         
         tasksLabel.snp.makeConstraints {
-            $0.height.equalToSuperview().multipliedBy(0.8)
+            $0.height.equalToSuperview().multipliedBy(DS.SizeMultipliers.eightyPercent)
             $0.trailing.equalToSuperview()
-            $0.leading.equalTo(tasksIcon.snp.trailing).inset(-4)
+            $0.leading.equalTo(tasksIcon.snp.trailing).inset(-DS.Constraints.infoViewLabelInset)
             $0.centerY.equalTo(tasksIcon.snp.centerY)
         }
         
@@ -148,9 +149,9 @@ extension InfoView {
         }
         
         courtMeetLabel.snp.makeConstraints {
-            $0.height.equalToSuperview().multipliedBy(0.8)
+            $0.height.equalToSuperview().multipliedBy(DS.SizeMultipliers.eightyPercent)
             $0.trailing.equalToSuperview()
-            $0.leading.equalTo(courtMeetIcon.snp.trailing).inset(-4)
+            $0.leading.equalTo(courtMeetIcon.snp.trailing).inset(-DS.Constraints.infoViewLabelInset)
             $0.centerY.equalTo(courtMeetIcon.snp.centerY)
         }
         
@@ -167,7 +168,7 @@ extension InfoView {
         }
     }
     
-    func addCostsView() {
+    func setCostsView() {
         let costsIcon = UIImageView()
         costsIcon.image = UIImage(named: "costsIcon")
         additionallyInfoView.addSubview(costsIcon)
@@ -201,40 +202,132 @@ extension InfoView {
         bottomView.addSubview(arrowIcon)
         
         costsIcon.snp.makeConstraints {
-            $0.height.equalToSuperview().multipliedBy(0.15)
+            $0.height.equalToSuperview().multipliedBy(DS.SizeMultipliers.fifteenPercent)
             $0.width.equalTo(costsIcon.snp.height)
             $0.top.leading.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
         }
         
         costsLabel.snp.makeConstraints {
-            $0.height.equalToSuperview().multipliedBy(0.15)
-            $0.leading.equalTo(costsIcon.snp.trailing).inset(-4)
+            $0.height.equalToSuperview().multipliedBy(DS.SizeMultipliers.fifteenPercent)
+            $0.leading.equalTo(costsIcon.snp.trailing).inset(-DS.Constraints.infoViewLabelInset)
             $0.trailing.equalToSuperview()
             $0.centerY.equalTo(costsIcon.snp.centerY)
         }
         
         bottomView.snp.makeConstraints {
-            $0.height.equalToSuperview().multipliedBy(0.25)
+            $0.height.equalToSuperview().multipliedBy(DS.SizeMultipliers.quarterSize)
             $0.leading.trailing.bottom.equalToSuperview()
         }
         
         detailsLabel.snp.makeConstraints {
-            $0.height.equalToSuperview().multipliedBy(DS.Sizes.halfSize)
+            $0.height.equalToSuperview().multipliedBy(DS.SizeMultipliers.halfSize)
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
         }
         
         arrowIcon.snp.makeConstraints {
-            $0.height.equalToSuperview().multipliedBy(0.4)
-            $0.width.equalTo(arrowIcon.snp.height).multipliedBy(DS.Sizes.halfSize)
+            $0.height.equalToSuperview().multipliedBy(DS.SizeMultipliers.fortyPercent)
+            $0.width.equalTo(arrowIcon.snp.height).multipliedBy(DS.SizeMultipliers.halfSize)
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
         }
         
         scheduleIcon.snp.makeConstraints {
-            $0.height.equalToSuperview().multipliedBy(0.4)
+            $0.height.equalToSuperview().multipliedBy(DS.SizeMultipliers.fortyPercent)
             $0.bottom.equalTo(bottomView.snp.top)
             $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+        }
+    }
+    
+    
+    func addInfoButton() {
+        infoButton = UIButton(type: .system)
+        infoButton.layer.cornerRadius = DS.CornerRadius.baseCornerRadiusLayers
+        infoButton.layer.masksToBounds = true
+        additionallyInfoView.addSubview(infoButton)
+        
+        infoButton.snp.makeConstraints { $0.edges.equalToSuperview() }
+    }
+    
+    func setInfo(title: String, value: Int) {
+        let label = UILabel()
+        label.text = title
+        label.textColor = DS.Colors.standartTextColor
+        label.font = UIFont(name: "Manrope-Bold", size: 100)
+        label.adjustsFontSizeToFitWidth = true
+        mainInfoView.addSubview(label)
+        
+        let valueLabel = UILabel()
+        valueLabel.text = value.description
+        valueLabel.textColor = DS.Colors.standartTextColor
+        valueLabel.textAlignment = .center
+        valueLabel.font = UIFont(name: "Manrope-Bold", size: 100)
+        valueLabel.adjustsFontSizeToFitWidth = true
+        mainInfoView.addSubview(valueLabel)
+        
+        label.snp.makeConstraints {
+            $0.height.equalToSuperview().multipliedBy(DS.SizeMultipliers.twentyPercent)
+            $0.top.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+        }
+        
+        valueLabel.snp.makeConstraints {
+            $0.height.equalToSuperview().multipliedBy(DS.SizeMultipliers.halfSize)
+            $0.top.equalTo(label.snp.bottom).inset(-DS.Constraints.authTFSpacing)
+            $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+        }
+    }
+    
+    func setInfoWithValueFrom(title: String, value: Int, from: Int) {
+        let label = UILabel()
+        label.text = title
+        label.textColor = DS.Colors.standartTextColor
+        label.font = UIFont(name: "Manrope-Bold", size: 100)
+        label.adjustsFontSizeToFitWidth = true
+        mainInfoView.addSubview(label)
+        
+        let valueLabel = UILabel()
+        valueLabel.text = "\(value.description) / \(from.description)"
+        valueLabel.textColor = DS.Colors.standartTextColor
+        valueLabel.textAlignment = .center
+        valueLabel.font = UIFont(name: "Manrope-Bold", size: 100)
+        valueLabel.adjustsFontSizeToFitWidth = true
+        mainInfoView.addSubview(valueLabel)
+        
+        label.snp.makeConstraints {
+            $0.height.equalToSuperview().multipliedBy(DS.SizeMultipliers.twentyPercent)
+            $0.top.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+        }
+        
+        valueLabel.snp.makeConstraints {
+            $0.height.equalToSuperview().multipliedBy(DS.SizeMultipliers.fortyPercent)
+            $0.top.equalTo(label.snp.bottom).inset(-DS.Constraints.authTFSpacing)
+            $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+        }
+    }
+    
+    func setAddView(title: String) {
+        
+        let addViewLabel = UILabel()
+        addViewLabel.text = title
+        addViewLabel.textColor = DS.Colors.standartTextColor
+        addViewLabel.font = UIFont(name: "Manrope-Bold", size: 80)
+        addViewLabel.adjustsFontSizeToFitWidth = true
+        additionallyInfoView.addSubview(addViewLabel)
+        
+        let plusIcon = UIImageView()
+        plusIcon.image = UIImage(named: "plusIcon")
+        additionallyInfoView.addSubview(plusIcon)
+        
+        addViewLabel.snp.makeConstraints {
+            $0.height.equalToSuperview().multipliedBy(DS.SizeMultipliers.fifteenPercent)
+            $0.top.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+        }
+        
+        plusIcon.snp.makeConstraints {
+            $0.height.equalToSuperview().multipliedBy(DS.SizeMultipliers.fortyPercent)
+            $0.top.equalTo(addViewLabel.snp.bottom).inset(-DS.Constraints.authViewLeadinTrailing)
+            $0.width.equalTo(plusIcon.snp.height)
+            $0.centerX.equalToSuperview()
         }
     }
 }

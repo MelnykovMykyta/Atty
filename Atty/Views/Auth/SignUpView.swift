@@ -123,7 +123,7 @@ extension SignUpView {
         icon.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authLogoLeadingTrailing)
-            $0.height.equalTo(icon.snp.width).multipliedBy(DS.Sizes.halfSize)
+            $0.height.equalTo(icon.snp.width).multipliedBy(DS.SizeMultipliers.halfSize)
         }
         
         signLabel.snp.makeConstraints {
