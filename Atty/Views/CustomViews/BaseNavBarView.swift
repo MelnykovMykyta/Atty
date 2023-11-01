@@ -65,10 +65,6 @@ extension BaseNavBarView {
         userIcon.setImage(icon ?? UIImage(named: "defaultUserIcon"), for: .normal)
         userIcon.tintColor = DS.Colors.standartTextColor
         addSubview(userIcon)
-        userIcon.snp.makeConstraints {
-            $0.size.equalTo(DS.Sizes.buttonSize)
-            $0.top.leading.bottom.equalToSuperview().inset(DS.Constraints.navigationBarItem)
-        }
         
         let userStatus = UILabel()
         userStatus.text = status
@@ -86,15 +82,17 @@ extension BaseNavBarView {
         stackView.distribution = .fillProportionally
         addSubview(stackView)
         
-        [userStatus, userName].forEach { label in
-            stackView.addArrangedSubview(label)
+        [userStatus, userName].forEach { stackView.addArrangedSubview($0) }
+        
+        userIcon.snp.makeConstraints {
+            $0.size.equalTo(DS.Sizes.buttonSize)
+            $0.top.leading.bottom.equalToSuperview().inset(DS.Constraints.navigationBarItem)
         }
         
         stackView.snp.makeConstraints {
             $0.leading.equalTo(userIcon.snp.trailing).inset(-8)
-            $0.height.equalTo(userIcon.snp.height).multipliedBy(0.7)
+            $0.height.equalTo(userIcon.snp.height).multipliedBy(0.8)
             $0.centerY.equalTo(userIcon.snp.centerY)
         }
     }
 }
-

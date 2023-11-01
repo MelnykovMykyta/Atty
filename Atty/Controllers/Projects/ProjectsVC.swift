@@ -25,7 +25,7 @@ private extension ProjectsVC {
     
     func addViews() {
         
-        navigationBar.addTitle(with: "Проєкти")
+        navigationBar.addTitle(with: Tabs.projects.itemTitle)
     }
 }
 

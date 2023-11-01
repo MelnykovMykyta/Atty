@@ -25,7 +25,7 @@ private extension ClientsVC {
     
     func addViews() {
         
-        navigationBar.addTitle(with: "Клієнти")
+        navigationBar.addTitle(with: Tabs.clients.itemTitle)
     }
 }
 

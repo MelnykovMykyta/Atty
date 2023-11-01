@@ -25,6 +25,6 @@ private extension CourtCasesVC {
     
     func addViews() {
         
-        navigationBar.addTitle(with: "Суди")
+        navigationBar.addTitle(with: Tabs.courtCases.itemTitle)
     }
 }

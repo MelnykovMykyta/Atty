@@ -28,6 +28,8 @@ private extension MainVC {
     func addViews() {
         
         navigationBar.addUser(name: "Микита Мельников", status: "Адвокат", icon: nil)
+        infoView.addTodayInfo(date: "31 жовтня 2023", todayTasksValue: 2, todayCourtMeets: 2)
+        infoView.addCostsView()
         
         logout = UIButton(type: .system)
         logout.setTitle("Вихід", for: .normal)

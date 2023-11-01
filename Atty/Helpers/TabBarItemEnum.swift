@@ -32,6 +32,23 @@ enum Tabs: Int {
         }
     }
     
+    var itemTitle: String {
+        
+        switch self {
+            
+        case .projects:
+            return "Проєкти"
+        case .clients:
+            return "Клієнти"
+        case .main:
+            return "Головна"
+        case .courtCases:
+            return "Суди"
+        case .tasks:
+            return "Задачі"
+        }
+    }
+    
     var itemBar: UITabBarItem {
         
         switch self {

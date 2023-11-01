@@ -13,6 +13,7 @@ import FirebaseAuth
 class BaseViewContoller: UIViewController {
     
     var navigationBar: BaseNavBarView!
+    var infoView: InfoView!
     var contentView = UIView()
     
     override func viewDidLoad() {
@@ -34,9 +35,12 @@ class BaseViewContoller: UIViewController {
         
         contentView = UIView()
         contentView.backgroundColor = DS.Colors.mainViewColor
-        contentView.layer.cornerRadius = 25
+        contentView.layer.cornerRadius = DS.CornerRadius.baseCornerRadiusLayers
         contentView.layer.masksToBounds = true
         view.addSubview(contentView)
+        
+        infoView = InfoView()
+        contentView.addSubview(infoView)
     }
     
     func setupConstraintViews() {
@@ -50,6 +54,10 @@ class BaseViewContoller: UIViewController {
             $0.top.equalTo(navigationBar.snp.bottom)
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
             $0.leading.trailing.equalToSuperview()
+        }
+        
+        infoView.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
         }
     }
 }

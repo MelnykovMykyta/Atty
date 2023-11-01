@@ -20,6 +20,9 @@ enum DS {
         static var authButtonTextColor = UIColor(red: 0.145, green: 0.145, blue: 0.145, alpha: 1)
         static var authButtonColor = UIColor(red: 0.871, green: 0.871, blue: 0.871, alpha: 1)
         static var mainViewColor = UIColor(red: 0.102, green: 0.102, blue: 0.102, alpha: 1)
+        static var mainInfoView = UIColor(red: 0.235, green: 0.282, blue: 0.965, alpha: 1)
+        static var additionallyInfoView = UIColor(red: 0.133, green: 0.133, blue: 0.133, alpha: 1)
+        static var lightGray = UIColor(red: 0.176, green: 0.173, blue: 0.173, alpha: 1)
     }
     
     enum Constraints {
@@ -30,12 +33,13 @@ enum DS {
         static var authTFSpacing = 8
         static var safeAreaInset = 12
         static var navigationBarItem = 20
+        static var baseInsetViews = 8
     }
     
     enum Sizes {
         static var halfSize = 0.5
         static var authTFHeight = 60
-        static var buttonSize = 50
+        static var buttonSize = 40
     }
     
     enum AlertMessages {
@@ -45,4 +49,10 @@ enum DS {
         static var wrongPassword = "Пароль повинен містити як мінімум 6 символів (літери верхнього та нижнього регістру, цифри, символи _ . % + -"
         static var forgotPassword = "На Вашу електронну пошту надіслано посилання для відновлення паролю"
     }
+    
+    enum CornerRadius {
+        static var baseCornerRadiusLayers = 20.0
+        
+    }
+    
 }

@@ -19,6 +19,7 @@
 		772D35BA2AF05BE500038AA6 /* NavigationBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D35B92AF05BE500038AA6 /* NavigationBarController.swift */; };
 		772D35BC2AF05FB500038AA6 /* BaseNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D35BB2AF05FB500038AA6 /* BaseNavBarView.swift */; };
 		772D35BE2AF0648F00038AA6 /* BaseViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D35BD2AF0648F00038AA6 /* BaseViewContoller.swift */; };
+		772D35C02AF1149D00038AA6 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D35BF2AF1149D00038AA6 /* InfoView.swift */; };
 		777027A22AE28F5E007CA2B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777027A12AE28F5E007CA2B7 /* AppDelegate.swift */; };
 		777027A42AE28F5E007CA2B7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777027A32AE28F5E007CA2B7 /* SceneDelegate.swift */; };
 		777027AB2AE28F61007CA2B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 777027AA2AE28F61007CA2B7 /* Assets.xcassets */; };
@@ -71,6 +72,7 @@
 		772D35B92AF05BE500038AA6 /* NavigationBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarController.swift; sourceTree = "<group>"; };
 		772D35BB2AF05FB500038AA6 /* BaseNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavBarView.swift; sourceTree = "<group>"; };
 		772D35BD2AF0648F00038AA6 /* BaseViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewContoller.swift; sourceTree = "<group>"; };
+		772D35BF2AF1149D00038AA6 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		7770279E2AE28F5E007CA2B7 /* Atty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Atty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		777027A12AE28F5E007CA2B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		777027A32AE28F5E007CA2B7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 		77DB26F32AE5531000944822 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				77DB26FC2AE56D1100944822 /* CustomViews */,
 				772D35982AE9DB0B00038AA6 /* Auth */,
 			);
 			path = Views;
@@ -242,7 +245,6 @@
 			children = (
 				77DB26FA2AE5671900944822 /* DS.swift */,
 				77DB26FF2AE5812C00944822 /* CustomComponents */,
-				77DB26FC2AE56D1100944822 /* CustomViews */,
 				772D35AB2AEA871700038AA6 /* TabBarItemEnum.swift */,
 			);
 			path = Helpers;
@@ -265,6 +267,7 @@
 			children = (
 				77DB26FD2AE56D3600944822 /* AuthTFView.swift */,
 				772D35BB2AF05FB500038AA6 /* BaseNavBarView.swift */,
+				772D35BF2AF1149D00038AA6 /* InfoView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -457,6 +460,7 @@
 				77DB272D2AE5B18200944822 /* UIViewController + DismissGesture.swift in Sources */,
 				772D359C2AEA5DC700038AA6 /* NavigateTabBarController.swift in Sources */,
 				7795AD9C2AE826E1007FC870 /* MainVC.swift in Sources */,
+				772D35C02AF1149D00038AA6 /* InfoView.swift in Sources */,
 				772D35BC2AF05FB500038AA6 /* BaseNavBarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

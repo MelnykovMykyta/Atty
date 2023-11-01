@@ -25,6 +25,6 @@ private extension TasksVC {
     
     func addViews() {
         
-        navigationBar.addTitle(with: "Задачі")
+        navigationBar.addTitle(with: Tabs.tasks.itemTitle)
     }
 }
