@@ -11,7 +11,8 @@ import SnapKit
 
 class BaseNavBarView: UIView {
     
-    private var notificationButton: UIButton!
+    var notificationButton: UIButton!
+    var userIcon: UIButton!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -61,7 +62,7 @@ extension BaseNavBarView {
     
     func addUser(name: String, status: String, icon: UIImage?) {
         
-        let userIcon = UIButton(type: .system)
+        userIcon = UIButton(type: .system)
         userIcon.setImage(icon ?? UIImage(named: "defaultUserIcon"), for: .normal)
         userIcon.tintColor = DS.Colors.standartTextColor
         addSubview(userIcon)

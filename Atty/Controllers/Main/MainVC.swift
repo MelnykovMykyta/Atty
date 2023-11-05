@@ -24,13 +24,12 @@ private extension MainVC {
     func addViews() {
         
         navigationBar.addUser(name: "Микита Мельников", status: "Адвокат", icon: nil)
+        navigationBar.userIcon.addTarget(self, action: #selector(logouttap), for: .touchUpInside)
         infoView.setMainTodayInfo(date: "31 жовтня 2023", todayTasksValue: 2, todayCourtMeets: 2)
         infoView.setCostsView()
         infoView.addInfoButton()
         infoView.infoButton.addTarget(self, action: #selector(tapCostsInfo), for: .touchUpInside)
         addtable(with: MainTV())
-        
-        
     }
     
     @objc func logouttap() {

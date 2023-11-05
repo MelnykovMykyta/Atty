@@ -10,9 +10,9 @@ import UIKit
 import SnapKit
 
 class TaskTVC: UITableViewCell {
-    
+    private var doneIcon = UIImageView()
     private var view: UIView!
-    var taskDescription = UILabel()
+    private var taskDescription = UILabel()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -53,16 +53,18 @@ extension TaskTVC {
         label.snp.makeConstraints {
             $0.edges.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
         }
-        
     }
     
     func addTask(title: String, completionStatus: Bool) {
-
+     
+        doneIcon.removeFromSuperview()
+        taskDescription.removeFromSuperview()
+        
         if completionStatus {
 
             view.backgroundColor = DS.Colors.taskFinished
 
-            let doneIcon = UIImageView()
+            doneIcon = UIImageView()
             doneIcon.image = UIImage(named: "doneIcon")
             view.addSubview(doneIcon)
 
@@ -70,19 +72,20 @@ extension TaskTVC {
             taskDescription.text = title
             taskDescription.textColor = .black
             taskDescription.numberOfLines = 0
-            taskDescription.font = UIFont(name: "Manrope-Bold", size: 14)
+            taskDescription.font = UIFont(name: "Manrope-Bold", size: 12)
             view.addSubview(taskDescription)
 
             doneIcon.snp.makeConstraints {
-                $0.top.bottom.equalToSuperview()
+                $0.centerY.equalToSuperview()
                 $0.leading.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
-                $0.width.equalTo(doneIcon.snp.height)
+                $0.size.equalTo(20)
             }
 
             taskDescription.snp.makeConstraints {
                 $0.top.trailing.bottom.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
-                $0.leading.equalTo(doneIcon.snp.trailing)
+                $0.leading.equalTo(doneIcon.snp.trailing).inset(-8)
             }
+            
         } else {
 
             view.backgroundColor = DS.Colors.taskStarted
@@ -91,7 +94,7 @@ extension TaskTVC {
             taskDescription.text = title
             taskDescription.textColor = DS.Colors.standartTextColor
             taskDescription.numberOfLines = 0
-            taskDescription.font = UIFont(name: "Manrope-Bold", size: 14)
+            taskDescription.font = UIFont(name: "Manrope-Bold", size: 12)
             view.addSubview(taskDescription)
 
             taskDescription.snp.makeConstraints {

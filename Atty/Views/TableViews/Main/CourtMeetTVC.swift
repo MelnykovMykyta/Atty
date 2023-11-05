@@ -60,7 +60,6 @@ extension CourtMeetTVC {
         label.snp.makeConstraints {
             $0.edges.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
         }
-        
     }
     
     func addCourtMeet(courtName: String, caseNumber: String, plaintiff: String, defendant: String, judge: String, time: String, date: String) {
@@ -70,8 +69,7 @@ extension CourtMeetTVC {
         courtNameLabel = UILabel()
         courtNameLabel.text = courtName
         courtNameLabel.textColor = DS.Colors.standartTextColor
-        courtNameLabel.numberOfLines = 0
-        courtNameLabel.font = UIFont(name: "Manrope-Bold", size: 14)
+        courtNameLabel.font = UIFont(name: "Manrope-Bold", size: 12)
         view.addSubview(courtNameLabel)
         
         courtNameLabel.snp.makeConstraints {
@@ -82,12 +80,11 @@ extension CourtMeetTVC {
         caseNumberLabel = UILabel()
         caseNumberLabel.text = caseNumber
         caseNumberLabel.textColor = DS.Colors.standartTextColor
-        caseNumberLabel.numberOfLines = 0
         caseNumberLabel.font = UIFont(name: "Manrope-Bold", size: 20)
         view.addSubview(caseNumberLabel)
         
         caseNumberLabel.snp.makeConstraints {
-            $0.top.equalTo(courtNameLabel.snp.bottom).inset(-DS.Constraints.authViewLeadinTrailing)
+            $0.top.equalTo(courtNameLabel.snp.bottom)
             $0.leading.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
         }
         
@@ -95,24 +92,23 @@ extension CourtMeetTVC {
         plaintiffLabel.text = "Позивач: \(plaintiff)"
         plaintiffLabel.textColor = DS.Colors.darkedTextColor
         plaintiffLabel.numberOfLines = 0
-        plaintiffLabel.font = UIFont(name: "Manrope-Bold", size: 12)
+        plaintiffLabel.font = UIFont(name: "Manrope-ExtraLight", size: 10)
         view.addSubview(plaintiffLabel)
         
         plaintiffLabel.snp.makeConstraints {
-            $0.top.equalTo(caseNumberLabel.snp.bottom).inset(-DS.Constraints.authViewLeadinTrailing)
+            $0.top.equalTo(caseNumberLabel.snp.bottom).inset(-8)
             $0.leading.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
         }
-        
 
         defendantLabel = UILabel()
         defendantLabel.text = "Відповідач: \(defendant)"
         defendantLabel.textColor = DS.Colors.darkedTextColor
         defendantLabel.numberOfLines = 0
-        defendantLabel.font = UIFont(name: "Manrope-Bold", size: 12)
+        defendantLabel.font = UIFont(name: "Manrope-ExtraLight", size: 10)
         view.addSubview(defendantLabel)
         
         defendantLabel.snp.makeConstraints {
-            $0.top.equalTo(plaintiffLabel.snp.bottom).inset(-DS.Constraints.authViewLeadinTrailing)
+            $0.top.equalTo(plaintiffLabel.snp.bottom)
             $0.leading.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
         }
         
@@ -120,32 +116,33 @@ extension CourtMeetTVC {
         judgeLabel.text = "Суддя: \(judge)"
         judgeLabel.textColor = DS.Colors.darkedTextColor
         judgeLabel.numberOfLines = 0
-        judgeLabel.font = UIFont(name: "Manrope-Bold", size: 12)
+        judgeLabel.font = UIFont(name: "Manrope-ExtraLight", size: 10)
         view.addSubview(judgeLabel)
         
         judgeLabel.snp.makeConstraints {
-            $0.top.equalTo(defendantLabel.snp.bottom).inset(-DS.Constraints.authViewLeadinTrailing)
-            $0.leading.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
-            $0.bottom.equalToSuperview().inset(-DS.Constraints.authViewLeadinTrailing)
+            $0.top.equalTo(defendantLabel.snp.bottom).inset(-4)
+            $0.leading.bottom.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
         }
         
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.distribution = .fillEqually
         view.addSubview(stackView)
         
         stackView.snp.makeConstraints {
-            $0.centerY.trailing.equalToSuperview()
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
         }
         
         timeLabel = UILabel()
         timeLabel.text = time
+        timeLabel.textAlignment = .center
         timeLabel.textColor = DS.Colors.taskFinished
         timeLabel.numberOfLines = 0
         timeLabel.font = UIFont(name: "Manrope-Bold", size: 24)
         
         dateLabel = UILabel()
         dateLabel.text = date
+        dateLabel.textAlignment = .center
         dateLabel.textColor = DS.Colors.standartTextColor
         dateLabel.numberOfLines = 0
         dateLabel.font = UIFont(name: "Manrope-Bold", size: 18)

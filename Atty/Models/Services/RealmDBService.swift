@@ -40,10 +40,10 @@ class RealmDBService {
         return Array(tasks.sorted { !$0.status && $1.status})
     }
     
-    func updateTaskStatus(with task: Task) {
+    func updateTaskStatus(with task: Task, status: Bool) {
         try! realm.write {
             if let taskToUpdate = realm.objects(Task.self).filter("desc == %@", task.desc).first {
-                taskToUpdate.status = true
+                taskToUpdate.status = status
             }
         }
     }

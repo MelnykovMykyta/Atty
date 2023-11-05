@@ -359,6 +359,7 @@
 		77F9D5362AF3A9AD002132D1 /* TableViews */ = {
 			isa = PBXGroup;
 			children = (
+				77F9D5402AF3C46D002132D1 /* MainTasksTV.swift */,
 				77F9D53B2AF3B9D9002132D1 /* Main */,
 			);
 			path = TableViews;
@@ -370,7 +371,6 @@
 				77F9D5372AF3A9C5002132D1 /* MainTV.swift */,
 				77F9D53C2AF3BA15002132D1 /* HeaderTVC.swift */,
 				77F9D5422AF3C536002132D1 /* TaskTVC.swift */,
-				77F9D5402AF3C46D002132D1 /* MainTasksTV.swift */,
 				77F9D54A2AF7BE16002132D1 /* CourtMeetTVC.swift */,
 			);
 			path = Main;
