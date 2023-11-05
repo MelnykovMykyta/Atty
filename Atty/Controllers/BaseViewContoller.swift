@@ -13,8 +13,10 @@ import FirebaseAuth
 class BaseViewContoller: UIViewController {
     
     var navigationBar: BaseNavBarView!
+    var contentView: UIView!
     var infoView: InfoView!
-    var contentView = UIView()
+
+    var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +60,15 @@ class BaseViewContoller: UIViewController {
         
         infoView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
+        }
+    }
+    
+    func addtable(with: UITableView){
+        tableView = with
+        contentView.addSubview(tableView)
+        tableView.snp.makeConstraints {
+            $0.top.equalTo(infoView.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
         }
     }
 }

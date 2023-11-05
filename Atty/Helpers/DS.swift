@@ -23,6 +23,8 @@ enum DS {
         static var mainInfoView = UIColor(red: 0.235, green: 0.282, blue: 0.965, alpha: 1)
         static var additionallyInfoView = UIColor(red: 0.133, green: 0.133, blue: 0.133, alpha: 1)
         static var lightGray = UIColor(red: 0.176, green: 0.173, blue: 0.173, alpha: 1)
+        static var taskStarted = UIColor(red: 0.176, green: 0.173, blue: 0.173, alpha: 1)
+        static var taskFinished = UIColor(red: 0.6, green: 0.808, blue: 0.4, alpha: 1)
     }
     
     enum Constraints {
@@ -46,6 +48,7 @@ enum DS {
         static var halfSize = 0.5
         static var mainInfoViewWidth = 0.55
         static var mainInfoViewHeidht = 0.6
+        static var tenPercent = 0.1
         static var fifteenPercent = 0.15
         static var twentyPercent = 0.2
         static var quarterSize = 0.25
