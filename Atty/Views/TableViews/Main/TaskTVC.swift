@@ -39,15 +39,18 @@ class TaskTVC: UITableViewCell {
 
 extension TaskTVC {
 
-    func emptyTasksList() {
+    func emptyTodayTasksList() {
         
-        view.backgroundColor = DS.Colors.mainBackgroundColor
+        view.subviews.forEach { $0.removeFromSuperview() }
+        
+        view.backgroundColor = DS.Colors.mainViewColor
+        
         let label = UILabel()
-        label.text = "На сьогодні задачі відсутні"
+        label.text = "Cьогодні дедлайни відсутні"
         label.textColor = DS.Colors.standartTextColor
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.font = UIFont(name: "Manrope-Bold", size: 18)
+        label.font = UIFont(name: "Manrope-Bold", size: 14)
         view.addSubview(label)
 
         label.snp.makeConstraints {
@@ -56,9 +59,8 @@ extension TaskTVC {
     }
     
     func addTask(title: String, completionStatus: Bool) {
-     
-        doneIcon.removeFromSuperview()
-        taskDescription.removeFromSuperview()
+        
+        view.subviews.forEach { $0.removeFromSuperview() }
         
         if completionStatus {
 
@@ -102,4 +104,24 @@ extension TaskTVC {
             }
         }
     }
+    
+    func emptyTasksList() {
+        
+        view.subviews.forEach { $0.removeFromSuperview() }
+        
+        view.backgroundColor = DS.Colors.mainViewColor
+        
+        let label = UILabel()
+        label.text = "Ви ще не додали жодної задачі"
+        label.textColor = DS.Colors.standartTextColor
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.font = UIFont(name: "Manrope-Bold", size: 14)
+        view.addSubview(label)
+
+        label.snp.makeConstraints {
+            $0.edges.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+        }
+    }
+    
 }

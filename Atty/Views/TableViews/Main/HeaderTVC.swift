@@ -29,6 +29,8 @@ extension HeaderTVC {
     
     func addViews(title: String, buttonTitle: String) {
         
+        contentView.subviews.forEach { $0.removeFromSuperview() }
+        
         label = UILabel()
         label.text = title
         label.textColor = DS.Colors.standartTextColor

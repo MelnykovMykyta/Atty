@@ -8,21 +8,32 @@
 import Foundation
 import UIKit
 import SnapKit
+import RxCocoa
+import RxSwift
 
 class MainTV: UITableView {
+    
+    private var disposeBag = DisposeBag()
     
     let header = "HeaderTVC"
     let task = "TaskTVC"
     let meet = "CourtMeetTVC"
     
-    var tasks: [Task] = []
-    
-    var courtMeets: [CourtMeet] = [CourtMeet(courtName: "Господарський суд міста Києва", caseNumber: "№ 911/12212/19", plaintiff: "ТОВ “НАНО”", defendant: "ТОВ “Консалт плюс”", judge: "Коваленко А. І.", time: "09:45", date: "27.10.2023")]
+    private var tasks: [Task] = TasksViewModel.shared.getTasks()
+    private var courtMeets: [CourtMeet] = CourtsViewModel.shared.getTodayMeets()
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         
-        tasks = RealmDBService.shared.getTasks()
+        TasksViewModel.shared.observeTasks().subscribe(onNext: { event in
+            self.tasks = TasksViewModel.shared.getTasks()
+            self.reloadData()
+        }).disposed(by: disposeBag)
+        
+        CourtsViewModel.shared.observeMeets().subscribe(onNext: { event in
+            self.courtMeets = CourtsViewModel.shared.getTodayMeets()
+            self.reloadData()
+        }).disposed(by: disposeBag)
         
         self.delegate = self
         self.dataSource = self
@@ -86,7 +97,7 @@ extension MainTV: UITableViewDelegate, UITableViewDataSource {
             
         case 1:
             if tasks.isEmpty {
-                tasksCell.emptyTasksList()
+                tasksCell.emptyTodayTasksList()
             } else {
                 tasksCell.addTask(title: tasks[indexPath.row].desc, completionStatus: tasks[indexPath.row].status)
             }
@@ -108,7 +119,7 @@ extension MainTV: UITableViewDelegate, UITableViewDataSource {
                                       defendant: courtMeets[indexPath.row].defendant,
                                       judge: courtMeets[indexPath.row].judge,
                                       time: courtMeets[indexPath.row].time,
-                                      date: courtMeets[indexPath.row].date)
+                                      date: courtMeets[indexPath.row].day)
             }
             return meetCell
             
@@ -124,11 +135,10 @@ extension MainTV: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        if indexPath.section == 1 {
+        if indexPath.section == 1 && !tasks.isEmpty {
             let swipe = UIContextualAction(style: .destructive, title: "Не виконано") { (action, view, success) in
                 let task = self.tasks[indexPath.row]
-                self.taskStatus(task: task, status: false)
+                TasksViewModel.shared.updateTaskStatus(with: task, status: false)
                 success(true)
             }
             return UISwipeActionsConfiguration(actions: [swipe])
@@ -138,10 +148,10 @@ extension MainTV: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        if indexPath.section == 1 {
+        if indexPath.section == 1 && !tasks.isEmpty {
             let swipe = UIContextualAction(style: .normal, title: "Виконано") { (action, view, success) in
                 let task = self.tasks[indexPath.row]
-                self.taskStatus(task: task, status: true)
+                TasksViewModel.shared.updateTaskStatus(with: task, status: true)
                 success(true)
             }
             swipe.backgroundColor = DS.Colors.taskFinished
@@ -149,11 +159,5 @@ extension MainTV: UITableViewDelegate, UITableViewDataSource {
             return UISwipeActionsConfiguration(actions: [swipe])
         }
         return UISwipeActionsConfiguration()
-    }
-    
-    private func taskStatus (task: Task, status: Bool) {
-        RealmDBService.shared.updateTaskStatus(with: task, status: status)
-        tasks = RealmDBService.shared.getTasks()
-        reloadSections(IndexSet(integer: 1), with: .fade)
     }
 }

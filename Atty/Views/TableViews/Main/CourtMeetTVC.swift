@@ -47,7 +47,9 @@ extension CourtMeetTVC {
     
     func emptyCourtMeetsList() {
         
-        view.backgroundColor = DS.Colors.mainBackgroundColor
+        view.subviews.forEach { $0.removeFromSuperview() }
+        
+        view.backgroundColor = DS.Colors.mainViewColor
         
         let label = UILabel()
         label.text = "На сьогодні засідання відсутні"
@@ -63,6 +65,8 @@ extension CourtMeetTVC {
     }
     
     func addCourtMeet(courtName: String, caseNumber: String, plaintiff: String, defendant: String, judge: String, time: String, date: String) {
+        
+        view.subviews.forEach { $0.removeFromSuperview() }
         
         view.backgroundColor = DS.Colors.mainBackgroundColor
         
