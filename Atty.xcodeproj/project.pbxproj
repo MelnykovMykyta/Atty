@@ -26,6 +26,9 @@
 		774583322AF82C8000340CBB /* CourtsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774583312AF82C8000340CBB /* CourtsViewModel.swift */; };
 		774583342AF84D6100340CBB /* TasksTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774583332AF84D6100340CBB /* TasksTV.swift */; };
 		774583382AF85DA100340CBB /* AddTaskVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774583372AF85DA100340CBB /* AddTaskVC.swift */; };
+		7745833B2AF9AF2E00340CBB /* DoneTasksTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7745833A2AF9AF2E00340CBB /* DoneTasksTV.swift */; };
+		774583402AF9B3B000340CBB /* ProjectsTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7745833F2AF9B3B000340CBB /* ProjectsTV.swift */; };
+		774583422AF9B40400340CBB /* ProjectTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774583412AF9B40400340CBB /* ProjectTVC.swift */; };
 		777027A22AE28F5E007CA2B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777027A12AE28F5E007CA2B7 /* AppDelegate.swift */; };
 		777027A42AE28F5E007CA2B7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777027A32AE28F5E007CA2B7 /* SceneDelegate.swift */; };
 		777027AB2AE28F61007CA2B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 777027AA2AE28F61007CA2B7 /* Assets.xcassets */; };
@@ -78,6 +81,9 @@
 		774583312AF82C8000340CBB /* CourtsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourtsViewModel.swift; sourceTree = "<group>"; };
 		774583332AF84D6100340CBB /* TasksTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksTV.swift; sourceTree = "<group>"; };
 		774583372AF85DA100340CBB /* AddTaskVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskVC.swift; sourceTree = "<group>"; };
+		7745833A2AF9AF2E00340CBB /* DoneTasksTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneTasksTV.swift; sourceTree = "<group>"; };
+		7745833F2AF9B3B000340CBB /* ProjectsTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsTV.swift; sourceTree = "<group>"; };
+		774583412AF9B40400340CBB /* ProjectTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTVC.swift; sourceTree = "<group>"; };
 		7770279E2AE28F5E007CA2B7 /* Atty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Atty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		777027A12AE28F5E007CA2B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		777027A32AE28F5E007CA2B7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -193,6 +199,23 @@
 			path = Tasks;
 			sourceTree = "<group>";
 		};
+		774583392AF9AD4100340CBB /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				774583332AF84D6100340CBB /* TasksTV.swift */,
+				7745833A2AF9AF2E00340CBB /* DoneTasksTV.swift */,
+			);
+			path = Tasks;
+			sourceTree = "<group>";
+		};
+		7745833E2AF9B38000340CBB /* Projects */ = {
+			isa = PBXGroup;
+			children = (
+				7745833F2AF9B3B000340CBB /* ProjectsTV.swift */,
+			);
+			path = Projects;
+			sourceTree = "<group>";
+		};
 		777027952AE28F5E007CA2B7 = {
 			isa = PBXGroup;
 			children = (
@@ -249,6 +272,8 @@
 			isa = PBXGroup;
 			children = (
 				77F9D5362AF3A9AD002132D1 /* TableViews */,
+				77F9D5422AF3C536002132D1 /* TaskTVC.swift */,
+				77F9D54A2AF7BE16002132D1 /* CourtMeetTVC.swift */,
 				77DB26FC2AE56D1100944822 /* CustomViews */,
 				772D35982AE9DB0B00038AA6 /* Auth */,
 			);
@@ -357,8 +382,10 @@
 		77F9D5362AF3A9AD002132D1 /* TableViews */ = {
 			isa = PBXGroup;
 			children = (
+				7745833E2AF9B38000340CBB /* Projects */,
+				774583392AF9AD4100340CBB /* Tasks */,
 				77F9D53B2AF3B9D9002132D1 /* Main */,
-				774583332AF84D6100340CBB /* TasksTV.swift */,
+				774583412AF9B40400340CBB /* ProjectTVC.swift */,
 			);
 			path = TableViews;
 			sourceTree = "<group>";
@@ -368,8 +395,6 @@
 			children = (
 				77F9D5372AF3A9C5002132D1 /* MainTV.swift */,
 				77F9D53C2AF3BA15002132D1 /* HeaderTVC.swift */,
-				77F9D5422AF3C536002132D1 /* TaskTVC.swift */,
-				77F9D54A2AF7BE16002132D1 /* CourtMeetTVC.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -510,6 +535,7 @@
 			files = (
 				77DB26FE2AE56D3600944822 /* AuthTFView.swift in Sources */,
 				77DB27012AE5814D00944822 /* AuthButton.swift in Sources */,
+				774583402AF9B3B000340CBB /* ProjectsTV.swift in Sources */,
 				77F9D54D2AF7C424002132D1 /* CourtMeet.swift in Sources */,
 				777027A22AE28F5E007CA2B7 /* AppDelegate.swift in Sources */,
 				77F9D54F2AF7CBF2002132D1 /* RealmDBService.swift in Sources */,
@@ -518,9 +544,11 @@
 				77DB27192AE597F400944822 /* SignUpView.swift in Sources */,
 				774583382AF85DA100340CBB /* AddTaskVC.swift in Sources */,
 				77F9D5432AF3C536002132D1 /* TaskTVC.swift in Sources */,
+				7745833B2AF9AF2E00340CBB /* DoneTasksTV.swift in Sources */,
 				774583302AF823A700340CBB /* TasksViewModel.swift in Sources */,
 				77DB27332AE5DFD600944822 /* AuthVC.swift in Sources */,
 				772D35A72AEA845300038AA6 /* CourtCasesVC.swift in Sources */,
+				774583422AF9B40400340CBB /* ProjectTVC.swift in Sources */,
 				772D359E2AEA82CC00038AA6 /* ProjectsVC.swift in Sources */,
 				772D35A32AEA83D400038AA6 /* ClientsVC.swift in Sources */,
 				7745832C2AF8155900340CBB /* MainInfoView.swift in Sources */,

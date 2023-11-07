@@ -40,6 +40,7 @@ class MainVC: UIViewController, UITextFieldDelegate {
 }
 
 extension MainVC {
+    
     private func setupViews() {
         
         view.backgroundColor = DS.Colors.mainBackgroundColor
@@ -98,7 +99,7 @@ private extension MainVC {
     }
     
     @objc func tapCostsInfo() {
-        print("Soon")
+        Alert.shared.showAlert(title: "Скоро", message: "Цей розділ ще в розробці.")
     }
     
     func formatDate(_ date: Date) -> String {

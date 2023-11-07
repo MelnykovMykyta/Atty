@@ -11,6 +11,7 @@ import SnapKit
 import FirebaseAuth
 import RxCocoa
 import RxSwift
+import BetterSegmentedControl
 
 class TasksVC: BaseViewContoller {
     
@@ -19,11 +20,21 @@ class TasksVC: BaseViewContoller {
     private var nextbtn: UIButton!
     private var valueLabel: UILabel!
     private var valueFromLabel: UILabel!
+    private var segmentController: BetterSegmentedControl!
+    private var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         addViews()
+        addSegmentController()
+        
+        addTable(with: TasksTV())
+        
+        infoView.setAddView(title: "Додати задачу")
+        infoView.addInfoButton()
+        infoView.infoButton.addTarget(self, action: #selector(addNewTask), for: .touchUpInside)
+        
         
         TasksViewModel.shared.observeTasks().subscribe(onNext: { event in
             let count = event.filter { $0.status == true }.count.description
@@ -98,14 +109,61 @@ private extension TasksVC {
             $0.height.equalToSuperview()
         }
         
-        infoView.setAddView(title: "Додати задачу")
-        infoView.addInfoButton()
-        infoView.infoButton.addTarget(self, action: #selector(addNewTask), for: .touchUpInside)
-        addtable(with: TasksTV())
     }
     
     @objc func addNewTask() {
         let vc = AddTaskVC()
         present(vc, animated: true, completion: nil)
+    }
+    
+    func addSegmentController() {
+        
+        segmentController = BetterSegmentedControl()
+        contentView.addSubview(segmentController)
+        segmentController.snp.makeConstraints {
+            $0.width.equalToSuperview().multipliedBy(DS.SizeMultipliers.eightyPercent)
+            $0.top.equalTo(infoView.snp.bottom).inset(-DS.Constraints.authViewLeadinTrailing)
+            $0.leading.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+            $0.height.equalTo(segmentController.snp.width).multipliedBy(0.12)
+        }
+
+        segmentController.segments = LabelSegment.segments(withTitles: ["Всі задачі", "По клієнтам", "Виконані"],
+                                                           normalBackgroundColor: DS.Colors.mainViewColor,
+                                                           normalFont: UIFont(name: "Manrope-Bold", size: 14),
+                                                           normalTextColor: DS.Colors.darkedTextColor,
+                                                           selectedBackgroundColor: DS.Colors.selectedSegmentControllerItem,
+                                                           selectedFont: UIFont(name: "Manrope-Bold", size: 14),
+                                                           selectedTextColor: DS.Colors.standartTextColor)
+        
+        segmentController.cornerRadius = segmentController.frame.height / 2
+        segmentController.backgroundColor = DS.Colors.mainViewColor
+        segmentController.indicatorViewBackgroundColor = DS.Colors.mainViewColor
+        segmentController.indicatorViewBorderColor = DS.Colors.mainViewColor
+        segmentController.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
+    }
+    
+    func addTable(with table: UITableView) {
+        tableView = table
+        contentView.addSubview(tableView)
+        tableView.snp.makeConstraints {
+            $0.top.equalTo(segmentController.snp.bottom).inset(-DS.Constraints.authViewLeadinTrailing)
+            $0.leading.trailing.bottom.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+        }
+    }
+    
+    @objc func segmentedControlValueChanged(_ sender: BetterSegmentedControl) {
+        
+        tableView.removeFromSuperview()
+        
+        switch sender.index {
+        case 0:
+            addTable(with: TasksTV())
+        case 1:
+            addTable(with: MainTV())
+        case 2:
+            addTable(with: DoneTasksTV())
+        default:
+            return
+        }
     }
 }

@@ -1,8 +1,8 @@
 //
-//  TasksTV.swift
+//  DoneTasksTV.swift
 //  Atty
 //
-//  Created by Nikita Melnikov on 06.11.2023.
+//  Created by Nikita Melnikov on 07.11.2023.
 //
 
 import Foundation
@@ -11,19 +11,19 @@ import SnapKit
 import RxCocoa
 import RxSwift
 
-class TasksTV: UITableView {
+class DoneTasksTV: UITableView {
     
     private var disposeBag = DisposeBag()
     
     let task = "TaskTVC"
     
-    private var tasks: [Task] = TasksViewModel.shared.getTasks()
+    private var tasks: [Task] = TasksViewModel.shared.getTasks().filter {$0.status == true }
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         
         TasksViewModel.shared.observeTasks().subscribe(onNext: { event in
-            self.tasks = TasksViewModel.shared.getTasks()
+            self.tasks = TasksViewModel.shared.getTasks().filter {$0.status == true }
             self.reloadData()
         }).disposed(by: disposeBag)
         
@@ -44,7 +44,7 @@ class TasksTV: UITableView {
     }
 }
 
-extension TasksTV: UITableViewDelegate, UITableViewDataSource {
+extension DoneTasksTV: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -91,4 +91,3 @@ extension TasksTV: UITableViewDelegate, UITableViewDataSource {
         return UISwipeActionsConfiguration()
     }
 }
-

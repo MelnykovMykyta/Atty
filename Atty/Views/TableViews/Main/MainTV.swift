@@ -93,6 +93,7 @@ extension MainTV: UITableViewDelegate, UITableViewDataSource {
             
         case 0:
             headerCell.addViews(title: "Задачі", buttonTitle: "Всі задачі")
+            headerCell.button.addTarget(self, action: #selector(allTasks), for: .touchUpInside)
             return headerCell
             
         case 1:
@@ -105,6 +106,7 @@ extension MainTV: UITableViewDelegate, UITableViewDataSource {
             
         case 2:
             headerCell.addViews(title: "Засідання", buttonTitle: "Більше")
+            headerCell.button.addTarget(self, action: #selector(allCourtMeets), for: .touchUpInside)
             return headerCell
             
         case 3:
@@ -160,4 +162,13 @@ extension MainTV: UITableViewDelegate, UITableViewDataSource {
         }
         return UISwipeActionsConfiguration()
     }
+    
+    @objc func allTasks(_ sender: UIButton) {
+        print("TAaaaaaaaaap 1")
+    }
+    
+    @objc func allCourtMeets(_ sender: UIButton) {
+        print("TAaaaaaaaaap 2")
+    }
 }
+

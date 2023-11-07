@@ -16,7 +16,7 @@ class BaseViewContoller: UIViewController {
     var contentView: UIView!
     var infoView: InfoView!
 
-    var tableView: UITableView!
+//    var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,12 +63,12 @@ class BaseViewContoller: UIViewController {
         }
     }
     
-    func addtable(with: UITableView){
-        tableView = with
-        contentView.addSubview(tableView)
-        tableView.snp.makeConstraints {
-            $0.top.equalTo(infoView.snp.bottom)
-            $0.leading.trailing.bottom.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
-        }
-    }
+//    func addtable(with: UITableView){
+//        tableView = with
+//        contentView.addSubview(tableView)
+//        tableView.snp.makeConstraints {
+//            $0.top.equalTo(infoView.snp.bottom)
+//            $0.leading.trailing.bottom.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+//        }
+//    }
 }

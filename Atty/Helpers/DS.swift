@@ -25,6 +25,7 @@ enum DS {
         static var lightGray = UIColor(red: 0.176, green: 0.173, blue: 0.173, alpha: 1)
         static var taskStarted = UIColor(red: 0.176, green: 0.173, blue: 0.173, alpha: 1)
         static var taskFinished = UIColor(red: 0.6, green: 0.808, blue: 0.4, alpha: 1)
+        static var selectedSegmentControllerItem = UIColor(red: 0.851, green: 0.851, blue: 0.851, alpha: 0.5)
     }
     
     enum Constraints {
@@ -53,6 +54,7 @@ enum DS {
         static var twentyPercent = 0.2
         static var quarterSize = 0.25
         static var fortyPercent = 0.4
+        static var seventyPercent = 0.7
         static var eightyPercent = 0.8
         
     }

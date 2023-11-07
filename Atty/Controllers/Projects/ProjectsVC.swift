@@ -9,15 +9,39 @@ import Foundation
 import UIKit
 import SnapKit
 import FirebaseAuth
+import RxCocoa
+import RxSwift
+import BetterSegmentedControl
 
 class ProjectsVC: BaseViewContoller {
     
+    private var disposeBag = DisposeBag()
+    
     private var nextbtn: UIButton!
+    private var valueLabel: UILabel!
+    private var valueFromLabel: UILabel!
+    private var segmentController: BetterSegmentedControl!
+    private var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         addViews()
+        addSegmentController()
+        
+        addTable(with: TasksTV())
+        
+        infoView.setAddView(title: "Додати проєкт")
+        infoView.addInfoButton()
+        infoView.infoButton.addTarget(self, action: #selector(addNewTask), for: .touchUpInside)
+        
+        
+        TasksViewModel.shared.observeTasks().subscribe(onNext: { event in
+            let count = event.filter { $0.status == true }.count.description
+            let allCount = event.count.description
+            self.valueLabel.text = count
+            self.valueFromLabel.text = allCount
+        }).disposed(by: disposeBag)
     }
 }
 
@@ -26,14 +50,122 @@ private extension ProjectsVC {
     func addViews() {
         
         navigationBar.addTitle(with: Tabs.projects.itemTitle)
-        infoView.setInfoWithValueFrom(title: "Завершені", value: 2, from: 4)
-        infoView.setAddView(title: "Додати проєкт")
-        infoView.addInfoButton()
-        infoView.infoButton.addTarget(self, action: #selector(addProject), for: .touchUpInside)
+        
+        let label = UILabel()
+        label.text = "Завершені"
+        label.textColor = DS.Colors.standartTextColor
+        label.font = UIFont(name: "Manrope-Bold", size: 100)
+        label.adjustsFontSizeToFitWidth = true
+        infoView.mainInfoView.addSubview(label)
+        
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.distribution = .equalCentering
+        infoView.mainInfoView.addSubview(stackView)
+        
+        valueLabel = UILabel()
+        valueLabel.textColor = DS.Colors.standartTextColor
+        valueLabel.textAlignment = .right
+        valueLabel.font = UIFont(name: "Manrope-Bold", size: 100)
+        valueLabel.adjustsFontSizeToFitWidth = true
+        stackView.addArrangedSubview(valueLabel)
+        
+        let separator = UILabel()
+        separator.text = "/"
+        separator.textColor = DS.Colors.standartTextColor
+        separator.textAlignment = .center
+        separator.font = UIFont(name: "Manrope-Bold", size: 100)
+        separator.adjustsFontSizeToFitWidth = true
+        stackView.addArrangedSubview(separator)
+        
+        valueFromLabel = UILabel()
+        valueFromLabel.textColor = DS.Colors.standartTextColor
+        valueFromLabel.textAlignment = .left
+        valueFromLabel.font = UIFont(name: "Manrope-Bold", size: 100)
+        valueFromLabel.adjustsFontSizeToFitWidth = true
+        stackView.addArrangedSubview(valueFromLabel)
+        
+        label.snp.makeConstraints {
+            $0.height.equalToSuperview().multipliedBy(DS.SizeMultipliers.twentyPercent)
+            $0.top.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+        }
+        
+        stackView.snp.makeConstraints {
+            $0.height.equalToSuperview().multipliedBy(DS.SizeMultipliers.fortyPercent)
+            $0.top.equalTo(label.snp.bottom).inset(-DS.Constraints.authTFSpacing)
+            $0.centerX.equalToSuperview()
+        }
+        
+        valueLabel.snp.makeConstraints {
+            $0.height.equalToSuperview()
+        }
+        
+        separator.snp.makeConstraints {
+            $0.height.equalToSuperview()
+        }
+        
+        valueFromLabel.snp.makeConstraints {
+            $0.height.equalToSuperview()
+        }
+        
     }
     
-    @objc func addProject() {
-        print("addProject")
+    @objc func addNewTask() {
+        let vc = AddTaskVC()
+        present(vc, animated: true, completion: nil)
+    }
+    
+    func addSegmentController() {
+        
+        segmentController = BetterSegmentedControl()
+        contentView.addSubview(segmentController)
+        segmentController.snp.makeConstraints {
+            $0.width.equalToSuperview().multipliedBy(DS.SizeMultipliers.eightyPercent)
+            $0.top.equalTo(infoView.snp.bottom).inset(-DS.Constraints.authViewLeadinTrailing)
+            $0.leading.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+            $0.height.equalTo(segmentController.snp.width).multipliedBy(0.12)
+        }
+
+        segmentController.segments = LabelSegment.segments(withTitles: ["Всі", "По клієнтам", "Завершені"],
+                                                           normalBackgroundColor: DS.Colors.mainViewColor,
+                                                           normalFont: UIFont(name: "Manrope-Bold", size: 14),
+                                                           normalTextColor: DS.Colors.darkedTextColor,
+                                                           selectedBackgroundColor: DS.Colors.selectedSegmentControllerItem,
+                                                           selectedFont: UIFont(name: "Manrope-Bold", size: 14),
+                                                           selectedTextColor: DS.Colors.standartTextColor)
+        
+        segmentController.cornerRadius = segmentController.frame.height / 2
+        segmentController.backgroundColor = DS.Colors.mainViewColor
+        segmentController.indicatorViewBackgroundColor = DS.Colors.mainViewColor
+        segmentController.indicatorViewBorderColor = DS.Colors.mainViewColor
+        segmentController.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
+    }
+    
+    func addTable(with table: UITableView) {
+        tableView = table
+        contentView.addSubview(tableView)
+        tableView.snp.makeConstraints {
+            $0.top.equalTo(segmentController.snp.bottom).inset(-DS.Constraints.authViewLeadinTrailing)
+            $0.leading.trailing.bottom.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+        }
+    }
+    
+    @objc func segmentedControlValueChanged(_ sender: BetterSegmentedControl) {
+        
+        tableView.removeFromSuperview()
+        
+        switch sender.index {
+        case 0:
+            addTable(with: ProjectsTV())
+        case 1:
+            addTable(with: MainTV())
+        case 2:
+            addTable(with: DoneTasksTV())
+        default:
+            return
+        }
     }
 }
+
 
