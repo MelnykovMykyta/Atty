@@ -43,6 +43,7 @@ enum DS {
     enum Sizes {
         static var authTFHeight = 60
         static var buttonSize = 40
+        static var backButtonSize = 20
     }
     
     enum SizeMultipliers {

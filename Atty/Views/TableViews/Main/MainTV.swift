@@ -15,9 +15,9 @@ class MainTV: UITableView {
     
     private var disposeBag = DisposeBag()
     
-    let header = "HeaderTVC"
-    let task = "TaskTVC"
-    let meet = "CourtMeetTVC"
+    private let header = "HeaderTVC"
+    private let task = "TaskTVC"
+    private let meet = "CourtMeetTVC"
     
     private var tasks: [Task] = TasksViewModel.shared.getTasks()
     private var courtMeets: [CourtMeet] = CourtsViewModel.shared.getTodayMeets()
@@ -65,17 +65,9 @@ extension MainTV: UITableViewDelegate, UITableViewDataSource {
         case 0:
             return 1
         case 1:
-            if tasks.isEmpty {
-                return 1
-            } else {
-                return tasks.count
-            }
+            return tasks.isEmpty ? 1 : tasks.count
         case 3:
-            if courtMeets.isEmpty {
-                return 1
-            } else {
-                return courtMeets.count
-            }
+            return courtMeets.isEmpty ? 1 : courtMeets.count
         default:
             return 1
         }
@@ -85,9 +77,7 @@ extension MainTV: UITableViewDelegate, UITableViewDataSource {
         guard let headerCell = tableView.dequeueReusableCell(withIdentifier: "HeaderTVC") as? HeaderTVC,
               let tasksCell = tableView.dequeueReusableCell(withIdentifier: "TaskTVC") as? TaskTVC,
               let meetCell = tableView.dequeueReusableCell(withIdentifier: "CourtMeetTVC") as? CourtMeetTVC
-        else {
-            return UITableViewCell()
-        }
+        else { return UITableViewCell() }
         
         switch indexPath.section {
             
@@ -114,14 +104,8 @@ extension MainTV: UITableViewDelegate, UITableViewDataSource {
             if courtMeets.isEmpty {
                 meetCell.emptyCourtMeetsList()
             } else {
-                
-                meetCell.addCourtMeet(courtName: courtMeets[indexPath.row].courtName,
-                                      caseNumber: courtMeets[indexPath.row].caseNumber,
-                                      plaintiff: courtMeets[indexPath.row].plaintiff,
-                                      defendant: courtMeets[indexPath.row].defendant,
-                                      judge: courtMeets[indexPath.row].judge,
-                                      time: courtMeets[indexPath.row].time,
-                                      date: courtMeets[indexPath.row].day)
+                let meet = courtMeets[indexPath.row]
+                meetCell.addCourtMeet(courtName: meet.courtName, caseNumber: meet.caseNumber, plaintiff: meet.plaintiff,defendant: meet.defendant, judge: meet.judge, time: meet.time, date: meet.day)
             }
             return meetCell
             
@@ -137,30 +121,25 @@ extension MainTV: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if indexPath.section == 1 && !tasks.isEmpty {
-            let swipe = UIContextualAction(style: .destructive, title: "Не виконано") { (action, view, success) in
-                let task = self.tasks[indexPath.row]
-                TasksViewModel.shared.updateTaskStatus(with: task, status: false)
-                success(true)
-            }
-            return UISwipeActionsConfiguration(actions: [swipe])
+        guard indexPath.section == 1 && !tasks.isEmpty else {  return UISwipeActionsConfiguration() }
+        let swipe = UIContextualAction(style: .destructive, title: "Не виконано") { (action, view, success) in
+            let task = self.tasks[indexPath.row]
+            TasksViewModel.shared.updateTaskStatus(with: task, status: false)
+            success(true)
         }
-        return UISwipeActionsConfiguration()
+        return UISwipeActionsConfiguration(actions: [swipe])
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        if indexPath.section == 1 && !tasks.isEmpty {
-            let swipe = UIContextualAction(style: .normal, title: "Виконано") { (action, view, success) in
-                let task = self.tasks[indexPath.row]
-                TasksViewModel.shared.updateTaskStatus(with: task, status: true)
-                success(true)
-            }
-            swipe.backgroundColor = DS.Colors.taskFinished
-            
-            return UISwipeActionsConfiguration(actions: [swipe])
+        guard indexPath.section == 1 && !tasks.isEmpty  else {  return UISwipeActionsConfiguration() }
+        let swipe = UIContextualAction(style: .normal, title: "Виконано") { (action, view, success) in
+            let task = self.tasks[indexPath.row]
+            TasksViewModel.shared.updateTaskStatus(with: task, status: true)
+            success(true)
         }
-        return UISwipeActionsConfiguration()
+        swipe.backgroundColor = DS.Colors.taskFinished
+        
+        return UISwipeActionsConfiguration(actions: [swipe])
     }
     
     @objc func allTasks(_ sender: UIButton) {
@@ -171,4 +150,3 @@ extension MainTV: UITableViewDelegate, UITableViewDataSource {
         print("TAaaaaaaaaap 2")
     }
 }
-

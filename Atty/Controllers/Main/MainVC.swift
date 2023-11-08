@@ -86,13 +86,13 @@ extension MainVC {
         
         tableView.snp.makeConstraints {
             $0.top.equalTo(infoView.snp.bottom)
-            $0.leading.trailing.bottom.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+            $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+            $0.bottom.equalToSuperview()
         }
     }
 }
 
 private extension MainVC {
-    
     
     @objc func logouttap() {
         FirebaseAuthService.shared.logout()

@@ -13,6 +13,8 @@ class BaseNavBarView: UIView {
     
     var notificationButton: UIButton!
     var userIcon: UIButton!
+    var backButton: UIButton!
+    var titleLabel: UILabel!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -94,6 +96,34 @@ extension BaseNavBarView {
             $0.leading.equalTo(userIcon.snp.trailing).inset(-8)
             $0.height.equalTo(userIcon.snp.height).multipliedBy(0.8)
             $0.centerY.equalTo(userIcon.snp.centerY)
+        }
+    }
+    
+    func addBackButton(with title: String) {
+        
+        backButton = UIButton(type: .system)
+        backButton.setImage(UIImage(named: "arrowLeft"), for: .normal)
+        backButton.tintColor = DS.Colors.standartTextColor
+        addSubview(backButton)
+        
+        titleLabel = UILabel()
+        titleLabel.text = title
+        titleLabel.textColor = DS.Colors.standartTextColor
+        titleLabel.font = UIFont(name: "Manrope-Bold", size: 24)
+        addSubview(titleLabel)
+        
+        backButton.snp.makeConstraints {
+            $0.height.equalTo(DS.Sizes.backButtonSize)
+            $0.width.equalTo(backButton.snp.height).multipliedBy(DS.SizeMultipliers.seventyPercent)
+            $0.centerY.equalTo(notificationButton.snp.centerY)
+            $0.leading.equalToSuperview().inset(DS.Constraints.navigationBarItem)
+        }
+        
+        titleLabel.snp.makeConstraints {
+            $0.height.equalTo(DS.Sizes.buttonSize)
+            $0.top.bottom.equalToSuperview().inset(DS.Constraints.navigationBarItem)
+            $0.leading.equalTo(backButton.snp.trailing).inset(-DS.Constraints.navigationBarItem)
+            $0.trailing.equalTo(notificationButton.snp.leading)
         }
     }
 }

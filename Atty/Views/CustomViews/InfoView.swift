@@ -97,59 +97,6 @@ extension InfoView {
         }
     }
     
-    func setInfoWithValueFrom(title: String, value: Int, from: Int) {
-        
-        let label = UILabel()
-        label.text = title
-        label.textColor = DS.Colors.standartTextColor
-        label.font = UIFont(name: "Manrope-Bold", size: 100)
-        label.adjustsFontSizeToFitWidth = true
-        mainInfoView.addSubview(label)
-        
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        mainInfoView.addSubview(stackView)
-        
-        let valueLabel = UILabel()
-        valueLabel.textColor = DS.Colors.standartTextColor
-        valueLabel.textAlignment = .center
-        valueLabel.font = UIFont(name: "Manrope-Bold", size: 100)
-        valueLabel.adjustsFontSizeToFitWidth = true
-        stackView.addSubview(valueLabel)
-        
-        let separator = UILabel()
-        separator.text = "/"
-        separator.textColor = DS.Colors.standartTextColor
-        separator.textAlignment = .center
-        separator.font = UIFont(name: "Manrope-Bold", size: 100)
-        separator.adjustsFontSizeToFitWidth = true
-        stackView.addSubview(separator)
-        
-        let valueFromLabel = UILabel()
-        valueFromLabel.textColor = DS.Colors.standartTextColor
-        valueFromLabel.textAlignment = .center
-        valueFromLabel.font = UIFont(name: "Manrope-Bold", size: 100)
-        valueFromLabel.adjustsFontSizeToFitWidth = true
-        stackView.addSubview(valueFromLabel)
-        
-        label.snp.makeConstraints {
-            $0.height.equalToSuperview().multipliedBy(DS.SizeMultipliers.twentyPercent)
-            $0.top.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
-        }
-        
-        stackView.snp.makeConstraints {
-            $0.height.equalToSuperview().multipliedBy(DS.SizeMultipliers.fortyPercent)
-            $0.top.equalTo(label.snp.bottom).inset(-DS.Constraints.authTFSpacing)
-            $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
-        }
-        
-//        valueLabel.snp.makeConstraints {
-//            $0.height.equalToSuperview().multipliedBy(DS.SizeMultipliers.fortyPercent)
-//            $0.top.equalTo(label.snp.bottom).inset(-DS.Constraints.authTFSpacing)
-//            $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
-//        }
-    }
-    
     func setAddView(title: String) {
         
         let addViewLabel = UILabel()

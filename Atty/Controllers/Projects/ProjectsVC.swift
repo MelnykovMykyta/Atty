@@ -13,7 +13,7 @@ import RxCocoa
 import RxSwift
 import BetterSegmentedControl
 
-class ProjectsVC: BaseViewContoller {
+class ProjectsVC: BaseViewContoller, ProjectsTVDelegate {
     
     private var disposeBag = DisposeBag()
     
@@ -23,25 +23,36 @@ class ProjectsVC: BaseViewContoller {
     private var segmentController: BetterSegmentedControl!
     private var tableView: UITableView!
     
+    private var projectsTV = ProjectsTV()
+    private var doneProjectsTV = DoneProjectsTV()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         addViews()
         addSegmentController()
         
-        addTable(with: TasksTV())
+        projectsTV.delegateProject = self
+        doneProjectsTV.delegateProject = self
+        
+        addTable(with: projectsTV)
         
         infoView.setAddView(title: "Додати проєкт")
         infoView.addInfoButton()
-        infoView.infoButton.addTarget(self, action: #selector(addNewTask), for: .touchUpInside)
+        infoView.infoButton.addTarget(self, action: #selector(addNewProject), for: .touchUpInside)
         
-        
-        TasksViewModel.shared.observeTasks().subscribe(onNext: { event in
+        ProjectsViewModel.shared.observeProjects().subscribe(onNext: { event in
             let count = event.filter { $0.status == true }.count.description
             let allCount = event.count.description
             self.valueLabel.text = count
             self.valueFromLabel.text = allCount
         }).disposed(by: disposeBag)
+    }
+    
+    func didSelectProject(_ project: Project) {
+        let projectInfoVC = ProjectInfoVC()
+        projectInfoVC.project = project
+        navigationController?.pushViewController(projectInfoVC, animated: true)
     }
 }
 
@@ -58,61 +69,55 @@ private extension ProjectsVC {
         label.adjustsFontSizeToFitWidth = true
         infoView.mainInfoView.addSubview(label)
         
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.alignment = .center
-        stackView.distribution = .equalCentering
-        infoView.mainInfoView.addSubview(stackView)
-        
-        valueLabel = UILabel()
-        valueLabel.textColor = DS.Colors.standartTextColor
-        valueLabel.textAlignment = .right
-        valueLabel.font = UIFont(name: "Manrope-Bold", size: 100)
-        valueLabel.adjustsFontSizeToFitWidth = true
-        stackView.addArrangedSubview(valueLabel)
-        
         let separator = UILabel()
         separator.text = "/"
         separator.textColor = DS.Colors.standartTextColor
         separator.textAlignment = .center
         separator.font = UIFont(name: "Manrope-Bold", size: 100)
         separator.adjustsFontSizeToFitWidth = true
-        stackView.addArrangedSubview(separator)
+        infoView.mainInfoView.addSubview(separator)
+        
+        valueLabel = UILabel()
+        valueLabel.textColor = DS.Colors.standartTextColor
+        valueLabel.textAlignment = .right
+        valueLabel.font = UIFont(name: "Manrope-Bold", size: 100)
+        valueLabel.adjustsFontSizeToFitWidth = true
+        infoView.mainInfoView.addSubview(valueLabel)
         
         valueFromLabel = UILabel()
         valueFromLabel.textColor = DS.Colors.standartTextColor
         valueFromLabel.textAlignment = .left
         valueFromLabel.font = UIFont(name: "Manrope-Bold", size: 100)
         valueFromLabel.adjustsFontSizeToFitWidth = true
-        stackView.addArrangedSubview(valueFromLabel)
+        infoView.mainInfoView.addSubview(valueFromLabel)
         
         label.snp.makeConstraints {
             $0.height.equalToSuperview().multipliedBy(DS.SizeMultipliers.twentyPercent)
             $0.top.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
         }
         
-        stackView.snp.makeConstraints {
+        separator.snp.makeConstraints {
             $0.height.equalToSuperview().multipliedBy(DS.SizeMultipliers.fortyPercent)
             $0.top.equalTo(label.snp.bottom).inset(-DS.Constraints.authTFSpacing)
             $0.centerX.equalToSuperview()
         }
-        
         valueLabel.snp.makeConstraints {
-            $0.height.equalToSuperview()
-        }
-        
-        separator.snp.makeConstraints {
-            $0.height.equalToSuperview()
+            $0.height.equalToSuperview().multipliedBy(DS.SizeMultipliers.fortyPercent)
+            $0.top.equalTo(label.snp.bottom).inset(-DS.Constraints.authTFSpacing)
+            $0.leading.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+            $0.trailing.equalTo(separator.snp.leading)
         }
         
         valueFromLabel.snp.makeConstraints {
-            $0.height.equalToSuperview()
+            $0.height.equalToSuperview().multipliedBy(DS.SizeMultipliers.fortyPercent)
+            $0.top.equalTo(label.snp.bottom).inset(-DS.Constraints.authTFSpacing)
+            $0.leading.equalTo(separator.snp.trailing)
+            $0.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
         }
-        
     }
     
-    @objc func addNewTask() {
-        let vc = AddTaskVC()
+    @objc func addNewProject() {
+        let vc = AddProjectVC()
         present(vc, animated: true, completion: nil)
     }
     
@@ -126,7 +131,7 @@ private extension ProjectsVC {
             $0.leading.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
             $0.height.equalTo(segmentController.snp.width).multipliedBy(0.12)
         }
-
+        
         segmentController.segments = LabelSegment.segments(withTitles: ["Всі", "По клієнтам", "Завершені"],
                                                            normalBackgroundColor: DS.Colors.mainViewColor,
                                                            normalFont: UIFont(name: "Manrope-Bold", size: 14),
@@ -147,7 +152,8 @@ private extension ProjectsVC {
         contentView.addSubview(tableView)
         tableView.snp.makeConstraints {
             $0.top.equalTo(segmentController.snp.bottom).inset(-DS.Constraints.authViewLeadinTrailing)
-            $0.leading.trailing.bottom.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+            $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+            $0.bottom.equalToSuperview()
         }
     }
     
@@ -157,15 +163,16 @@ private extension ProjectsVC {
         
         switch sender.index {
         case 0:
-            addTable(with: ProjectsTV())
+            addTable(with: projectsTV)
         case 1:
             addTable(with: MainTV())
         case 2:
-            addTable(with: DoneTasksTV())
+            addTable(with: doneProjectsTV)
         default:
             return
         }
     }
+    
 }
 
 

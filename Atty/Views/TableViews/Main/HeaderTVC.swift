@@ -57,4 +57,22 @@ extension HeaderTVC {
             $0.trailing.equalToSuperview()
         }
     }
+    
+    func addTitle(title: String) {
+        
+        contentView.subviews.forEach { $0.removeFromSuperview() }
+        
+        label = UILabel()
+        label.text = title
+        label.textColor = DS.Colors.standartTextColor
+        label.font = UIFont(name: "Manrope-Bold", size: 100)
+        label.adjustsFontSizeToFitWidth = true
+        contentView.addSubview(label)
+        
+        label.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview().inset(DS.Constraints.baseInsetViews)
+            $0.leading.equalToSuperview()
+            $0.height.equalTo(contentView.snp.width).multipliedBy(DS.SizeMultipliers.tenPercent)
+        }
+    }
 }

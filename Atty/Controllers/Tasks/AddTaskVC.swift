@@ -12,17 +12,25 @@ import SnapKit
 
 class AddTaskVC: UIViewController, UITextFieldDelegate {
     
+    private var label: UILabel!
     private var closeButton: UIButton!
     private var addButton: AuthButton!
     private var taskDescriptionView: AuthTFView!
     private var taskDescription: UITextField!
     
+    var project: Project?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         view.backgroundColor = DS.Colors.mainBackgroundColor
         
         addViews()
+        
+        if let project_ = project {
+            project = project_
+            label.text = "Додати задачу до проєкту: \(project_.name)"
+        }
         
         self.addKeyboardDismissGesture()
         
@@ -40,10 +48,10 @@ private extension AddTaskVC {
         closeButton.tintColor = DS.Colors.standartTextColor
         view.addSubview(closeButton)
         
-        let label = UILabel()
-        label.text = "Додати задачу"
+        label = UILabel()
         label.textColor = DS.Colors.standartTextColor
         label.font = UIFont(name: "Manrope-Bold", size: 50)
+        label.numberOfLines = 0
         label.adjustsFontSizeToFitWidth = true
         view.addSubview(label)
         
@@ -72,7 +80,7 @@ private extension AddTaskVC {
         
         label.snp.makeConstraints {
             $0.top.equalToSuperview().inset(DS.Constraints.authLogoLeadingTrailing)
-            $0.leading.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+            $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
         }
         
         stackView.snp.makeConstraints {
@@ -85,15 +93,17 @@ private extension AddTaskVC {
         taskDescription.snp.makeConstraints { $0.edges.equalToSuperview().inset(DS.Constraints.authTFInsets) }
         
         addButton.snp.makeConstraints { $0.height.equalTo(DS.Sizes.authTFHeight) }
-        
     }
 }
     extension AddTaskVC {
         
         @objc private func addTask() {
-            guard let desc = taskDescription.text else { return }
-            if !desc.isEmpty {
-                TasksViewModel.shared.addTask(with: Task(desc: desc, status: false))
+            guard let desc = taskDescription.text, !desc.isEmpty else { return }
+            let task = Task(desc: desc, status: false)
+            if let project_ = project {
+                RealmDBService.shared.addTaskToProject(task, to: project_)
+            } else {
+                TasksViewModel.shared.addTask(with: task)
             }
             dismiss(animated: true, completion: nil)
         }

@@ -1,8 +1,8 @@
 //
-//  TasksVC.swift
+//  ProjectInfoVC.swift
 //  Atty
 //
-//  Created by Nikita Melnikov on 26.10.2023.
+//  Created by Nikita Melnikov on 07.11.2023.
 //
 
 import Foundation
@@ -13,9 +13,11 @@ import RxCocoa
 import RxSwift
 import BetterSegmentedControl
 
-class TasksVC: BaseViewContoller {
+class ProjectInfoVC: BaseViewContoller {
     
     private var disposeBag = DisposeBag()
+    
+    var project: Project?
     
     private var nextbtn: UIButton!
     private var valueLabel: UILabel!
@@ -26,33 +28,35 @@ class TasksVC: BaseViewContoller {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let project_ = project { project = project_ }
+        
+        navigationBar.addBackButton(with: project?.name ?? "")
+        navigationBar.backButton.addTarget(self, action: #selector(back), for: .touchUpInside)
         addViews()
+        
         addSegmentController()
         
-        addTable(with: TasksTV())
-        
+        addTable(with: ProjectInfoTV())
         infoView.setAddView(title: "Додати задачу")
         infoView.addInfoButton()
         infoView.infoButton.addTarget(self, action: #selector(addNewTask), for: .touchUpInside)
         
-        
-        TasksViewModel.shared.observeTasks().subscribe(onNext: { event in
-            let count = event.filter { $0.status == true }.count.description
-            let allCount = event.count.description
+        ProjectsViewModel.shared.observeProjects().subscribe(onNext: { event in
+            let element = event.first(where: { $0.id == self.project?.id })
+            let count = element?.tasks.filter {$0.status == true}.count.description
+            let allCount = element?.tasks.count.description
             self.valueLabel.text = count
             self.valueFromLabel.text = allCount
         }).disposed(by: disposeBag)
     }
 }
 
-private extension TasksVC {
+private extension ProjectInfoVC {
     
     func addViews() {
         
-        navigationBar.addTitle(with: Tabs.tasks.itemTitle)
-        
         let label = UILabel()
-        label.text = "Завершені"
+        label.text = "Задачі"
         label.textColor = DS.Colors.standartTextColor
         label.font = UIFont(name: "Manrope-Bold", size: 100)
         label.adjustsFontSizeToFitWidth = true
@@ -107,7 +111,12 @@ private extension TasksVC {
     
     @objc func addNewTask() {
         let vc = AddTaskVC()
+        vc.project = project
         present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func back() {
+        navigationController?.popViewController(animated: true)
     }
     
     func addSegmentController() {
@@ -121,7 +130,7 @@ private extension TasksVC {
             $0.height.equalTo(segmentController.snp.width).multipliedBy(0.12)
         }
         
-        segmentController.segments = LabelSegment.segments(withTitles: ["Всі задачі", "По клієнтам", "Виконані"],
+        segmentController.segments = LabelSegment.segments(withTitles: ["Картка", "Документи", "Суди"],
                                                            normalBackgroundColor: DS.Colors.mainViewColor,
                                                            normalFont: UIFont(name: "Manrope-Bold", size: 14),
                                                            normalTextColor: DS.Colors.darkedTextColor,
@@ -152,11 +161,11 @@ private extension TasksVC {
         
         switch sender.index {
         case 0:
-            addTable(with: TasksTV())
+            addTable(with: ProjectInfoTV())
         case 1:
             addTable(with: MainTV())
         case 2:
-            addTable(with: DoneTasksTV())
+            addTable(with: DoneProjectsTV())
         default:
             return
         }

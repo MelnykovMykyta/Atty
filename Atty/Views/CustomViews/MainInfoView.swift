@@ -18,7 +18,6 @@ class MainInfoView: InfoView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setupViews()
     }
     
@@ -123,7 +122,6 @@ extension MainInfoView {
         costsButton.layer.masksToBounds = true
         additionallyInfoView.addSubview(costsButton)
         
-        
         dateLabel.snp.makeConstraints {
             $0.height.equalToSuperview().multipliedBy(DS.SizeMultipliers.twentyPercent)
             $0.top.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
@@ -160,12 +158,14 @@ extension MainInfoView {
         }
         
         tasksValue.snp.makeConstraints {
+            $0.width.equalTo(tasksView.snp.width)
             $0.centerX.equalTo(tasksView.snp.centerX)
             $0.top.equalTo(labelsStackView.snp.bottom)
             $0.bottom.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
         }
         
         courtMeetsValue.snp.makeConstraints {
+            $0.width.equalTo(courtMeetView.snp.width)
             $0.centerX.equalTo(courtMeetView.snp.centerX)
             $0.top.equalTo(labelsStackView.snp.bottom)
             $0.bottom.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)

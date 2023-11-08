@@ -1,5 +1,5 @@
 //
-//  ProjectsTV.swift
+//  DoneProjectsTV.swift
 //  Atty
 //
 //  Created by Nikita Melnikov on 07.11.2023.
@@ -11,19 +11,15 @@ import SnapKit
 import RxCocoa
 import RxSwift
 
-protocol ProjectsTVDelegate {
-    func didSelectProject(_ project: Project)
-}
-
-class ProjectsTV: UITableView {
+class DoneProjectsTV: UITableView {
     
     private var disposeBag = DisposeBag()
     
+    let project = "ProjectTVC"
+    
     var delegateProject: ProjectsTVDelegate?
     
-    private let project = "ProjectTVC"
-    
-    private var projects: [Project] = ProjectsViewModel.shared.getProjects().filter { $0.status == false }
+    private var projects: [Project] = ProjectsViewModel.shared.getProjects().filter { $0.status == true }
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -38,7 +34,7 @@ class ProjectsTV: UITableView {
         self.register(ProjectTVC.self, forCellReuseIdentifier: project)
         
         ProjectsViewModel.shared.observeProjects().subscribe(onNext: { event in
-            self.projects = ProjectsViewModel.shared.getProjects().filter { $0.status == false }
+            self.projects = ProjectsViewModel.shared.getProjects().filter { $0.status == true }
             self.reloadData()
         }).disposed(by: disposeBag)
     }
@@ -48,7 +44,7 @@ class ProjectsTV: UITableView {
     }
 }
 
-extension ProjectsTV: UITableViewDelegate, UITableViewDataSource {
+extension DoneProjectsTV: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -66,6 +62,7 @@ extension ProjectsTV: UITableViewDelegate, UITableViewDataSource {
             projectCell.addProject(projectName: projects[indexPath.row].name, clientName: "", category: projects[indexPath.row].category, completionStatus: projects[indexPath.row].status)
             projectCell.selectionStyle = .none
         }
+        
         return projectCell
     }
     
@@ -100,8 +97,8 @@ extension ProjectsTV: UITableViewDelegate, UITableViewDataSource {
         if !projects.isEmpty {
             let selectedProject = projects[indexPath.row]
             delegateProject?.didSelectProject(selectedProject)
-            
-            ProjectsViewModel.currentProject = selectedProject
         }
     }
 }
+
+

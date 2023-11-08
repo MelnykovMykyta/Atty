@@ -32,6 +32,7 @@ class CourtMeetTVC: UITableViewCell {
         view.layer.cornerRadius = DS.CornerRadius.baseCornerRadiusLayers
         view.layer.masksToBounds = true
         addSubview(view)
+        
         view.snp.makeConstraints {
             $0.top.bottom.equalToSuperview().inset(DS.Constraints.infoViewLabelInset)
             $0.leading.trailing.equalToSuperview()
@@ -39,7 +40,7 @@ class CourtMeetTVC: UITableViewCell {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
     }
 }
 
@@ -103,7 +104,7 @@ extension CourtMeetTVC {
             $0.top.equalTo(caseNumberLabel.snp.bottom).inset(-8)
             $0.leading.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
         }
-
+        
         defendantLabel = UILabel()
         defendantLabel.text = "Відповідач: \(defendant)"
         defendantLabel.textColor = DS.Colors.darkedTextColor
