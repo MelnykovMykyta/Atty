@@ -15,6 +15,8 @@
 		77048A232AFC60DC00824E5F /* ClientTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77048A222AFC60DC00824E5F /* ClientTVC.swift */; };
 		77048A252AFC690300824E5F /* ArchiveClientsTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77048A242AFC690300824E5F /* ArchiveClientsTV.swift */; };
 		77048A272AFC701D00824E5F /* AddClientVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77048A262AFC701D00824E5F /* AddClientVC.swift */; };
+		77048A292AFCD5C800824E5F /* ClientInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77048A282AFCD5C800824E5F /* ClientInfoVC.swift */; };
+		77048A2C2AFCDB1B00824E5F /* ClientInfoTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77048A2B2AFCDB1B00824E5F /* ClientInfoTV.swift */; };
 		772D35972AE94F1100038AA6 /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D35962AE94F1100038AA6 /* ResetPasswordVC.swift */; };
 		772D359A2AE9DB4C00038AA6 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D35992AE9DB4C00038AA6 /* ResetPasswordView.swift */; };
 		772D359C2AEA5DC700038AA6 /* NavigateTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D359B2AEA5DC700038AA6 /* NavigateTabBarController.swift */; };
@@ -83,6 +85,8 @@
 		77048A222AFC60DC00824E5F /* ClientTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientTVC.swift; sourceTree = "<group>"; };
 		77048A242AFC690300824E5F /* ArchiveClientsTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveClientsTV.swift; sourceTree = "<group>"; };
 		77048A262AFC701D00824E5F /* AddClientVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddClientVC.swift; sourceTree = "<group>"; };
+		77048A282AFCD5C800824E5F /* ClientInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientInfoVC.swift; sourceTree = "<group>"; };
+		77048A2B2AFCDB1B00824E5F /* ClientInfoTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientInfoTV.swift; sourceTree = "<group>"; };
 		772D35962AE94F1100038AA6 /* ResetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
 		772D35992AE9DB4C00038AA6 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		772D359B2AEA5DC700038AA6 /* NavigateTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigateTabBarController.swift; sourceTree = "<group>"; };
@@ -165,6 +169,16 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		77048A2A2AFCDAE900824E5F /* Clients */ = {
+			isa = PBXGroup;
+			children = (
+				77048A202AFC5F0500824E5F /* ClientsTV.swift */,
+				77048A242AFC690300824E5F /* ArchiveClientsTV.swift */,
+				77048A2B2AFCDB1B00824E5F /* ClientInfoTV.swift */,
+			);
+			path = Clients;
+			sourceTree = "<group>";
+		};
 		772D35982AE9DB0B00038AA6 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,6 +213,7 @@
 			children = (
 				772D35A22AEA83D400038AA6 /* ClientsVC.swift */,
 				77048A262AFC701D00824E5F /* AddClientVC.swift */,
+				77048A282AFCD5C800824E5F /* ClientInfoVC.swift */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -421,11 +436,10 @@
 		77F9D5362AF3A9AD002132D1 /* TableViews */ = {
 			isa = PBXGroup;
 			children = (
+				77048A2A2AFCDAE900824E5F /* Clients */,
 				7745833E2AF9B38000340CBB /* Projects */,
 				774583392AF9AD4100340CBB /* Tasks */,
 				77F9D53B2AF3B9D9002132D1 /* Main */,
-				77048A202AFC5F0500824E5F /* ClientsTV.swift */,
-				77048A242AFC690300824E5F /* ArchiveClientsTV.swift */,
 			);
 			path = TableViews;
 			sourceTree = "<group>";
@@ -605,6 +619,7 @@
 				77DB273D2AE72E9D00944822 /* Alert.swift in Sources */,
 				77048A212AFC5F0500824E5F /* ClientsTV.swift in Sources */,
 				77DB26FB2AE5671900944822 /* DS.swift in Sources */,
+				77048A292AFCD5C800824E5F /* ClientInfoVC.swift in Sources */,
 				77F9D5382AF3A9C5002132D1 /* MainTV.swift in Sources */,
 				77DB273B2AE724DB00944822 /* AuthViewModel.swift in Sources */,
 				774583342AF84D6100340CBB /* TasksTV.swift in Sources */,
@@ -618,6 +633,7 @@
 				772D35BE2AF0648F00038AA6 /* BaseViewContoller.swift in Sources */,
 				77048A252AFC690300824E5F /* ArchiveClientsTV.swift in Sources */,
 				77DB272D2AE5B18200944822 /* UIViewController + DismissGesture.swift in Sources */,
+				77048A2C2AFCDB1B00824E5F /* ClientInfoTV.swift in Sources */,
 				77EB3F602AFA5E01002AB368 /* AddProjectVC.swift in Sources */,
 				772D359C2AEA5DC700038AA6 /* NavigateTabBarController.swift in Sources */,
 				7795AD9C2AE826E1007FC870 /* MainVC.swift in Sources */,

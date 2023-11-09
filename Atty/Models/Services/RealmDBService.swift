@@ -54,4 +54,11 @@ class RealmDBService {
             project.tasks.append(task)
         }
     }
+    
+    func addProjectToClient(_ project: Project, to client: Client) {
+        try! realm.write {
+            client.projects.append(project)
+            project.client = client
+        }
+    }
 }

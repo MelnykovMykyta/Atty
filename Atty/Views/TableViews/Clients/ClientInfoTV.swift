@@ -1,8 +1,8 @@
 //
-//  ProjectInfoTV.swift
+//  ClientInfoTV.swift
 //  Atty
 //
-//  Created by Nikita Melnikov on 07.11.2023.
+//  Created by Nikita Melnikov on 09.11.2023.
 //
 
 import Foundation
@@ -11,15 +11,16 @@ import SnapKit
 import RxCocoa
 import RxSwift
 
-class ProjectInfoTV: UITableView {
+class ClientInfoTV: UITableView {
     
     private var disposeBag = DisposeBag()
     
-    let project = "ProjectTVC"
+    let client = "ClientTVC"
     let header = "HeaderTVC"
     let task = "TaskTVC"
     
-    private var projectItem: Project = ProjectsViewModel.currentProject
+    private var clientItem: Client = ClientsViewModel.currentClient
+    private var clientTasks = ClientsViewModel.shared.getClientProjectsTasks()
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -31,12 +32,13 @@ class ProjectInfoTV: UITableView {
         showsVerticalScrollIndicator = false
         backgroundColor = .clear
         
-        self.register(ProjectTVC.self, forCellReuseIdentifier: project)
+        self.register(ClientTVC.self, forCellReuseIdentifier: client)
         self.register(HeaderTVC.self, forCellReuseIdentifier: header)
         self.register(TaskTVC.self, forCellReuseIdentifier: task)
         
-        ProjectsViewModel.shared.observeProjects().subscribe(onNext: { event in
-            self.projectItem = ProjectsViewModel.currentProject
+        ClientsViewModel.shared.observeClients().subscribe(onNext: { event in
+            self.clientItem = ClientsViewModel.currentClient
+            self.clientTasks = ClientsViewModel.shared.getClientProjectsTasks()
             self.reloadData()
         }).disposed(by: disposeBag)
         
@@ -47,10 +49,10 @@ class ProjectInfoTV: UITableView {
     }
 }
 
-extension ProjectInfoTV: UITableViewDelegate, UITableViewDataSource {
+extension ClientInfoTV: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 5
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -60,36 +62,41 @@ extension ProjectInfoTV: UITableViewDelegate, UITableViewDataSource {
         case 1:
             return 1
         case 2:
-            return projectItem.tasks.isEmpty ? 1 : projectItem.tasks.count
+            return clientTasks.isEmpty ? 1 : clientTasks.count
+        case 3:
+            return 1
         default:
             return 1
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let projectCell = tableView.dequeueReusableCell(withIdentifier: "ProjectTVC") as? ProjectTVC,
-              let projectHeaderCell = tableView.dequeueReusableCell(withIdentifier: "HeaderTVC") as? HeaderTVC,
+        guard let clientCell = tableView.dequeueReusableCell(withIdentifier: "ClientTVC") as? ClientTVC,
+              let clientHeaderCell = tableView.dequeueReusableCell(withIdentifier: "HeaderTVC") as? HeaderTVC,
               let tasksCell = tableView.dequeueReusableCell(withIdentifier: "TaskTVC") as? TaskTVC
         else { return UITableViewCell() }
         
         switch indexPath.section {
         case 0:
-            projectCell.addFullProject(projectName: projectItem.name, clientName: projectItem.client?.name ?? "", category: projectItem.category, shortDesc: projectItem.shortDesc, additionalDesc: projectItem.additionalDesc)
-            projectCell.selectionStyle = .none
-            return projectCell
+            clientCell.addFullClient(clientName: clientItem.name, contactPerson: clientItem.contactPerson, contact: clientItem.contact, email: clientItem.email, idCode: clientItem.idCode)
+            clientCell.selectionStyle = .none
+            return clientCell
         case 1:
-            projectHeaderCell.addTitle(title: "Задачі")
-            projectHeaderCell.selectionStyle = .none
-            return projectHeaderCell
+            clientHeaderCell.addTitle(title: "Задачі")
+            clientHeaderCell.selectionStyle = .none
+            return clientHeaderCell
         case 2:
-            if projectItem.tasks.isEmpty {
+            if clientTasks.isEmpty {
                 tasksCell.emptyTasksList()
             } else {
-                let tasks = projectItem.tasks.sorted { $0.date < $1.date }.sorted { !$0.status && $1.status}
-                tasksCell.addTask(title: tasks[indexPath.row].desc, completionStatus: tasks[indexPath.row].status)
+                
+                tasksCell.addTask(title: clientTasks[indexPath.row].desc, completionStatus: clientTasks[indexPath.row].status)
             }
             tasksCell.selectionStyle = .none
             return tasksCell
+        case 3:
+            clientHeaderCell.addTitle(title: "Суди")
+            return clientHeaderCell
         default:
             return UITableViewCell()
         }
@@ -104,15 +111,14 @@ extension ProjectInfoTV: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension ProjectInfoTV {
+extension ClientInfoTV {
     private func swipe(indexPath: IndexPath, status: Bool) -> UISwipeActionsConfiguration {
-        guard indexPath.section == 2 && !projectItem.tasks.isEmpty else {  return UISwipeActionsConfiguration() }
+        guard indexPath.section == 2 && !clientTasks.isEmpty else {  return UISwipeActionsConfiguration() }
         let title = status ? "Виконано" : "Не виконано"
         let style: UIContextualAction.Style = status ? .normal : .destructive
         
         let swipe = UIContextualAction(style: style, title: title) { (action, view, success) in
-            let tasks = self.projectItem.tasks.sorted { $0.date < $1.date }.sorted { !$0.status && $1.status}
-            let task = tasks[indexPath.row]
+            let task = self.clientTasks[indexPath.row]
             TasksViewModel.shared.updateTaskStatus(with: task, status: status)
             success(true)
         }

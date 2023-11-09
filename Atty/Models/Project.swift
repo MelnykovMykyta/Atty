@@ -17,6 +17,7 @@ class Project: Object {
     @Persisted var status: Bool = false
     @Persisted var category: String
     @Persisted var tasks: List<Task> = List<Task>()
+    @Persisted var client: Client?
     
     convenience init(name: String, shortDesc: String, additionalDesc: String, category: String) {
         self.init()

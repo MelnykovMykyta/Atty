@@ -1,8 +1,8 @@
 //
-//  ClientsVC.swift
+//  ClientInfoVC.swift
 //  Atty
 //
-//  Created by Nikita Melnikov on 26.10.2023.
+//  Created by Nikita Melnikov on 09.11.2023.
 //
 
 import Foundation
@@ -13,54 +13,46 @@ import RxCocoa
 import RxSwift
 import BetterSegmentedControl
 
-class ClientsVC: BaseViewContoller, ClientsTVDelegate {
+class ClientInfoVC: BaseViewContoller {
     
     private var disposeBag = DisposeBag()
     
+    var client: Client = ClientsViewModel.currentClient
+    
     private var nextbtn: UIButton!
     private var valueLabel: UILabel!
+    private var valueFromLabel: UILabel!
     private var segmentController: BetterSegmentedControl!
     private var tableView: UITableView!
-    
-    private var clients = ClientsTV()
-    private var archive = ArchiveClientsTV()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationBar.addBackButton(with: client.name)
+        navigationBar.backButton.addTarget(self, action: #selector(back), for: .touchUpInside)
         addViews()
+        
         addSegmentController()
         
-        clients.delegateClient = self
-        archive.delegateClient = self
-        
-        addTable(with: clients)
-        
-        infoView.setAddView(title: "Додати клієнта")
+        addTable(with: ClientInfoTV())
+        infoView.setAddView(title: "Додати проєкт")
         infoView.addInfoButton()
-        infoView.infoButton.addTarget(self, action: #selector(addNewClient), for: .touchUpInside)
+        infoView.infoButton.addTarget(self, action: #selector(addNewProject), for: .touchUpInside)
         
         ClientsViewModel.shared.observeClients().subscribe(onNext: { event in
-            let allCount = event.count.description
-            self.valueLabel.text = allCount
+            let element = event.first(where: { $0.id == self.client.id })
+            let count = element?.projects.filter {$0.status == false}.count.description
+            self.valueLabel.text = count
         }).disposed(by: disposeBag)
-    }
-    
-    func didSelectClient(_ client: Client) {
-        let clientInfoVC = ClientInfoVC()
-        clientInfoVC.client = client
-        navigationController?.pushViewController(clientInfoVC, animated: true)
     }
 }
 
-private extension ClientsVC {
+private extension ClientInfoVC {
     
     func addViews() {
         
-        navigationBar.addTitle(with: Tabs.clients.itemTitle)
-        
         let label = UILabel()
-        label.text = "Кількість"
+        label.text = "Проєкти"
         label.textColor = DS.Colors.standartTextColor
         label.font = UIFont(name: "Manrope-Bold", size: 100)
         label.adjustsFontSizeToFitWidth = true
@@ -72,7 +64,6 @@ private extension ClientsVC {
         valueLabel.font = UIFont(name: "Manrope-Bold", size: 100)
         valueLabel.adjustsFontSizeToFitWidth = true
         infoView.mainInfoView.addSubview(valueLabel)
-    
         
         label.snp.makeConstraints {
             $0.height.equalToSuperview().multipliedBy(DS.SizeMultipliers.twentyPercent)
@@ -86,9 +77,14 @@ private extension ClientsVC {
         }
     }
     
-    @objc func addNewClient() {
-        let vc = AddClientVC()
+    @objc func addNewProject() {
+        let vc = AddProjectVC()
+        vc.client = client
         present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func back() {
+        navigationController?.popViewController(animated: true)
     }
     
     func addSegmentController() {
@@ -96,13 +92,13 @@ private extension ClientsVC {
         segmentController = BetterSegmentedControl()
         contentView.addSubview(segmentController)
         segmentController.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(DS.SizeMultipliers.halfSize)
+            $0.width.equalToSuperview().multipliedBy(DS.SizeMultipliers.eightyPercent)
             $0.top.equalTo(infoView.snp.bottom).inset(-DS.Constraints.authViewLeadinTrailing)
             $0.leading.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
             $0.height.equalTo(contentView.snp.width).multipliedBy(DS.SizeMultipliers.tenPercent)
         }
         
-        segmentController.segments = LabelSegment.segments(withTitles: ["Всі", "Архів"],
+        segmentController.segments = LabelSegment.segments(withTitles: ["Картка", "Проєкти", "Витрати"],
                                                            normalBackgroundColor: DS.Colors.mainViewColor,
                                                            normalFont: UIFont(name: "Manrope-Bold", size: 14),
                                                            normalTextColor: DS.Colors.darkedTextColor,
@@ -133,12 +129,14 @@ private extension ClientsVC {
         
         switch sender.index {
         case 0:
-            addTable(with: clients)
+            addTable(with: ClientInfoTV())
         case 1:
-            addTable(with: archive)
+            addTable(with: ProjectDocumentsTV())
+        case 2:
+            addTable(with: DoneProjectsTV())
         default:
             return
         }
     }
-    
 }
+

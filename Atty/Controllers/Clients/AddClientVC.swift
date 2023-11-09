@@ -50,7 +50,7 @@ private extension AddClientVC {
         let label = UILabel()
         label.text = "Додати клієнта"
         label.textColor = DS.Colors.standartTextColor
-        label.font = UIFont(name: "Manrope-Bold", size: 50)
+        label.font = UIFont(name: "Manrope-Bold", size: 40)
         label.adjustsFontSizeToFitWidth = true
         view.addSubview(label)
         

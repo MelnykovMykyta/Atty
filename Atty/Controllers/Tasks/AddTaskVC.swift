@@ -48,9 +48,10 @@ private extension AddTaskVC {
         view.addSubview(closeButton)
         
         label = UILabel()
+        label.text = "Додати задачу"
         label.textColor = DS.Colors.standartTextColor
-        label.font = UIFont(name: "Manrope-Bold", size: 50)
-        label.numberOfLines = 0
+        label.font = UIFont(name: "Manrope-Bold", size: 40)
+        label.numberOfLines = 2
         label.adjustsFontSizeToFitWidth = true
         view.addSubview(label)
         

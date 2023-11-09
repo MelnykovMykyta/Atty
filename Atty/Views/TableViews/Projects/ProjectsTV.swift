@@ -63,7 +63,7 @@ extension ProjectsTV: UITableViewDelegate, UITableViewDataSource {
         if projects.isEmpty {
             projectCell.emptyProjectsList()
         } else {
-            projectCell.addProject(projectName: projects[indexPath.row].name, clientName: "", category: projects[indexPath.row].category, completionStatus: projects[indexPath.row].status)
+            projectCell.addProject(projectName: projects[indexPath.row].name, clientName: projects[indexPath.row].client?.name ?? "", category: projects[indexPath.row].category, completionStatus: projects[indexPath.row].status)
             projectCell.selectionStyle = .none
         }
         return projectCell

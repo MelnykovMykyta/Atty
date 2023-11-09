@@ -11,6 +11,7 @@ import SnapKit
 
 class AddProjectVC: UIViewController, UITextFieldDelegate {
     
+    private var label: UILabel!
     private var closeButton: UIButton!
     private var addButton: AuthButton!
     private var projectNameView: AuthTFView!
@@ -22,12 +23,19 @@ class AddProjectVC: UIViewController, UITextFieldDelegate {
     private var projectAdditionalDesc: UITextField!
     private var projectCategory: UITextField!
     
+    var client: Client?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = DS.Colors.mainBackgroundColor
         
         addViews()
+        
+        if let client_ = client {
+            client = client_
+            label.text = "Додати проєкт до клієнта: \(client_.name)"
+        }
         
         self.addKeyboardDismissGesture()
         
@@ -45,10 +53,11 @@ private extension AddProjectVC {
         closeButton.tintColor = DS.Colors.standartTextColor
         view.addSubview(closeButton)
         
-        let label = UILabel()
+        label = UILabel()
         label.text = "Додати проєкт"
+        label.numberOfLines = 2
         label.textColor = DS.Colors.standartTextColor
-        label.font = UIFont(name: "Manrope-Bold", size: 50)
+        label.font = UIFont(name: "Manrope-Bold", size: 40)
         label.adjustsFontSizeToFitWidth = true
         view.addSubview(label)
         
@@ -101,7 +110,7 @@ private extension AddProjectVC {
         
         label.snp.makeConstraints {
             $0.top.equalToSuperview().inset(DS.Constraints.authLogoLeadingTrailing)
-            $0.leading.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+            $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
         }
         
         stackView.snp.makeConstraints {
@@ -136,12 +145,18 @@ extension AddProjectVC {
         guard let name = projectName.text,
               let shortDesc = projectShortDesc.text,
               let additionalDesc = projectAdditionalDesc.text,
-              let category = projectCategory.text
+              let category = projectCategory.text,
+              !name.isEmpty
         else { return }
+        let project = Project(name: name, shortDesc: shortDesc, additionalDesc: additionalDesc, category: category)
         
-        if !name.isEmpty {
-            ProjectsViewModel.shared.addProject(with: Project(name: name, shortDesc: shortDesc, additionalDesc: additionalDesc, category: category))
+        if let client_ = client {
+            RealmDBService.shared.addProjectToClient(project, to: client_)
+            
+        } else {
+            ProjectsViewModel.shared.addProject(with: project)
         }
+        
         
         dismiss(animated: true, completion: nil)
     }
