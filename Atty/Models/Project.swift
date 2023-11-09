@@ -18,12 +18,11 @@ class Project: Object {
     @Persisted var category: String
     @Persisted var tasks: List<Task> = List<Task>()
     
-    convenience init(name: String, shortDesc: String, additionalDesc: String, status: Bool, category: String) {
+    convenience init(name: String, shortDesc: String, additionalDesc: String, category: String) {
         self.init()
         self.name = name
         self.shortDesc = shortDesc
         self.additionalDesc = additionalDesc
-        self.status = status
         self.category = category
     }
 }

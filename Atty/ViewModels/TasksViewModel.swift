@@ -17,12 +17,13 @@ class TasksViewModel {
     
     let realm = try! Realm()
     
-    private init() {}
-    
     func observeTasks() -> Observable<[Task]> {
         return Observable.collection(from: realm.objects(Task.self))
             .map { results in
-                return results.toArray().sorted { !$0.status && $1.status}
+                return results
+                    .toArray()
+                    .sorted { $0.date < $1.date }
+                    .sorted { !$0.status && $1.status}
             }
     }
     

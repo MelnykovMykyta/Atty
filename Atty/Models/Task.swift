@@ -11,6 +11,7 @@ import RealmSwift
 class Task: Object {
     
     @Persisted(primaryKey: true) var id: String = UUID().uuidString
+    @Persisted var date = Date()
     @Persisted var desc: String
     @Persisted var status: Bool
     @Persisted var deadline: Date?

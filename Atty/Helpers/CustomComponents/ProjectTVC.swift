@@ -185,7 +185,7 @@ extension ProjectTVC {
         view.backgroundColor = DS.Colors.mainViewColor
         
         let label = UILabel()
-        label.text = "Ви ще не додали жодного проєкта"
+        label.text = "Додайте поточний проєкт"
         label.textColor = DS.Colors.standartTextColor
         label.textAlignment = .center
         label.numberOfLines = 0
@@ -197,5 +197,23 @@ extension ProjectTVC {
         }
     }
     
+    func emptyDocumetsList() {
+        
+        view.subviews.forEach { $0.removeFromSuperview() }
+        
+        view.backgroundColor = DS.Colors.mainViewColor
+        
+        let label = UILabel()
+        label.text = "Ви ще не додали жодного документа"
+        label.textColor = DS.Colors.standartTextColor
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.font = UIFont(name: "Manrope-Bold", size: 14)
+        view.addSubview(label)
+        
+        label.snp.makeConstraints {
+            $0.edges.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+        }
+    }
 }
 

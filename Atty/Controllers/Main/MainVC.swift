@@ -99,7 +99,7 @@ private extension MainVC {
     }
     
     @objc func tapCostsInfo() {
-        Alert.shared.showAlert(title: "Скоро", message: "Цей розділ ще в розробці.")
+        Alert.shared.showAlert(title: "Скоро", message: "Цей розділ ще в розробці")
     }
     
     func formatDate(_ date: Date) -> String {

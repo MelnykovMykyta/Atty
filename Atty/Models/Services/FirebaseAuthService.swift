@@ -13,8 +13,6 @@ class FirebaseAuthService {
     
     static let shared = FirebaseAuthService()
     
-    private init() {}
-    
     func createUser(name: String, email: String, password: String) {
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             if let error = error {

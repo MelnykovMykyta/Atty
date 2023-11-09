@@ -127,7 +127,7 @@ private extension ProjectInfoVC {
             $0.width.equalToSuperview().multipliedBy(DS.SizeMultipliers.eightyPercent)
             $0.top.equalTo(infoView.snp.bottom).inset(-DS.Constraints.authViewLeadinTrailing)
             $0.leading.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
-            $0.height.equalTo(segmentController.snp.width).multipliedBy(0.12)
+            $0.height.equalTo(contentView.snp.width).multipliedBy(DS.SizeMultipliers.tenPercent)
         }
         
         segmentController.segments = LabelSegment.segments(withTitles: ["Картка", "Документи", "Суди"],
@@ -163,7 +163,7 @@ private extension ProjectInfoVC {
         case 0:
             addTable(with: ProjectInfoTV())
         case 1:
-            addTable(with: MainTV())
+            addTable(with: ProjectDocumentsTV())
         case 2:
             addTable(with: DoneProjectsTV())
         default:

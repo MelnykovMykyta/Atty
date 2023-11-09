@@ -1,8 +1,8 @@
 //
-//  DoneProjectsTV.swift
+//  ClientsTV.swift
 //  Atty
 //
-//  Created by Nikita Melnikov on 07.11.2023.
+//  Created by Nikita Melnikov on 09.11.2023.
 //
 
 import Foundation
@@ -11,15 +11,19 @@ import SnapKit
 import RxCocoa
 import RxSwift
 
-class DoneProjectsTV: UITableView {
+protocol ClientsTVDelegate {
+    func didSelectClient(_ client: Client)
+}
+
+class ClientsTV: UITableView {
     
     private var disposeBag = DisposeBag()
     
-    let project = "ProjectTVC"
+    var delegateClient: ClientsTVDelegate?
     
-    var delegateProject: ProjectsTVDelegate?
+    private let client = "ClientTVC"
     
-    private var projects: [Project] = ProjectsViewModel.shared.getProjects().filter { $0.status == true }
+    private var clients: [Client] = ClientsViewModel.shared.getClients().filter { $0.status == false }
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -31,10 +35,10 @@ class DoneProjectsTV: UITableView {
         showsVerticalScrollIndicator = false
         backgroundColor = .clear
         
-        self.register(ProjectTVC.self, forCellReuseIdentifier: project)
+        self.register(ClientTVC.self, forCellReuseIdentifier: client)
         
-        ProjectsViewModel.shared.observeProjects().subscribe(onNext: { event in
-            self.projects = ProjectsViewModel.shared.getProjects().filter { $0.status == true }
+        ClientsViewModel.shared.observeClients().subscribe(onNext: { event in
+            self.clients = ClientsViewModel.shared.getClients().filter { $0.status == false }
             self.reloadData()
         }).disposed(by: disposeBag)
     }
@@ -44,32 +48,32 @@ class DoneProjectsTV: UITableView {
     }
 }
 
-extension DoneProjectsTV: UITableViewDelegate, UITableViewDataSource {
+extension ClientsTV: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        projects.isEmpty ? 1 : projects.count
+        clients.isEmpty ? 1 : clients.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let projectCell = tableView.dequeueReusableCell(withIdentifier: "ProjectTVC") as? ProjectTVC else {
+        guard let clientCell = tableView.dequeueReusableCell(withIdentifier: "ClientTVC") as? ClientTVC else {
             return UITableViewCell()
         }
         
-        if projects.isEmpty {
-            projectCell.emptyProjectsList()
+        if clients.isEmpty {
+            clientCell.emptyClientsList()
         } else {
-            projectCell.addProject(projectName: projects[indexPath.row].name, clientName: "", category: projects[indexPath.row].category, completionStatus: projects[indexPath.row].status)
-            projectCell.selectionStyle = .none
+            let client = clients[indexPath.row]
+            clientCell.addClient(clientName: client.name, contact: client.contact, projects: client.projects.count.description, completionStatus: client.status)
+            clientCell.selectionStyle = .none
         }
-        
-        return projectCell
+        return clientCell
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if !projects.isEmpty {
+        if !clients.isEmpty {
             let swipe = UIContextualAction(style: .destructive, title: "Не завершено") { (action, view, success) in
-                let project = self.projects[indexPath.row]
-                ProjectsViewModel.shared.updateProjectStatus(with: project, status: false)
+                let client = self.clients[indexPath.row]
+                ClientsViewModel.shared.updateClientStatus(with: client, status: false)
                 success(true)
             }
             return UISwipeActionsConfiguration(actions: [swipe])
@@ -79,10 +83,10 @@ extension DoneProjectsTV: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        if !projects.isEmpty {
+        if !clients.isEmpty {
             let swipe = UIContextualAction(style: .normal, title: "Виконано") { (action, view, success) in
-                let project = self.projects[indexPath.row]
-                ProjectsViewModel.shared.updateProjectStatus(with: project, status: true)
+                let client = self.clients[indexPath.row]
+                ClientsViewModel.shared.updateClientStatus(with: client, status: true)
                 success(true)
             }
             swipe.backgroundColor = DS.Colors.taskFinished
@@ -93,11 +97,12 @@ extension DoneProjectsTV: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if !projects.isEmpty {
-            let selectedProject = projects[indexPath.row]
-            delegateProject?.didSelectProject(selectedProject)
+        if !clients.isEmpty {
+            let selectedClient = clients[indexPath.row]
+            delegateClient?.didSelectClient(selectedClient)
+            
+            ClientsViewModel.currentClient = selectedClient
         }
     }
 }
-
 

@@ -60,5 +60,4 @@ class BaseViewContoller: UIViewController {
             $0.top.leading.trailing.equalToSuperview()
         }
     }
-    
 }

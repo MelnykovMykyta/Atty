@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 import SnapKit
 
-
 class AddProjectVC: UIViewController, UITextFieldDelegate {
     
     private var closeButton: UIButton!
@@ -141,7 +140,7 @@ extension AddProjectVC {
         else { return }
         
         if !name.isEmpty {
-            ProjectsViewModel.shared.addProject(with: Project(name: name, shortDesc: shortDesc, additionalDesc: additionalDesc, status: false, category: category))
+            ProjectsViewModel.shared.addProject(with: Project(name: name, shortDesc: shortDesc, additionalDesc: additionalDesc, category: category))
         }
         
         dismiss(animated: true, completion: nil)
@@ -156,5 +155,3 @@ extension AddProjectVC {
         return true
     }
 }
-
-

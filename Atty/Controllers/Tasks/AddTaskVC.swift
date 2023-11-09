@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 import SnapKit
 
-
 class AddTaskVC: UIViewController, UITextFieldDelegate {
     
     private var label: UILabel!
@@ -22,7 +21,7 @@ class AddTaskVC: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = DS.Colors.mainBackgroundColor
         
         addViews()
@@ -95,26 +94,29 @@ private extension AddTaskVC {
         addButton.snp.makeConstraints { $0.height.equalTo(DS.Sizes.authTFHeight) }
     }
 }
-    extension AddTaskVC {
+
+extension AddTaskVC {
+    
+    @objc private func addTask() {
+        guard let desc = taskDescription.text, !desc.isEmpty else { return }
+        let task = Task(desc: desc, status: false)
         
-        @objc private func addTask() {
-            guard let desc = taskDescription.text, !desc.isEmpty else { return }
-            let task = Task(desc: desc, status: false)
-            if let project_ = project {
-                RealmDBService.shared.addTaskToProject(task, to: project_)
-            } else {
-                TasksViewModel.shared.addTask(with: task)
-            }
-            dismiss(animated: true, completion: nil)
+        if let project_ = project {
+            RealmDBService.shared.addTaskToProject(task, to: project_)
+        } else {
+            TasksViewModel.shared.addTask(with: task)
         }
         
-        @objc private func tapClose() {
-            dismiss(animated: true, completion: nil)
-        }
-        
-        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-            textField.resignFirstResponder()
-            return true
-        }
+        dismiss(animated: true, completion: nil)
     }
+    
+    @objc private func tapClose() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
 

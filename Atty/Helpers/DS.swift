@@ -26,6 +26,7 @@ enum DS {
         static var taskStarted = UIColor(red: 0.176, green: 0.173, blue: 0.173, alpha: 1)
         static var taskFinished = UIColor(red: 0.6, green: 0.808, blue: 0.4, alpha: 1)
         static var selectedSegmentControllerItem = UIColor(red: 0.851, green: 0.851, blue: 0.851, alpha: 0.5)
+        static var archiveColor = UIColor(red: 0.6, green: 0.808, blue: 0.4, alpha: 0.03)
     }
     
     enum Constraints {
