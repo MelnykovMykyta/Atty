@@ -25,6 +25,7 @@ class ProjectsVC: BaseViewContoller, ProjectsTVDelegate {
     
     private var projectsTV = ProjectsTV()
     private var doneProjectsTV = DoneProjectsTV()
+    private var projectsByClient = ProjectsByClientTV()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,7 @@ class ProjectsVC: BaseViewContoller, ProjectsTVDelegate {
         
         projectsTV.delegateProject = self
         doneProjectsTV.delegateProject = self
+        projectsByClient.delegateProject = self
         
         addTable(with: projectsTV)
         
@@ -165,12 +167,11 @@ private extension ProjectsVC {
         case 0:
             addTable(with: projectsTV)
         case 1:
-            addTable(with: MainTV())
+            addTable(with: projectsByClient)
         case 2:
             addTable(with: doneProjectsTV)
         default:
             return
         }
     }
-    
 }

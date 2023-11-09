@@ -17,6 +17,8 @@
 		77048A272AFC701D00824E5F /* AddClientVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77048A262AFC701D00824E5F /* AddClientVC.swift */; };
 		77048A292AFCD5C800824E5F /* ClientInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77048A282AFCD5C800824E5F /* ClientInfoVC.swift */; };
 		77048A2C2AFCDB1B00824E5F /* ClientInfoTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77048A2B2AFCDB1B00824E5F /* ClientInfoTV.swift */; };
+		77048A2E2AFD2C7200824E5F /* ProjectsByClientTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77048A2D2AFD2C7200824E5F /* ProjectsByClientTV.swift */; };
+		77048A322AFD429A00824E5F /* TasksByClientTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77048A312AFD429A00824E5F /* TasksByClientTV.swift */; };
 		772D35972AE94F1100038AA6 /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D35962AE94F1100038AA6 /* ResetPasswordVC.swift */; };
 		772D359A2AE9DB4C00038AA6 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D35992AE9DB4C00038AA6 /* ResetPasswordView.swift */; };
 		772D359C2AEA5DC700038AA6 /* NavigateTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D359B2AEA5DC700038AA6 /* NavigateTabBarController.swift */; };
@@ -87,6 +89,8 @@
 		77048A262AFC701D00824E5F /* AddClientVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddClientVC.swift; sourceTree = "<group>"; };
 		77048A282AFCD5C800824E5F /* ClientInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientInfoVC.swift; sourceTree = "<group>"; };
 		77048A2B2AFCDB1B00824E5F /* ClientInfoTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientInfoTV.swift; sourceTree = "<group>"; };
+		77048A2D2AFD2C7200824E5F /* ProjectsByClientTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsByClientTV.swift; sourceTree = "<group>"; };
+		77048A312AFD429A00824E5F /* TasksByClientTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksByClientTV.swift; sourceTree = "<group>"; };
 		772D35962AE94F1100038AA6 /* ResetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
 		772D35992AE9DB4C00038AA6 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		772D359B2AEA5DC700038AA6 /* NavigateTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigateTabBarController.swift; sourceTree = "<group>"; };
@@ -248,6 +252,7 @@
 			children = (
 				774583332AF84D6100340CBB /* TasksTV.swift */,
 				7745833A2AF9AF2E00340CBB /* DoneTasksTV.swift */,
+				77048A312AFD429A00824E5F /* TasksByClientTV.swift */,
 			);
 			path = Tasks;
 			sourceTree = "<group>";
@@ -259,6 +264,7 @@
 				77EB3F5D2AFA5D57002AB368 /* DoneProjectsTV.swift */,
 				77EB3F632AFACB4C002AB368 /* ProjectInfoTV.swift */,
 				77048A182AFBC42000824E5F /* ProjectDocumentsTV.swift */,
+				77048A2D2AFD2C7200824E5F /* ProjectsByClientTV.swift */,
 			);
 			path = Projects;
 			sourceTree = "<group>";
@@ -602,6 +608,7 @@
 				7745833B2AF9AF2E00340CBB /* DoneTasksTV.swift in Sources */,
 				77048A192AFBC42000824E5F /* ProjectDocumentsTV.swift in Sources */,
 				774583302AF823A700340CBB /* TasksViewModel.swift in Sources */,
+				77048A322AFD429A00824E5F /* TasksByClientTV.swift in Sources */,
 				77DB27332AE5DFD600944822 /* AuthVC.swift in Sources */,
 				77EB3F642AFACB4C002AB368 /* ProjectInfoTV.swift in Sources */,
 				772D35A72AEA845300038AA6 /* CourtCasesVC.swift in Sources */,
@@ -627,6 +634,7 @@
 				772D35972AE94F1100038AA6 /* ResetPasswordVC.swift in Sources */,
 				77F9D53D2AF3BA15002132D1 /* HeaderTVC.swift in Sources */,
 				77F9D5492AF7AF83002132D1 /* Task.swift in Sources */,
+				77048A2E2AFD2C7200824E5F /* ProjectsByClientTV.swift in Sources */,
 				77048A1F2AFC5BF900824E5F /* ClientsViewModel.swift in Sources */,
 				77048A1D2AFC57DD00824E5F /* Client.swift in Sources */,
 				77F9D54B2AF7BE16002132D1 /* CourtMeetTVC.swift in Sources */,

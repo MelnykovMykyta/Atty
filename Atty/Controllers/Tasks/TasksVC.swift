@@ -23,6 +23,10 @@ class TasksVC: BaseViewContoller {
     private var segmentController: BetterSegmentedControl!
     private var tableView: UITableView!
     
+    private let tasks = TasksTV()
+    private let tasksByClient = TasksByClientTV()
+    private let doneTasks = DoneTasksTV()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -152,11 +156,11 @@ private extension TasksVC {
         
         switch sender.index {
         case 0:
-            addTable(with: TasksTV())
+            addTable(with: tasks)
         case 1:
-            addTable(with: MainTV())
+            addTable(with: tasksByClient)
         case 2:
-            addTable(with: DoneTasksTV())
+            addTable(with: doneTasks)
         default:
             return
         }
