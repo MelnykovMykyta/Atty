@@ -19,7 +19,7 @@ class ClientsVC: BaseViewContoller, ClientsTVDelegate {
     
     private var nextbtn: UIButton!
     private var valueLabel: UILabel!
-    private var segmentController: BetterSegmentedControl!
+    private var segmentController: SegmentControllerView!
     private var tableView: UITableView!
     
     private var clients = ClientsTV()
@@ -72,7 +72,7 @@ private extension ClientsVC {
         valueLabel.font = UIFont(name: "Manrope-Bold", size: 100)
         valueLabel.adjustsFontSizeToFitWidth = true
         infoView.mainInfoView.addSubview(valueLabel)
-    
+        
         
         label.snp.makeConstraints {
             $0.height.equalToSuperview().multipliedBy(DS.SizeMultipliers.twentyPercent)
@@ -86,45 +86,36 @@ private extension ClientsVC {
         }
     }
     
-    @objc func addNewClient() {
-        let vc = AddClientVC()
-        present(vc, animated: true, completion: nil)
-    }
-    
     func addSegmentController() {
         
-        segmentController = BetterSegmentedControl()
+        segmentController = SegmentControllerView()
+        segmentController.addController(with: ["Всі", "Архів"])
+        segmentController.controller.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
         contentView.addSubview(segmentController)
+        
         segmentController.snp.makeConstraints {
             $0.width.equalToSuperview().multipliedBy(DS.SizeMultipliers.halfSize)
             $0.top.equalTo(infoView.snp.bottom).inset(-DS.Constraints.authViewLeadinTrailing)
             $0.leading.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
             $0.height.equalTo(contentView.snp.width).multipliedBy(DS.SizeMultipliers.tenPercent)
         }
-        
-        segmentController.segments = LabelSegment.segments(withTitles: ["Всі", "Архів"],
-                                                           normalBackgroundColor: DS.Colors.mainViewColor,
-                                                           normalFont: UIFont(name: "Manrope-Bold", size: 14),
-                                                           normalTextColor: DS.Colors.darkedTextColor,
-                                                           selectedBackgroundColor: DS.Colors.selectedSegmentControllerItem,
-                                                           selectedFont: UIFont(name: "Manrope-Bold", size: 14),
-                                                           selectedTextColor: DS.Colors.standartTextColor)
-        
-        segmentController.cornerRadius = segmentController.frame.height / 2
-        segmentController.backgroundColor = DS.Colors.mainViewColor
-        segmentController.indicatorViewBackgroundColor = DS.Colors.mainViewColor
-        segmentController.indicatorViewBorderColor = DS.Colors.mainViewColor
-        segmentController.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
     }
     
     func addTable(with table: UITableView) {
+        
         tableView = table
         contentView.addSubview(tableView)
+        
         tableView.snp.makeConstraints {
             $0.top.equalTo(segmentController.snp.bottom).inset(-DS.Constraints.authViewLeadinTrailing)
-            $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+            $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
+    }
+    
+    @objc func addNewClient() {
+        let vc = AddClientVC()
+        present(vc, animated: true, completion: nil)
     }
     
     @objc func segmentedControlValueChanged(_ sender: BetterSegmentedControl) {
@@ -140,5 +131,4 @@ private extension ClientsVC {
             return
         }
     }
-    
 }

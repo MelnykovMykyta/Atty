@@ -33,8 +33,7 @@ class ClientTVC: UITableViewCell {
         view.layer.masksToBounds = true
         addSubview(view)
         view.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview().inset(DS.Constraints.infoViewLabelInset)
-            $0.leading.trailing.equalToSuperview()
+            $0.edges.equalToSuperview().inset(DS.Constraints.baseInsetViews)
         }
     }
     

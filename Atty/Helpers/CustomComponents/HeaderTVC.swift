@@ -47,7 +47,7 @@ extension HeaderTVC {
         
         label.snp.makeConstraints {
             $0.top.bottom.equalToSuperview().inset(DS.Constraints.baseInsetViews)
-            $0.leading.equalToSuperview()
+            $0.leading.equalToSuperview().inset(DS.Constraints.baseInsetViews)
             $0.trailing.equalTo(button.snp.leading).inset(-DS.Constraints.authViewLeadinTrailing)
             $0.height.equalTo(contentView.snp.width).multipliedBy(DS.SizeMultipliers.tenPercent)
         }
@@ -55,7 +55,7 @@ extension HeaderTVC {
         button.snp.makeConstraints {
             $0.height.equalTo(contentView.snp.height).multipliedBy(DS.SizeMultipliers.halfSize)
             $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(DS.Constraints.baseInsetViews)
         }
     }
     
@@ -72,8 +72,7 @@ extension HeaderTVC {
         
         label.snp.makeConstraints {
             $0.top.bottom.equalToSuperview().inset(DS.Constraints.baseInsetViews)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+            $0.leading.trailing.equalToSuperview().inset(DS.Constraints.baseInsetViews)
             $0.height.equalTo(contentView.snp.width).multipliedBy(DS.SizeMultipliers.tenPercent)
         }
     }

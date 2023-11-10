@@ -30,7 +30,7 @@ class TaskTVC: UITableViewCell {
         
         view.snp.makeConstraints {
             $0.top.bottom.equalToSuperview().inset(DS.Constraints.infoViewLabelInset)
-            $0.leading.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(DS.Constraints.baseInsetViews)
         }
     }
     

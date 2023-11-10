@@ -22,7 +22,7 @@ class ClientInfoVC: BaseViewContoller {
     private var nextbtn: UIButton!
     private var valueLabel: UILabel!
     private var valueFromLabel: UILabel!
-    private var segmentController: BetterSegmentedControl!
+    private var segmentController: SegmentControllerView!
     private var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -77,6 +77,33 @@ private extension ClientInfoVC {
         }
     }
     
+    func addSegmentController() {
+        
+        segmentController = SegmentControllerView()
+        segmentController.addController(with: ["Картка", "Проєкти", "Витрати"])
+        segmentController.controller.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
+        contentView.addSubview(segmentController)
+        
+        segmentController.snp.makeConstraints {
+            $0.width.equalToSuperview().multipliedBy(DS.SizeMultipliers.eightyPercent)
+            $0.top.equalTo(infoView.snp.bottom).inset(-DS.Constraints.authViewLeadinTrailing)
+            $0.leading.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+            $0.height.equalTo(contentView.snp.width).multipliedBy(DS.SizeMultipliers.tenPercent)
+        }
+    }
+    
+    func addTable(with table: UITableView) {
+        
+        tableView = table
+        contentView.addSubview(tableView)
+        
+        tableView.snp.makeConstraints {
+            $0.top.equalTo(segmentController.snp.bottom).inset(-DS.Constraints.authViewLeadinTrailing)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
+        }
+    }
+    
     @objc func addNewProject() {
         let vc = AddProjectVC()
         vc.client = client
@@ -85,42 +112,6 @@ private extension ClientInfoVC {
     
     @objc func back() {
         navigationController?.popViewController(animated: true)
-    }
-    
-    func addSegmentController() {
-        
-        segmentController = BetterSegmentedControl()
-        contentView.addSubview(segmentController)
-        segmentController.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(DS.SizeMultipliers.eightyPercent)
-            $0.top.equalTo(infoView.snp.bottom).inset(-DS.Constraints.authViewLeadinTrailing)
-            $0.leading.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
-            $0.height.equalTo(contentView.snp.width).multipliedBy(DS.SizeMultipliers.tenPercent)
-        }
-        
-        segmentController.segments = LabelSegment.segments(withTitles: ["Картка", "Проєкти", "Витрати"],
-                                                           normalBackgroundColor: DS.Colors.mainViewColor,
-                                                           normalFont: UIFont(name: "Manrope-Bold", size: 14),
-                                                           normalTextColor: DS.Colors.darkedTextColor,
-                                                           selectedBackgroundColor: DS.Colors.selectedSegmentControllerItem,
-                                                           selectedFont: UIFont(name: "Manrope-Bold", size: 14),
-                                                           selectedTextColor: DS.Colors.standartTextColor)
-        
-        segmentController.cornerRadius = segmentController.frame.height / 2
-        segmentController.backgroundColor = DS.Colors.mainViewColor
-        segmentController.indicatorViewBackgroundColor = DS.Colors.mainViewColor
-        segmentController.indicatorViewBorderColor = DS.Colors.mainViewColor
-        segmentController.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
-    }
-    
-    func addTable(with table: UITableView) {
-        tableView = table
-        contentView.addSubview(tableView)
-        tableView.snp.makeConstraints {
-            $0.top.equalTo(segmentController.snp.bottom).inset(-DS.Constraints.authViewLeadinTrailing)
-            $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
-            $0.bottom.equalToSuperview()
-        }
     }
     
     @objc func segmentedControlValueChanged(_ sender: BetterSegmentedControl) {

@@ -54,15 +54,15 @@ enum Tabs: Int {
         switch self {
             
         case .projects:
-            return UITabBarItem(title: nil, image: Tabs.projects.icon, tag: Tabs.projects.rawValue)
+            return UITabBarItem(title: Tabs.projects.itemTitle, image: Tabs.projects.icon, tag: Tabs.projects.rawValue)
         case .clients:
-            return  UITabBarItem(title: nil, image: Tabs.clients.icon, tag: Tabs.clients.rawValue)
+            return  UITabBarItem(title: Tabs.clients.itemTitle, image: Tabs.clients.icon, tag: Tabs.clients.rawValue)
         case .main:
-            return UITabBarItem(title: nil, image: Tabs.main.icon, tag: Tabs.main.rawValue)
+            return UITabBarItem(title: Tabs.main.itemTitle, image: Tabs.main.icon, tag: Tabs.main.rawValue)
         case .courtCases:
-            return UITabBarItem(title: nil, image: Tabs.courtCases.icon, tag: Tabs.courtCases.rawValue)
+            return UITabBarItem(title: Tabs.courtCases.itemTitle, image: Tabs.courtCases.icon, tag: Tabs.courtCases.rawValue)
         case .tasks:
-            return UITabBarItem(title: nil, image: Tabs.tasks.icon, tag: Tabs.tasks.rawValue)
+            return UITabBarItem(title: Tabs.tasks.itemTitle, image: Tabs.tasks.icon, tag: Tabs.tasks.rawValue)
         }
     }
 }
