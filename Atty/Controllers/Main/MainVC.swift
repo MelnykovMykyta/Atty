@@ -32,7 +32,7 @@ class MainVC: UIViewController, UITextFieldDelegate {
             self.infoView.tasksValue.text = count
         }).disposed(by: disposeBag)
         
-        CourtsViewModel.shared.observeTodayMeets().subscribe(onNext: { event in
+        CourtsViewModel.observeTodayMeets().subscribe(onNext: { event in
             let count = event.count.description
             self.infoView.courtMeetsValue.text = count
         }).disposed(by: disposeBag)

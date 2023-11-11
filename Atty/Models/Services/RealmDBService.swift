@@ -49,6 +49,13 @@ class RealmDBService {
         }
     }
     
+    func updateCourtCaseStatus(with courtCase: CourtCase, status: Bool) {
+        try! realm.write {
+            guard let courtCase_ = realm.objects(CourtCase.self).filter("id == %@", courtCase.id).first else { return }
+            courtCase_.status = status
+        }
+    }
+    
     func addTaskToProject(_ task: Task, to project: Project) {
         try! realm.write {
             project.tasks.append(task)

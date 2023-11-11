@@ -20,7 +20,7 @@ class MainTV: UITableView {
     private let meet = "CourtMeetTVC"
     
     private var tasks: [Task] = TasksViewModel.shared.getTasks()
-    private var courtMeets: [CourtMeet] = CourtsViewModel.shared.getTodayMeets()
+    private var courtMeets: [CourtMeet] = CourtsViewModel.getTodayMeets()
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -30,8 +30,8 @@ class MainTV: UITableView {
             self.reloadData()
         }).disposed(by: disposeBag)
         
-        CourtsViewModel.shared.observeMeets().subscribe(onNext: { event in
-            self.courtMeets = CourtsViewModel.shared.getTodayMeets()
+        CourtsViewModel.observeMeets().subscribe(onNext: { event in
+            self.courtMeets = CourtsViewModel.getTodayMeets()
             self.reloadData()
         }).disposed(by: disposeBag)
         
@@ -102,7 +102,7 @@ extension MainTV: UITableViewDelegate, UITableViewDataSource {
         case 3:
             
             if courtMeets.isEmpty {
-                meetCell.emptyCourtMeetsList()
+                meetCell.emptyCourtMeetsList(with: "На сьогодні засідання відсутні")
             } else {
                 let meet = courtMeets[indexPath.row]
                 meetCell.addCourtMeet(courtName: meet.courtName, caseNumber: meet.caseNumber, plaintiff: meet.plaintiff,defendant: meet.defendant, judge: meet.judge, time: meet.time, date: meet.day)

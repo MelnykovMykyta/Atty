@@ -107,7 +107,7 @@ private extension ClientInfoVC {
     @objc func addNewProject() {
         let vc = AddProjectVC()
         vc.client = client
-        present(vc, animated: true, completion: nil)
+        present(vc, animated: true)
     }
     
     @objc func back() {

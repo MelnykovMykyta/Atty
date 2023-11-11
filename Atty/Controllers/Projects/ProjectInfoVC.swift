@@ -139,7 +139,7 @@ private extension ProjectInfoVC {
     @objc func addNewTask() {
         let vc = AddTaskVC()
         vc.project = project
-        present(vc, animated: true, completion: nil)
+        present(vc, animated: true)
     }
     
     @objc func back() {

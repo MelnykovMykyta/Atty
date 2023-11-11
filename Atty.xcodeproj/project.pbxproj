@@ -48,6 +48,8 @@
 		777027AE2AE28F61007CA2B7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 777027AC2AE28F61007CA2B7 /* LaunchScreen.storyboard */; };
 		7795AD9C2AE826E1007FC870 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7795AD9B2AE826E1007FC870 /* MainVC.swift */; };
 		7795AD9E2AE8277E007FC870 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7795AD9D2AE8277E007FC870 /* GoogleService-Info.plist */; };
+		77CE085C2AFEEDAC002E3144 /* CourtCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CE085B2AFEEDAC002E3144 /* CourtCase.swift */; };
+		77CE085F2AFEF0BF002E3144 /* CourtCasesTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CE085E2AFEF0BF002E3144 /* CourtCasesTV.swift */; };
 		77DB26F52AE5537400944822 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB26F42AE5537400944822 /* SignInView.swift */; };
 		77DB26FB2AE5671900944822 /* DS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB26FA2AE5671900944822 /* DS.swift */; };
 		77DB26FE2AE56D3600944822 /* AuthTFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB26FD2AE56D3600944822 /* AuthTFView.swift */; };
@@ -124,6 +126,8 @@
 		777027AF2AE28F61007CA2B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7795AD9B2AE826E1007FC870 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		7795AD9D2AE8277E007FC870 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		77CE085B2AFEEDAC002E3144 /* CourtCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourtCase.swift; sourceTree = "<group>"; };
+		77CE085E2AFEF0BF002E3144 /* CourtCasesTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourtCasesTV.swift; sourceTree = "<group>"; };
 		77DB26F42AE5537400944822 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		77DB26FA2AE5671900944822 /* DS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DS.swift; sourceTree = "<group>"; };
 		77DB26FD2AE56D3600944822 /* AuthTFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTFView.swift; sourceTree = "<group>"; };
@@ -314,6 +318,7 @@
 				77F9D54C2AF7C424002132D1 /* CourtMeet.swift */,
 				77EB3F592AFA2D2A002AB368 /* Project.swift */,
 				77048A1C2AFC57DD00824E5F /* Client.swift */,
+				77CE085B2AFEEDAC002E3144 /* CourtCase.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -325,6 +330,14 @@
 				77F9D54E2AF7CBF2002132D1 /* RealmDBService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		77CE085D2AFEF09B002E3144 /* CourtCases */ = {
+			isa = PBXGroup;
+			children = (
+				77CE085E2AFEF0BF002E3144 /* CourtCasesTV.swift */,
+			);
+			path = CourtCases;
 			sourceTree = "<group>";
 		};
 		77DB26F32AE5531000944822 /* Views */ = {
@@ -448,6 +461,7 @@
 		77F9D5362AF3A9AD002132D1 /* TableViews */ = {
 			isa = PBXGroup;
 			children = (
+				77CE085D2AFEF09B002E3144 /* CourtCases */,
 				77048A2A2AFCDAE900824E5F /* Clients */,
 				7745833E2AF9B38000340CBB /* Projects */,
 				774583392AF9AD4100340CBB /* Tasks */,
@@ -649,6 +663,8 @@
 				772D35BE2AF0648F00038AA6 /* BaseViewContoller.swift in Sources */,
 				77048A252AFC690300824E5F /* ArchiveClientsTV.swift in Sources */,
 				77DB272D2AE5B18200944822 /* UIViewController + DismissGesture.swift in Sources */,
+				77CE085F2AFEF0BF002E3144 /* CourtCasesTV.swift in Sources */,
+				77CE085C2AFEEDAC002E3144 /* CourtCase.swift in Sources */,
 				77048A2C2AFCDB1B00824E5F /* ClientInfoTV.swift in Sources */,
 				77EB3F602AFA5E01002AB368 /* AddProjectVC.swift in Sources */,
 				772D359C2AEA5DC700038AA6 /* NavigateTabBarController.swift in Sources */,

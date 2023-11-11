@@ -147,7 +147,7 @@ private extension ProjectsVC {
     
     @objc func addNewProject() {
         let vc = AddProjectVC()
-        present(vc, animated: true, completion: nil)
+        present(vc, animated: true)
     }
     
     @objc func segmentedControlValueChanged(_ sender: BetterSegmentedControl) {

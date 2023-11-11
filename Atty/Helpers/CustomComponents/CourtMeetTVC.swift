@@ -45,14 +45,14 @@ class CourtMeetTVC: UITableViewCell {
 
 extension CourtMeetTVC {
     
-    func emptyCourtMeetsList() {
+    func emptyCourtMeetsList(with title: String) {
         
         view.subviews.forEach { $0.removeFromSuperview() }
         
         view.backgroundColor = DS.Colors.mainViewColor
         
         let label = UILabel()
-        label.text = "На сьогодні засідання відсутні"
+        label.text = title
         label.textColor = DS.Colors.standartTextColor
         label.textAlignment = .center
         label.numberOfLines = 0
@@ -154,5 +154,69 @@ extension CourtMeetTVC {
         stackView.addArrangedSubview(timeLabel)
         stackView.addArrangedSubview(dateLabel)
     }
+    
+    func addCourtCase(courtName: String, caseNumber: String, plaintiff: String, defendant: String, judge: String) {
+        
+        view.subviews.forEach { $0.removeFromSuperview() }
+        
+        view.backgroundColor = DS.Colors.mainBackgroundColor
+        
+        courtNameLabel = UILabel()
+        courtNameLabel.text = courtName
+        courtNameLabel.textColor = DS.Colors.standartTextColor
+        courtNameLabel.font = UIFont(name: "Manrope-Bold", size: 12)
+        view.addSubview(courtNameLabel)
+        
+        courtNameLabel.snp.makeConstraints {
+            $0.top.leading.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+        }
+        
+        caseNumberLabel = UILabel()
+        caseNumberLabel = UILabel()
+        caseNumberLabel.text = caseNumber
+        caseNumberLabel.textColor = DS.Colors.standartTextColor
+        caseNumberLabel.font = UIFont(name: "Manrope-Bold", size: 20)
+        view.addSubview(caseNumberLabel)
+        
+        caseNumberLabel.snp.makeConstraints {
+            $0.top.equalTo(courtNameLabel.snp.bottom)
+            $0.leading.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+        }
+        
+        plaintiffLabel = UILabel()
+        plaintiffLabel.text = "Позивач: \(plaintiff)"
+        plaintiffLabel.textColor = DS.Colors.darkedTextColor
+        plaintiffLabel.numberOfLines = 0
+        plaintiffLabel.font = UIFont(name: "Manrope-ExtraLight", size: 10)
+        view.addSubview(plaintiffLabel)
+        
+        plaintiffLabel.snp.makeConstraints {
+            $0.top.equalTo(caseNumberLabel.snp.bottom).inset(-8)
+            $0.leading.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+        }
+        
+        defendantLabel = UILabel()
+        defendantLabel.text = "Відповідач: \(defendant)"
+        defendantLabel.textColor = DS.Colors.darkedTextColor
+        defendantLabel.numberOfLines = 0
+        defendantLabel.font = UIFont(name: "Manrope-ExtraLight", size: 10)
+        view.addSubview(defendantLabel)
+        
+        defendantLabel.snp.makeConstraints {
+            $0.top.equalTo(plaintiffLabel.snp.bottom)
+            $0.leading.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+        }
+        
+        judgeLabel = UILabel()
+        judgeLabel.text = "Суддя: \(judge)"
+        judgeLabel.textColor = DS.Colors.darkedTextColor
+        judgeLabel.numberOfLines = 0
+        judgeLabel.font = UIFont(name: "Manrope-ExtraLight", size: 10)
+        view.addSubview(judgeLabel)
+        
+        judgeLabel.snp.makeConstraints {
+            $0.top.equalTo(defendantLabel.snp.bottom).inset(-4)
+            $0.leading.bottom.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+        }
+    }
 }
-

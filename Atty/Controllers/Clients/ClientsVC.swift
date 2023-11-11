@@ -115,7 +115,7 @@ private extension ClientsVC {
     
     @objc func addNewClient() {
         let vc = AddClientVC()
-        present(vc, animated: true, completion: nil)
+        present(vc, animated: true)
     }
     
     @objc func segmentedControlValueChanged(_ sender: BetterSegmentedControl) {

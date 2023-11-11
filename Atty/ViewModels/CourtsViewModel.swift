@@ -13,20 +13,34 @@ import RxSwift
 
 class CourtsViewModel {
     
-    static let shared = CourtsViewModel()
+    static let realm = try! Realm()
     
-    let realm = try! Realm()
+    static var currentCase: CourtCase = CourtCase()
     
-    private init() {}
+    static var statusSubject = PublishSubject<Bool>()
     
-    func observeMeets() -> Observable<[CourtMeet]> {
+    static var statusFilter: Bool = true
+    
+    static func changeFilter() {
+        statusFilter.toggle()
+        statusSubject.onNext(statusFilter)
+    }
+    
+    static func observeMeets() -> Observable<[CourtMeet]> {
         return Observable.collection(from: realm.objects(CourtMeet.self))
             .map { results in
                 return results.toArray()
             }
     }
     
-    func observeTodayMeets() -> Observable<[CourtMeet]> {
+    static func observeCases() -> Observable<[CourtCase]> {
+        return Observable.collection(from: realm.objects(CourtCase.self))
+            .map { results in
+                return results.toArray()
+            }
+    }
+    
+    static func observeTodayMeets() -> Observable<[CourtMeet]> {
         return Observable.collection(from: realm.objects(CourtMeet.self))
             .map { results in
                 return results.toArray()
@@ -35,13 +49,21 @@ class CourtsViewModel {
             }
     }
     
-    func getTodayMeets() -> [CourtMeet] {
+    static func getTodayMeets() -> [CourtMeet] {
         return RealmDBService.shared.getObjects(CourtMeet.self)
             .filter { compareDates(date: $0.date) }
             .sorted(by: { $0.date < $1.date })
     }
     
-    func compareDates(date: Date) -> Bool {
+    static func getCourtCases() -> [CourtCase] {
+        return RealmDBService.shared.getObjects(CourtCase.self)
+    }
+    
+    static func updateCourtCaseStatus(with courtCase: CourtCase, status: Bool) {
+        RealmDBService.shared.updateCourtCaseStatus(with: courtCase, status: status)
+    }
+    
+    static func compareDates(date: Date) -> Bool {
         let calendar = Calendar.current
         let components = calendar.dateComponents([.day, .month, .year], from: date)
         let currentDate = calendar.dateComponents([.day, .month, .year], from: Date())
