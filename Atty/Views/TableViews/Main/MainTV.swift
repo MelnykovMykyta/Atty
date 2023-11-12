@@ -82,8 +82,7 @@ extension MainTV: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
             
         case 0:
-            headerCell.addViews(title: "Задачі", buttonTitle: "Всі задачі")
-            headerCell.button.addTarget(self, action: #selector(allTasks), for: .touchUpInside)
+            headerCell.addTitle(title: "Дедлайни")
             return headerCell
             
         case 1:
@@ -95,8 +94,7 @@ extension MainTV: UITableViewDelegate, UITableViewDataSource {
             return tasksCell
             
         case 2:
-            headerCell.addViews(title: "Засідання", buttonTitle: "Більше")
-            headerCell.button.addTarget(self, action: #selector(allCourtMeets), for: .touchUpInside)
+            headerCell.addTitle(title: "Засідання")
             return headerCell
             
         case 3:
@@ -111,6 +109,7 @@ extension MainTV: UITableViewDelegate, UITableViewDataSource {
             
         case 4:
             headerCell.addViews(title: "Новини", buttonTitle: "Більше")
+            headerCell.button.addTarget(self, action: #selector(allNews), for: .touchUpInside)
             return headerCell
         case 5:
             return headerCell
@@ -132,7 +131,7 @@ extension MainTV: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         guard indexPath.section == 1 && !tasks.isEmpty  else {  return UISwipeActionsConfiguration() }
-        let swipe = UIContextualAction(style: .normal, title: "Виконано") { (action, view, success) in
+        let swipe = UIContextualAction(style: .destructive, title: "Виконано") { (action, view, success) in
             let task = self.tasks[indexPath.row]
             TasksViewModel.shared.updateTaskStatus(with: task, status: true)
             success(true)
@@ -142,11 +141,7 @@ extension MainTV: UITableViewDelegate, UITableViewDataSource {
         return UISwipeActionsConfiguration(actions: [swipe])
     }
     
-    @objc func allTasks(_ sender: UIButton) {
-        print("TAaaaaaaaaap 1")
-    }
-    
-    @objc func allCourtMeets(_ sender: UIButton) {
-        print("TAaaaaaaaaap 2")
+    @objc func allNews(_ sender: UIButton) {
+        print("ALL NEWS")
     }
 }

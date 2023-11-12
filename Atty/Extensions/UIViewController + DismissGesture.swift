@@ -19,4 +19,9 @@ extension UIViewController {
     @objc func dismissKeyboardTouchOutside() {
         view.endEditing(true)
     }
+    
+    @objc public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }

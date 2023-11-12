@@ -66,9 +66,11 @@ extension ArchiveClientsTV: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if !clients.isEmpty {
+        
+        let client = self.clients[indexPath.row]
+        
+        if !clients.isEmpty && client.status {
             let swipe = UIContextualAction(style: .destructive, title: "Не завершено") { (action, view, success) in
-                let client = self.clients[indexPath.row]
                 ClientsViewModel.shared.updateClientStatus(with: client, status: false)
                 success(true)
             }
@@ -79,9 +81,10 @@ extension ArchiveClientsTV: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        if !clients.isEmpty {
-            let swipe = UIContextualAction(style: .normal, title: "Виконано") { (action, view, success) in
-                let client = self.clients[indexPath.row]
+        let client = self.clients[indexPath.row]
+        
+        if !clients.isEmpty && !client.status {
+            let swipe = UIContextualAction(style: .destructive, title: "Виконано") { (action, view, success) in
                 ClientsViewModel.shared.updateClientStatus(with: client, status: true)
                 success(true)
             }

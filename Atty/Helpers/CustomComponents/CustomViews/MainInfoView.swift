@@ -18,6 +18,7 @@ class MainInfoView: InfoView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         setupViews()
     }
     

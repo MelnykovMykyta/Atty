@@ -44,4 +44,9 @@ class ClientsViewModel {
     func updateClientStatus(with client: Client, status: Bool) {
         RealmDBService.shared.updateClientStatus(with: client, status: status)
     }
+    
+    static func getClientProjects() -> [Project] {
+        return RealmDBService.shared.getObjects(Project.self)
+            .filter { $0.client == currentClient}
+    }
 }

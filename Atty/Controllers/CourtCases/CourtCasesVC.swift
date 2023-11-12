@@ -14,16 +14,15 @@ import RxSwift
 import BetterSegmentedControl
 
 class CourtCasesVC: BaseViewContoller, CourtTVDelegate {
-        
+    
     private var disposeBag = DisposeBag()
     
-    private var nextbtn: UIButton!
     private var valueLabel: UILabel!
-    private var valueFromLabel: UILabel!
     private var segmentController: SegmentControllerView!
     private var tableView: UITableView!
     
     private var casesTV = CourtCasesTV()
+    private var courtMeets = CourtMeetsTV()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +36,7 @@ class CourtCasesVC: BaseViewContoller, CourtTVDelegate {
         
         infoView.setAddView(title: "Додати")
         infoView.addInfoButton()
-        infoView.infoButton.addTarget(self, action: #selector(addNewProject), for: .touchUpInside)
+        infoView.infoButton.addTarget(self, action: #selector(addCourtCase), for: .touchUpInside)
         
         CourtsViewModel.observeCases().subscribe(onNext: { event in
             let count = event.filter { $0.status == false }.count.description
@@ -46,9 +45,9 @@ class CourtCasesVC: BaseViewContoller, CourtTVDelegate {
     }
     
     func didSelectCase(_ courtCase: CourtCase) {
-//        let courtCaseInfoVC = CourtCaseInfoVC()
-//        courtCaseInfoVC.courtCase = courtCase
-//        navigationController?.pushViewController(projectInfoVC, animated: true)
+        let courtCaseInfoVC = CourtCaseInfoVC()
+        courtCaseInfoVC.courtCase = courtCase
+        navigationController?.pushViewController(courtCaseInfoVC, animated: true)
     }
 }
 
@@ -112,8 +111,8 @@ private extension CourtCasesVC {
         }
     }
     
-    @objc func addNewProject() {
-        let vc = AddProjectVC()
+    @objc func addCourtCase() {
+        let vc = AddCourtCaseVC()
         present(vc, animated: true)
     }
     
@@ -126,7 +125,7 @@ private extension CourtCasesVC {
             CourtsViewModel.changeFilter()
             addTable(with: casesTV)
         case 1:
-            addTable(with: casesTV)
+            addTable(with: courtMeets)
         case 2:
             CourtsViewModel.changeFilter()
             addTable(with: casesTV)

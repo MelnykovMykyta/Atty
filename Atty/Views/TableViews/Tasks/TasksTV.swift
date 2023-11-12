@@ -64,9 +64,11 @@ extension TasksTV: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        guard !tasks.isEmpty else { return UISwipeActionsConfiguration() }
+        
+        let task = self.tasks[indexPath.row]
+        
+        guard !tasks.isEmpty && task.status else { return UISwipeActionsConfiguration() }
         let swipe = UIContextualAction(style: .destructive, title: "Не виконано") { (action, view, success) in
-            let task = self.tasks[indexPath.row]
             TasksViewModel.shared.updateTaskStatus(with: task, status: false)
             success(true)
         }
@@ -74,9 +76,10 @@ extension TasksTV: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        guard !tasks.isEmpty else { return UISwipeActionsConfiguration() }
-        let swipe = UIContextualAction(style: .normal, title: "Виконано") { (action, view, success) in
-            let task = self.tasks[indexPath.row]
+        let task = self.tasks[indexPath.row]
+        
+        guard !tasks.isEmpty && !task.status else { return UISwipeActionsConfiguration() }
+        let swipe = UIContextualAction(style: .destructive, title: "Виконано") { (action, view, success) in
             TasksViewModel.shared.updateTaskStatus(with: task, status: true)
             success(true)
         }

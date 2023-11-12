@@ -20,7 +20,6 @@ class BaseNavBarView: UIView {
         super.init(frame: frame)
         
         setupViews()
-        setupConstraintViews()
     }
     
     required init?(coder: NSCoder) {
@@ -38,9 +37,6 @@ extension BaseNavBarView {
         notificationButton.setImage(UIImage(named: "notificationButton"), for: .normal)
         notificationButton.tintColor = DS.Colors.standartTextColor
         addSubview(notificationButton)
-    }
-    
-    private func setupConstraintViews(){
         
         notificationButton.snp.makeConstraints {
             $0.size.equalTo(DS.Sizes.buttonSize)

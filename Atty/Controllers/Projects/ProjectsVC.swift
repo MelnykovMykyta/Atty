@@ -17,7 +17,6 @@ class ProjectsVC: BaseViewContoller, ProjectsTVDelegate {
     
     private var disposeBag = DisposeBag()
     
-    private var nextbtn: UIButton!
     private var valueLabel: UILabel!
     private var valueFromLabel: UILabel!
     private var segmentController: SegmentControllerView!
@@ -43,7 +42,7 @@ class ProjectsVC: BaseViewContoller, ProjectsTVDelegate {
         infoView.addInfoButton()
         infoView.infoButton.addTarget(self, action: #selector(addNewProject), for: .touchUpInside)
         
-        ProjectsViewModel.shared.observeProjects().subscribe(onNext: { event in
+        ProjectsViewModel.observeProjects().subscribe(onNext: { event in
             let count = event.filter { $0.status == true }.count.description
             let allCount = event.count.description
             self.valueLabel.text = count

@@ -23,7 +23,7 @@ class ProjectsTV: UITableView {
     
     private let project = "ProjectTVC"
     
-    private var projects: [Project] = ProjectsViewModel.shared.getProjects().filter { $0.status == false }
+    private var projects: [Project] = ProjectsViewModel.getProjects().filter { $0.status == false }
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -37,8 +37,8 @@ class ProjectsTV: UITableView {
         
         self.register(ProjectTVC.self, forCellReuseIdentifier: project)
         
-        ProjectsViewModel.shared.observeProjects().subscribe(onNext: { event in
-            self.projects = ProjectsViewModel.shared.getProjects().filter { $0.status == false }
+        ProjectsViewModel.observeProjects().subscribe(onNext: { event in
+            self.projects = ProjectsViewModel.getProjects().filter { $0.status == false }
             self.reloadData()
         }).disposed(by: disposeBag)
     }
@@ -70,10 +70,12 @@ extension ProjectsTV: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if !projects.isEmpty {
+        
+        let project = self.projects[indexPath.row]
+        
+        if !projects.isEmpty && project.status {
             let swipe = UIContextualAction(style: .destructive, title: "Не завершено") { (action, view, success) in
-                let project = self.projects[indexPath.row]
-                ProjectsViewModel.shared.updateProjectStatus(with: project, status: false)
+                ProjectsViewModel.updateProjectStatus(with: project, status: false)
                 success(true)
             }
             return UISwipeActionsConfiguration(actions: [swipe])
@@ -83,10 +85,11 @@ extension ProjectsTV: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        if !projects.isEmpty {
-            let swipe = UIContextualAction(style: .normal, title: "Виконано") { (action, view, success) in
-                let project = self.projects[indexPath.row]
-                ProjectsViewModel.shared.updateProjectStatus(with: project, status: true)
+        let project = self.projects[indexPath.row]
+        
+        if !projects.isEmpty && !project.status {
+            let swipe = UIContextualAction(style: .destructive, title: "Виконано") { (action, view, success) in
+                ProjectsViewModel.updateProjectStatus(with: project, status: true)
                 success(true)
             }
             swipe.backgroundColor = DS.Colors.taskFinished

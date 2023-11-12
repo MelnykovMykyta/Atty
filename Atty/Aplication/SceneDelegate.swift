@@ -8,11 +8,9 @@
 import UIKit
 import FirebaseAuth
 
-
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
-    
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
@@ -32,20 +30,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private func checkAuthentication() {
         
         if Auth.auth().currentUser == nil {
-            FirebaseAuthService.shared.changeVCAuth(vc: AuthVC())
+            FirebaseAuthService.shared.changeVCAuth(vc: SignInVC())
         } else {
             FirebaseAuthService.shared.changeVCAuth(vc: NavigateTabBarController())
         }
     }
-    
-    func sceneDidDisconnect(_ scene: UIScene) { }
-    
-    func sceneDidBecomeActive(_ scene: UIScene) { }
-    
-    func sceneWillResignActive(_ scene: UIScene) { }
-    
-    func sceneWillEnterForeground(_ scene: UIScene) { }
-    
-    func sceneDidEnterBackground(_ scene: UIScene) { }
 }
 

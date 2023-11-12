@@ -1,64 +1,57 @@
 //
-//  SignInView.swift
+//  SignInVC.swift
 //  Atty
 //
-//  Created by Nikita Melnikov on 22.10.2023.
+//  Created by Nikita Melnikov on 12.11.2023.
 //
 
 import Foundation
 import UIKit
 import SnapKit
 
-class SignInView: UIView {
+class SignInVC: UIViewController, UITextFieldDelegate {
     
-    var signTypeButton: UIButton!
+    var signUpButton: UIButton!
     var userEmailTF: UITextField!
     var userPasswordTF: UITextField!
     var authButton: AuthButton!
     var forgotPasswordButton: UIButton!
     
-    private var icon: UIImageView!
-    private var signTypeStackView: UIStackView!
-    private var signTypeLabel: UILabel!
-    private var signLabel: UILabel!
-    private var authView: UIView!
-    private var tfStackView: UIStackView!
-    private var emailView: AuthTFView!
-    private var passwordView: AuthTFView!
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         setupViews()
-        setupConstraintViews()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        
+        self.navigationController?.navigationBar.isHidden = true
+        self.addKeyboardDismissGesture()
+        
+        authButton.addTarget(self, action: #selector(tapSignIn), for: .touchUpInside)
+        forgotPasswordButton.addTarget(self, action: #selector(tapForgotPassword), for: .touchUpInside)
+        signUpButton.addTarget(self, action: #selector(tapSignUp), for: .touchUpInside)
     }
 }
 
-extension SignInView {
+private extension SignInVC {
     
     func setupViews() {
         
-        backgroundColor = .clear
+        view.backgroundColor = .clear
         
-        icon = UIImageView()
+        let icon = UIImageView()
         icon.image = UIImage(named: "LaunchScreenLogo")
-        addSubview(icon)
+        view.addSubview(icon)
         
-        signLabel = UILabel()
+        let signLabel = UILabel()
         signLabel.text = "Вхід"
         signLabel.font = UIFont(name: "Manrope-Bold", size: 50)
-        addSubview(signLabel)
+        view.addSubview(signLabel)
         
-        tfStackView = UIStackView()
+        let tfStackView = UIStackView()
         tfStackView.axis = .vertical
         tfStackView.spacing = CGFloat(DS.Constraints.authTFSpacing)
-        addSubview(tfStackView)
+        view.addSubview(tfStackView)
         
-        emailView = AuthTFView()
+        let emailView = AuthTFView()
         tfStackView.addArrangedSubview(emailView)
         
         userEmailTF = UITextField()
@@ -69,7 +62,7 @@ extension SignInView {
         userEmailTF.keyboardType = .emailAddress
         emailView.addSubview(userEmailTF)
         
-        passwordView = AuthTFView()
+        let passwordView = AuthTFView()
         tfStackView.addArrangedSubview(passwordView)
         
         userPasswordTF = UITextField()
@@ -85,38 +78,35 @@ extension SignInView {
         forgotPasswordButton.setTitleColor(DS.Colors.standartTextColor, for: .normal)
         forgotPasswordButton.titleLabel?.font = UIFont(name: "Manrope-SemiBold", size: 14)
         forgotPasswordButton.backgroundColor = .clear
-        addSubview(forgotPasswordButton)
+        view.addSubview(forgotPasswordButton)
         
         authButton = AuthButton(type: .system)
         authButton.setTitle("Увійти", for: .normal)
         authButton.titleLabel?.font = UIFont(name: "Manrope-ExtraBold", size: 20)
-        addSubview(authButton)
+        view.addSubview(authButton)
         
-        signTypeStackView = UIStackView()
-        signTypeStackView.axis = .horizontal
-        signTypeStackView.spacing = CGFloat(DS.Constraints.authTFSpacing)
-        signTypeStackView.distribution = .equalCentering
-        addSubview(signTypeStackView)
+        let signUpSV = UIStackView()
+        signUpSV.axis = .horizontal
+        signUpSV.spacing = CGFloat(DS.Constraints.authTFSpacing)
+        signUpSV.distribution = .equalCentering
+        view.addSubview(signUpSV)
         
-        signTypeLabel = UILabel ()
-        signTypeLabel.text = "Ще не маєте аккаунт?"
-        signTypeLabel.textAlignment = .right
-        signTypeLabel.textColor = DS.Colors.standartTextColor
-        signTypeLabel.font = UIFont(name: "Manrope-ExtraLight", size: 14)
-        signTypeStackView.addArrangedSubview(signTypeLabel)
+        let signUpLabel = UILabel ()
+        signUpLabel.text = "Ще не маєте аккаунт?"
+        signUpLabel.textAlignment = .right
+        signUpLabel.textColor = DS.Colors.standartTextColor
+        signUpLabel.font = UIFont(name: "Manrope-ExtraLight", size: 14)
+        signUpSV.addArrangedSubview(signUpLabel)
         
-        signTypeButton = UIButton(type: .system)
-        signTypeButton.setTitle("Реєстрація", for: .normal)
-        signTypeButton.setTitleColor(DS.Colors.standartTextColor, for: .normal)
-        signTypeButton.titleLabel?.font = UIFont(name: "Manrope-SemiBold", size: 14)
-        signTypeButton.backgroundColor = .clear
-        signTypeStackView.addArrangedSubview(signTypeButton)
-    }
-    
-    func setupConstraintViews() {
+        signUpButton = UIButton(type: .system)
+        signUpButton.setTitle("Реєстрація", for: .normal)
+        signUpButton.setTitleColor(DS.Colors.standartTextColor, for: .normal)
+        signUpButton.titleLabel?.font = UIFont(name: "Manrope-SemiBold", size: 14)
+        signUpButton.backgroundColor = .clear
+        signUpSV.addArrangedSubview(signUpButton)
         
         icon.snp.makeConstraints {
-            $0.top.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authLogoLeadingTrailing)
             $0.height.equalTo(icon.snp.width).multipliedBy(DS.SizeMultipliers.halfSize)
         }
@@ -131,13 +121,21 @@ extension SignInView {
             $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
         }
         
-        emailView.snp.makeConstraints { $0.height.equalTo(DS.Sizes.authTFHeight) }
+        emailView.snp.makeConstraints {
+            $0.height.equalTo(DS.Sizes.authTFHeight)
+        }
         
-        userEmailTF.snp.makeConstraints { $0.edges.equalToSuperview().inset(DS.Constraints.authTFInsets) }
+        userEmailTF.snp.makeConstraints {
+            $0.edges.equalToSuperview().inset(DS.Constraints.authTFInsets)
+        }
         
-        passwordView.snp.makeConstraints { $0.height.equalTo(DS.Sizes.authTFHeight) }
+        passwordView.snp.makeConstraints {
+            $0.height.equalTo(DS.Sizes.authTFHeight)
+        }
         
-        userPasswordTF.snp.makeConstraints { $0.edges.equalToSuperview().inset(DS.Constraints.authTFInsets) }
+        userPasswordTF.snp.makeConstraints {
+            $0.edges.equalToSuperview().inset(DS.Constraints.authTFInsets)
+        }
         
         forgotPasswordButton.snp.makeConstraints {
             $0.height.equalTo(DS.Sizes.authTFHeight)
@@ -151,9 +149,25 @@ extension SignInView {
             $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
         }
         
-        signTypeStackView.snp.makeConstraints {
+        signUpSV.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(DS.Constraints.safeAreaInset)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(DS.Constraints.safeAreaInset)
         }
+    }
+}
+
+extension SignInVC {
+    
+    @objc private func tapSignIn() {
+        guard let email = userEmailTF.text, let password = userPasswordTF.text else { return }
+        AuthViewModel.signInUser(email: email, password: password)
+    }
+    
+    @objc private func tapForgotPassword() {
+        FirebaseAuthService.shared.changeVCAuth(vc: ResetPasswordVC())
+    }
+    
+    @objc private func tapSignUp() {
+        FirebaseAuthService.shared.changeVCAuth(vc: SignUpVC())
     }
 }

@@ -28,13 +28,7 @@ class ClientTVC: UITableViewCell {
         
         backgroundColor = .clear
         
-        view = UIView()
-        view.layer.cornerRadius = DS.CornerRadius.baseCornerRadiusLayers
-        view.layer.masksToBounds = true
-        addSubview(view)
-        view.snp.makeConstraints {
-            $0.edges.equalToSuperview().inset(DS.Constraints.baseInsetViews)
-        }
+       setupViews()
     }
     
     required init?(coder: NSCoder) {
@@ -43,6 +37,18 @@ class ClientTVC: UITableViewCell {
 }
 
 extension ClientTVC {
+   
+    private func setupViews() {
+      
+        view = UIView()
+        view.layer.cornerRadius = DS.CornerRadius.baseCornerRadiusLayers
+        view.layer.masksToBounds = true
+       
+        addSubview(view)
+        view.snp.makeConstraints {
+            $0.edges.equalToSuperview().inset(DS.Constraints.baseInsetViews)
+        }
+    }
     
     func addClient(clientName: String, contact: String, projects: String, completionStatus: Bool) {
         

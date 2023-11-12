@@ -1,21 +1,21 @@
 //
-//  AddTaskVC.swift
+//  AddCourtCaseVC.swift
 //  Atty
 //
-//  Created by Nikita Melnikov on 06.11.2023.
+//  Created by Nikita Melnikov on 11.11.2023.
 //
 
 import Foundation
 import UIKit
 import SnapKit
 
-class AddTaskVC: UIViewController, UITextFieldDelegate {
+class AddCourtCaseVC: UIViewController, UITextFieldDelegate {
     
     private var label: UILabel!
     private var closeButton: UIButton!
     private var addButton: AuthButton!
-    private var taskDescriptionView: AuthTFView!
-    private var taskDescription: UITextField!
+    private var courtCaseNumberView: AuthTFView!
+    private var courtCaseNumber: UITextField!
     
     var project: Project?
     
@@ -28,17 +28,17 @@ class AddTaskVC: UIViewController, UITextFieldDelegate {
         
         if let project_ = project {
             project = project_
-            label.text = "Додати задачу до проєкту: \(project_.name)"
+            label.text = "Відстежувати справу по проєкту: \(project_.name)"
         }
         
         self.addKeyboardDismissGesture()
         
-        addButton.addTarget(self, action: #selector(addTask), for: .touchUpInside)
+        addButton.addTarget(self, action: #selector(addCourtCase), for: .touchUpInside)
         closeButton.addTarget(self, action: #selector(tapClose), for: .touchUpInside)
     }
 }
 
-private extension AddTaskVC {
+private extension AddCourtCaseVC {
     
     func addViews() {
         
@@ -48,10 +48,10 @@ private extension AddTaskVC {
         view.addSubview(closeButton)
         
         label = UILabel()
-        label.text = "Додати задачу"
+        label.text = "Відстежувати справу"
+        label.numberOfLines = 2
         label.textColor = DS.Colors.standartTextColor
         label.font = UIFont(name: "Manrope-Bold", size: 40)
-        label.numberOfLines = 2
         label.adjustsFontSizeToFitWidth = true
         view.addSubview(label)
         
@@ -60,13 +60,13 @@ private extension AddTaskVC {
         stackView.spacing = 12
         view.addSubview(stackView)
         
-        taskDescriptionView = AuthTFView()
-        stackView.addArrangedSubview(taskDescriptionView)
+        courtCaseNumberView = AuthTFView()
+        stackView.addArrangedSubview(courtCaseNumberView)
         
-        taskDescription = UITextField()
-        taskDescription.backgroundColor = .clear
-        taskDescription.placeholder = "Введіть опис"
-        taskDescriptionView.addSubview(taskDescription)
+        courtCaseNumber = UITextField()
+        courtCaseNumber.backgroundColor = .clear
+        courtCaseNumber.placeholder = "Введіть номер справи"
+        courtCaseNumberView.addSubview(courtCaseNumber)
         
         addButton = AuthButton(type: .system)
         addButton.setTitle("Додати", for: .normal)
@@ -88,11 +88,11 @@ private extension AddTaskVC {
             $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
         }
         
-        taskDescriptionView.snp.makeConstraints {
+        courtCaseNumberView.snp.makeConstraints {
             $0.height.equalTo(DS.Sizes.authTFHeight)
         }
         
-        taskDescription.snp.makeConstraints {
+        courtCaseNumber.snp.makeConstraints {
             $0.edges.equalToSuperview().inset(DS.Constraints.authTFInsets)
         }
         
@@ -102,16 +102,23 @@ private extension AddTaskVC {
     }
 }
 
-extension AddTaskVC {
+extension AddCourtCaseVC {
     
-    @objc private func addTask() {
-        guard let desc = taskDescription.text, !desc.isEmpty else { return }
-        let task = Task(desc: desc, status: false)
+    @objc private func addCourtCase() {
+        
+        guard let caseNumber = courtCaseNumber.text, !caseNumber.isEmpty else { return }
+        
+        //        let project = Project(name: name, shortDesc: shortDesc, additionalDesc: additionalDesc, category: category)
         
         if let project_ = project {
-            RealmDBService.shared.addTaskToProject(task, to: project_)
+            print("FOR PROJECT: \(project_.name)")
+            let a = CourtCase(caseNumber: "PROJECTTT", courtName: "Господарський", plaintiff: "ТОВ НООО", defendant: "ТОВ АААА", disputeSubject: "Стягнення коштыв 100000", judge: "ТИП")
+            RealmDBService.shared.addCourtCseToProject(a, to: project_)
         } else {
-            TasksViewModel.shared.addTask(with: task)
+            print("SIMPLE")
+            let a = CourtCase(caseNumber: "112/1212/1223", courtName: "Господарський", plaintiff: "ТОВ НООО", defendant: "ТОВ АААА", disputeSubject: "Стягнення коштыв 100000", judge: "ТИП")
+            RealmDBService.shared.addObject(object: a)
+            //            ProjectsViewModel.addProject(with: project)
         }
         
         dismiss(animated: true)
@@ -121,4 +128,3 @@ extension AddTaskVC {
         dismiss(animated: true)
     }
 }
-

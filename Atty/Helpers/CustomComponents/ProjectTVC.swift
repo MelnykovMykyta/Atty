@@ -28,13 +28,7 @@ class ProjectTVC: UITableViewCell {
         
         backgroundColor = .clear
         
-        view = UIView()
-        view.layer.cornerRadius = DS.CornerRadius.baseCornerRadiusLayers
-        view.layer.masksToBounds = true
-        addSubview(view)
-        view.snp.makeConstraints {
-            $0.edges.equalToSuperview().inset(DS.Constraints.baseInsetViews)
-        }
+        setupViews()
     }
     
     required init?(coder: NSCoder) {
@@ -43,6 +37,17 @@ class ProjectTVC: UITableViewCell {
 }
 
 extension ProjectTVC {
+    private func setupViews() {
+        
+        view = UIView()
+        view.layer.cornerRadius = DS.CornerRadius.baseCornerRadiusLayers
+        view.layer.masksToBounds = true
+        addSubview(view)
+        
+        view.snp.makeConstraints {
+            $0.edges.equalToSuperview().inset(DS.Constraints.baseInsetViews)
+        }
+    }
     
     func addProject(projectName: String, clientName: String, category: String, completionStatus: Bool) {
         

@@ -17,7 +17,6 @@ class TasksVC: BaseViewContoller {
     
     private var disposeBag = DisposeBag()
     
-    private var nextbtn: UIButton!
     private var valueLabel: UILabel!
     private var valueFromLabel: UILabel!
     private var segmentController: SegmentControllerView!
@@ -130,7 +129,7 @@ private extension TasksVC {
         
         tableView.snp.makeConstraints {
             $0.top.equalTo(segmentController.snp.bottom).inset(-DS.Constraints.authViewLeadinTrailing)
-            $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+            $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
     }

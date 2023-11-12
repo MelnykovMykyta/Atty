@@ -19,11 +19,11 @@ class ProjectInfoVC: BaseViewContoller {
     
     var project: Project?
     
-    private var nextbtn: UIButton!
     private var valueLabel: UILabel!
     private var valueFromLabel: UILabel!
     private var segmentController: SegmentControllerView!
     private var tableView: UITableView!
+    private var courtCaseButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,13 +35,17 @@ class ProjectInfoVC: BaseViewContoller {
         addViews()
         
         addSegmentController()
+        addCourtCaseButton()
+        courtCaseButton.isHidden = true
+        courtCaseButton.addTarget(self, action: #selector(addCourtCase), for: .touchUpInside)
         
         addTable(with: ProjectInfoTV())
+        
         infoView.setAddView(title: "Додати задачу")
         infoView.addInfoButton()
         infoView.infoButton.addTarget(self, action: #selector(addNewTask), for: .touchUpInside)
         
-        ProjectsViewModel.shared.observeProjects().subscribe(onNext: { event in
+        ProjectsViewModel.observeProjects().subscribe(onNext: { event in
             let element = event.first(where: { $0.id == self.project?.id })
             let count = element?.tasks.filter {$0.status == true}.count.description
             let allCount = element?.tasks.count.description
@@ -136,6 +140,21 @@ private extension ProjectInfoVC {
         }
     }
     
+    func addCourtCaseButton() {
+        
+        courtCaseButton = UIButton(type: .system)
+        courtCaseButton.setImage(UIImage(named: "plusIcon"), for: .normal)
+        courtCaseButton.tintColor = DS.Colors.darkedTextColor
+        contentView.addSubview(courtCaseButton)
+        
+        courtCaseButton.snp.makeConstraints {
+            $0.height.equalTo(segmentController.snp.height).multipliedBy(DS.SizeMultipliers.halfSize)
+            $0.width.equalTo(courtCaseButton.snp.height)
+            $0.centerY.equalTo(segmentController.snp.centerY)
+            $0.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+        }
+    }
+    
     @objc func addNewTask() {
         let vc = AddTaskVC()
         vc.project = project
@@ -146,6 +165,12 @@ private extension ProjectInfoVC {
         navigationController?.popViewController(animated: true)
     }
     
+    @objc func addCourtCase() {
+        let vc = AddCourtCaseVC()
+        vc.project = project
+        present(vc, animated: true)
+    }
+    
     @objc func segmentedControlValueChanged(_ sender: BetterSegmentedControl) {
         
         tableView.removeFromSuperview()
@@ -153,10 +178,13 @@ private extension ProjectInfoVC {
         switch sender.index {
         case 0:
             addTable(with: ProjectInfoTV())
+            courtCaseButton.isHidden = true
         case 1:
             addTable(with: ProjectDocumentsTV())
+            courtCaseButton.isHidden = true
         case 2:
-            addTable(with: DoneProjectsTV())
+            addTable(with: PojectCourtCasesTV())
+            courtCaseButton.isHidden = false
         default:
             return
         }

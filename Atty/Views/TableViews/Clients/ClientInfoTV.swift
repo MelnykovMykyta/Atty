@@ -115,9 +115,8 @@ extension ClientInfoTV {
     private func swipe(indexPath: IndexPath, status: Bool) -> UISwipeActionsConfiguration {
         guard indexPath.section == 2 && !clientTasks.isEmpty else {  return UISwipeActionsConfiguration() }
         let title = status ? "Виконано" : "Не виконано"
-        let style: UIContextualAction.Style = status ? .normal : .destructive
         
-        let swipe = UIContextualAction(style: style, title: title) { (action, view, success) in
+        let swipe = UIContextualAction(style: .destructive, title: title) { (action, view, success) in
             let task = self.clientTasks[indexPath.row]
             TasksViewModel.shared.updateTaskStatus(with: task, status: status)
             success(true)

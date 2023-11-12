@@ -118,23 +118,19 @@ private extension AddProjectVC {
             $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
         }
         
-        projectNameView.snp.makeConstraints { $0.height.equalTo(DS.Sizes.authTFHeight) }
+        [projectNameView, projectShortDeskView, projectAdditionalDescView, projectCategoryView, addButton]
+            .forEach { element in
+                element.snp.makeConstraints {
+                    $0.height.equalTo(DS.Sizes.authTFHeight)
+                }
+            }
         
-        projectShortDeskView.snp.makeConstraints { $0.height.equalTo(DS.Sizes.authTFHeight) }
-        
-        projectAdditionalDescView.snp.makeConstraints { $0.height.equalTo(DS.Sizes.authTFHeight) }
-        
-        projectCategoryView.snp.makeConstraints { $0.height.equalTo(DS.Sizes.authTFHeight) }
-        
-        projectName.snp.makeConstraints { $0.edges.equalToSuperview().inset(DS.Constraints.authTFInsets) }
-        
-        projectShortDesc.snp.makeConstraints { $0.edges.equalToSuperview().inset(DS.Constraints.authTFInsets) }
-        
-        projectAdditionalDesc.snp.makeConstraints { $0.edges.equalToSuperview().inset(DS.Constraints.authTFInsets) }
-        
-        projectCategory.snp.makeConstraints { $0.edges.equalToSuperview().inset(DS.Constraints.authTFInsets) }
-        
-        addButton.snp.makeConstraints { $0.height.equalTo(DS.Sizes.authTFHeight) }
+        [projectName, projectShortDesc, projectAdditionalDesc, projectCategory]
+            .forEach { elemen in
+                elemen.snp.makeConstraints {
+                    $0.edges.equalToSuperview().inset(DS.Constraints.authTFInsets)
+                }
+            }
     }
 }
 
@@ -154,19 +150,14 @@ extension AddProjectVC {
             RealmDBService.shared.addProjectToClient(project, to: client_)
             
         } else {
-            ProjectsViewModel.shared.addProject(with: project)
+            ProjectsViewModel.addProject(with: project)
         }
         
         
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
     
     @objc private func tapClose() {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+        dismiss(animated: true)
     }
 }

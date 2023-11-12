@@ -26,8 +26,13 @@ class FirebaseAuthService {
     
     func signIn(email: String, password: String) {
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
-            guard self != nil else { return }
-            self?.changeVCAuth(vc: NavigateTabBarController())
+            guard let strongSelf = self else { return }
+            if let authResult = authResult {
+                AuthViewModel.currentUserEmail = authResult.user.email ?? ""
+                self?.changeVCAuth(vc: NavigateTabBarController())
+            } else {
+                Alert.shared.showAlert(title: "Упс", message: "Помилка авторизації")
+            }
         }
     }
     
@@ -35,7 +40,7 @@ class FirebaseAuthService {
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
-            FirebaseAuthService.shared.changeVCAuth(vc: AuthVC())
+            self.changeVCAuth(vc: SignInVC())
             
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
@@ -58,12 +63,6 @@ class FirebaseAuthService {
     }
     
     func resetPassword(email: String) {
-        Auth.auth().sendPasswordReset(withEmail: email) { (error) in
-            
-        }
+        Auth.auth().sendPasswordReset(withEmail: email)
     }
 }
-
-
-
-

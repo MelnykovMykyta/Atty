@@ -25,7 +25,6 @@ class MainVC: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         setupViews()
-        setupConstraintViews()
         
         TasksViewModel.shared.observeTasks().subscribe(onNext: { event in
             let count = event.filter { $0.status == false }.count.description
@@ -39,9 +38,9 @@ class MainVC: UIViewController, UITextFieldDelegate {
     }
 }
 
-extension MainVC {
+private extension MainVC {
     
-    private func setupViews() {
+    func setupViews() {
         
         view.backgroundColor = DS.Colors.mainBackgroundColor
         
@@ -65,9 +64,6 @@ extension MainVC {
         
         tableView = MainTV()
         contentView.addSubview(tableView)
-    }
-    
-    func setupConstraintViews() {
         
         navigationBar.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)

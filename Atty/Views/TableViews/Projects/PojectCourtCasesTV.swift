@@ -1,5 +1,5 @@
 //
-//  CourtCasesTV.swift
+//  PojectCourtCasesTV.swift
 //  Atty
 //
 //  Created by Nikita Melnikov on 11.11.2023.
@@ -11,19 +11,13 @@ import SnapKit
 import RxCocoa
 import RxSwift
 
-protocol CourtTVDelegate {
-    func didSelectCase(_ courtCase: CourtCase)
-}
-
-class CourtCasesTV: UITableView {
+class PojectCourtCasesTV: UITableView {
     
     private var disposeBag = DisposeBag()
     
-    var delegateCase: CourtTVDelegate?
-    
     private let meet = "CourtMeetTVC"
     
-    private var courtCases: [CourtCase] = CourtsViewModel.getCourtCases().filter { $0.status == CourtsViewModel.statusFilter }
+    private var courtCases: [CourtCase] = ProjectsViewModel.getProjectCourtCases().sorted { !$0.status && $1.status}
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -36,14 +30,9 @@ class CourtCasesTV: UITableView {
         backgroundColor = .clear
         
         self.register(CourtMeetTVC.self, forCellReuseIdentifier: meet)
-
-        CourtsViewModel.statusSubject.subscribe({ event in
-            self.courtCases = CourtsViewModel.getCourtCases().filter { $0.status == CourtsViewModel.statusFilter }
-            self.reloadData()
-        }).disposed(by: disposeBag)
         
         CourtsViewModel.observeCases().subscribe(onNext: { event in
-            self.courtCases = CourtsViewModel.getCourtCases().filter { $0.status == CourtsViewModel.statusFilter }
+            self.courtCases = ProjectsViewModel.getProjectCourtCases().sorted { !$0.status && $1.status}
             self.reloadData()
         }).disposed(by: disposeBag)
     }
@@ -53,7 +42,7 @@ class CourtCasesTV: UITableView {
     }
 }
 
-extension CourtCasesTV: UITableViewDelegate, UITableViewDataSource {
+extension PojectCourtCasesTV: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         courtCases.isEmpty ? 1 : courtCases.count
@@ -65,7 +54,7 @@ extension CourtCasesTV: UITableViewDelegate, UITableViewDataSource {
         }
         
         if courtCases.isEmpty {
-            meetCell.emptyCourtMeetsList(with: "Список відстеження порожній")
+            meetCell.emptyCourtMeetsList(with: "Список відстеження по проєкту порожній")
         } else {
             let caseItem = courtCases[indexPath.row]
             meetCell.addCourtCase(courtName: caseItem.courtName, caseNumber: caseItem.caseNumber, plaintiff: caseItem.plaintiff, defendant: caseItem.defendant, judge: caseItem.judge, status: caseItem.status)
@@ -75,9 +64,11 @@ extension CourtCasesTV: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if !courtCases.isEmpty && !CourtsViewModel.statusFilter  {
+        
+        let caseItem = self.courtCases[indexPath.row]
+        
+        if !courtCases.isEmpty && !caseItem.status{
             let swipe = UIContextualAction(style: .destructive, title: "В архів") { (action, view, success) in
-                let caseItem = self.courtCases[indexPath.row]
                 CourtsViewModel.updateCourtCaseStatus(with: caseItem, status: true)
                 success(true)
             }
@@ -88,9 +79,11 @@ extension CourtCasesTV: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        if !courtCases.isEmpty && CourtsViewModel.statusFilter {
+        let caseItem = self.courtCases[indexPath.row]
+        
+        if !courtCases.isEmpty && caseItem.status{
             let swipe = UIContextualAction(style: .destructive, title: "Актуально") { (action, view, success) in
-                let caseItem = self.courtCases[indexPath.row]
+                
                 CourtsViewModel.updateCourtCaseStatus(with: caseItem, status: false)
                 success(true)
             }
@@ -100,13 +93,5 @@ extension CourtCasesTV: UITableViewDelegate, UITableViewDataSource {
         }
         return UISwipeActionsConfiguration()
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if !courtCases.isEmpty {
-            let selectedCase = courtCases[indexPath.row]
-            delegateCase?.didSelectCase(selectedCase)
-            
-            CourtsViewModel.currentCase = selectedCase
-        }
-    }
 }
+

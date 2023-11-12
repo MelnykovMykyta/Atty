@@ -22,7 +22,6 @@
 		7717DFEB2AFDA1D80010167A /* SegmentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7717DFEA2AFDA1D80010167A /* SegmentController.swift */; };
 		7717DFED2AFDAFF70010167A /* SegmentControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7717DFEC2AFDAFF70010167A /* SegmentControllerView.swift */; };
 		772D35972AE94F1100038AA6 /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D35962AE94F1100038AA6 /* ResetPasswordVC.swift */; };
-		772D359A2AE9DB4C00038AA6 /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D35992AE9DB4C00038AA6 /* ResetPasswordView.swift */; };
 		772D359C2AEA5DC700038AA6 /* NavigateTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D359B2AEA5DC700038AA6 /* NavigateTabBarController.swift */; };
 		772D359E2AEA82CC00038AA6 /* ProjectsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D359D2AEA82CC00038AA6 /* ProjectsVC.swift */; };
 		772D35A32AEA83D400038AA6 /* ClientsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D35A22AEA83D400038AA6 /* ClientsVC.swift */; };
@@ -48,9 +47,12 @@
 		777027AE2AE28F61007CA2B7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 777027AC2AE28F61007CA2B7 /* LaunchScreen.storyboard */; };
 		7795AD9C2AE826E1007FC870 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7795AD9B2AE826E1007FC870 /* MainVC.swift */; };
 		7795AD9E2AE8277E007FC870 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7795AD9D2AE8277E007FC870 /* GoogleService-Info.plist */; };
+		779903BF2B001DA600B63303 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779903BE2B001DA600B63303 /* User.swift */; };
+		779903C12B00228800B63303 /* ClientProjectsTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779903C02B00228800B63303 /* ClientProjectsTV.swift */; };
+		779903C32B0040AD00B63303 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779903C22B0040AD00B63303 /* SignInVC.swift */; };
+		779903C52B0047FB00B63303 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779903C42B0047FB00B63303 /* SignUpVC.swift */; };
 		77CE085C2AFEEDAC002E3144 /* CourtCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CE085B2AFEEDAC002E3144 /* CourtCase.swift */; };
 		77CE085F2AFEF0BF002E3144 /* CourtCasesTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CE085E2AFEF0BF002E3144 /* CourtCasesTV.swift */; };
-		77DB26F52AE5537400944822 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB26F42AE5537400944822 /* SignInView.swift */; };
 		77DB26FB2AE5671900944822 /* DS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB26FA2AE5671900944822 /* DS.swift */; };
 		77DB26FE2AE56D3600944822 /* AuthTFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB26FD2AE56D3600944822 /* AuthTFView.swift */; };
 		77DB27012AE5814D00944822 /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB27002AE5814D00944822 /* AuthButton.swift */; };
@@ -61,9 +63,7 @@
 		77DB27152AE5923400944822 /* Manrope-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 77DB270E2AE5923400944822 /* Manrope-Bold.ttf */; };
 		77DB27162AE5923400944822 /* Manrope-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 77DB270F2AE5923400944822 /* Manrope-SemiBold.ttf */; };
 		77DB27172AE5923400944822 /* Manrope-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 77DB27102AE5923400944822 /* Manrope-ExtraBold.ttf */; };
-		77DB27192AE597F400944822 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB27182AE597F400944822 /* SignUpView.swift */; };
 		77DB272D2AE5B18200944822 /* UIViewController + DismissGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB272C2AE5B18200944822 /* UIViewController + DismissGesture.swift */; };
-		77DB27332AE5DFD600944822 /* AuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB27322AE5DFD600944822 /* AuthVC.swift */; };
 		77DB273B2AE724DB00944822 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB273A2AE724DB00944822 /* AuthViewModel.swift */; };
 		77DB273D2AE72E9D00944822 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB273C2AE72E9D00944822 /* Alert.swift */; };
 		77EB3F5A2AFA2D2A002AB368 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EB3F592AFA2D2A002AB368 /* Project.swift */; };
@@ -79,6 +79,11 @@
 		77F9D54B2AF7BE16002132D1 /* CourtMeetTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F9D54A2AF7BE16002132D1 /* CourtMeetTVC.swift */; };
 		77F9D54D2AF7C424002132D1 /* CourtMeet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F9D54C2AF7C424002132D1 /* CourtMeet.swift */; };
 		77F9D54F2AF7CBF2002132D1 /* RealmDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F9D54E2AF7CBF2002132D1 /* RealmDBService.swift */; };
+		77FBEC572AFFC2D900D8FEC7 /* CourtMeetsTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBEC562AFFC2D900D8FEC7 /* CourtMeetsTV.swift */; };
+		77FBEC592AFFC6D400D8FEC7 /* PojectCourtCasesTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBEC582AFFC6D400D8FEC7 /* PojectCourtCasesTV.swift */; };
+		77FBEC5B2AFFD30400D8FEC7 /* AddCourtCaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBEC5A2AFFD30400D8FEC7 /* AddCourtCaseVC.swift */; };
+		77FBEC5D2AFFD57C00D8FEC7 /* CourtCaseInfoTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBEC5C2AFFD57C00D8FEC7 /* CourtCaseInfoTV.swift */; };
+		77FBEC5F2AFFD5AB00D8FEC7 /* CourtCaseInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FBEC5E2AFFD5AB00D8FEC7 /* CourtCaseInfoVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,7 +103,6 @@
 		7717DFEA2AFDA1D80010167A /* SegmentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentController.swift; sourceTree = "<group>"; };
 		7717DFEC2AFDAFF70010167A /* SegmentControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentControllerView.swift; sourceTree = "<group>"; };
 		772D35962AE94F1100038AA6 /* ResetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
-		772D35992AE9DB4C00038AA6 /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
 		772D359B2AEA5DC700038AA6 /* NavigateTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigateTabBarController.swift; sourceTree = "<group>"; };
 		772D359D2AEA82CC00038AA6 /* ProjectsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsVC.swift; sourceTree = "<group>"; };
 		772D35A22AEA83D400038AA6 /* ClientsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientsVC.swift; sourceTree = "<group>"; };
@@ -126,9 +130,12 @@
 		777027AF2AE28F61007CA2B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7795AD9B2AE826E1007FC870 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
 		7795AD9D2AE8277E007FC870 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		779903BE2B001DA600B63303 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		779903C02B00228800B63303 /* ClientProjectsTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientProjectsTV.swift; sourceTree = "<group>"; };
+		779903C22B0040AD00B63303 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
+		779903C42B0047FB00B63303 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		77CE085B2AFEEDAC002E3144 /* CourtCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourtCase.swift; sourceTree = "<group>"; };
 		77CE085E2AFEF0BF002E3144 /* CourtCasesTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourtCasesTV.swift; sourceTree = "<group>"; };
-		77DB26F42AE5537400944822 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		77DB26FA2AE5671900944822 /* DS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DS.swift; sourceTree = "<group>"; };
 		77DB26FD2AE56D3600944822 /* AuthTFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTFView.swift; sourceTree = "<group>"; };
 		77DB27002AE5814D00944822 /* AuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
@@ -139,9 +146,7 @@
 		77DB270E2AE5923400944822 /* Manrope-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Bold.ttf"; sourceTree = "<group>"; };
 		77DB270F2AE5923400944822 /* Manrope-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-SemiBold.ttf"; sourceTree = "<group>"; };
 		77DB27102AE5923400944822 /* Manrope-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-ExtraBold.ttf"; sourceTree = "<group>"; };
-		77DB27182AE597F400944822 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		77DB272C2AE5B18200944822 /* UIViewController + DismissGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController + DismissGesture.swift"; sourceTree = "<group>"; };
-		77DB27322AE5DFD600944822 /* AuthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthVC.swift; sourceTree = "<group>"; };
 		77DB273A2AE724DB00944822 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		77DB273C2AE72E9D00944822 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		77EB3F592AFA2D2A002AB368 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
@@ -157,6 +162,11 @@
 		77F9D54A2AF7BE16002132D1 /* CourtMeetTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourtMeetTVC.swift; sourceTree = "<group>"; };
 		77F9D54C2AF7C424002132D1 /* CourtMeet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourtMeet.swift; sourceTree = "<group>"; };
 		77F9D54E2AF7CBF2002132D1 /* RealmDBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDBService.swift; sourceTree = "<group>"; };
+		77FBEC562AFFC2D900D8FEC7 /* CourtMeetsTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourtMeetsTV.swift; sourceTree = "<group>"; };
+		77FBEC582AFFC6D400D8FEC7 /* PojectCourtCasesTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PojectCourtCasesTV.swift; sourceTree = "<group>"; };
+		77FBEC5A2AFFD30400D8FEC7 /* AddCourtCaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCourtCaseVC.swift; sourceTree = "<group>"; };
+		77FBEC5C2AFFD57C00D8FEC7 /* CourtCaseInfoTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourtCaseInfoTV.swift; sourceTree = "<group>"; };
+		77FBEC5E2AFFD5AB00D8FEC7 /* CourtCaseInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourtCaseInfoVC.swift; sourceTree = "<group>"; };
 		B2562F13ED507CA111A302CC /* Pods-Atty.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Atty.debug.xcconfig"; path = "Target Support Files/Pods-Atty/Pods-Atty.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -187,25 +197,17 @@
 				77048A202AFC5F0500824E5F /* ClientsTV.swift */,
 				77048A242AFC690300824E5F /* ArchiveClientsTV.swift */,
 				77048A2B2AFCDB1B00824E5F /* ClientInfoTV.swift */,
+				779903C02B00228800B63303 /* ClientProjectsTV.swift */,
 			);
 			path = Clients;
-			sourceTree = "<group>";
-		};
-		772D35982AE9DB0B00038AA6 /* Auth */ = {
-			isa = PBXGroup;
-			children = (
-				77DB26F42AE5537400944822 /* SignInView.swift */,
-				77DB27182AE597F400944822 /* SignUpView.swift */,
-				772D35992AE9DB4C00038AA6 /* ResetPasswordView.swift */,
-			);
-			path = Auth;
 			sourceTree = "<group>";
 		};
 		772D359F2AEA82D700038AA6 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				77DB27322AE5DFD600944822 /* AuthVC.swift */,
 				772D35962AE94F1100038AA6 /* ResetPasswordVC.swift */,
+				779903C22B0040AD00B63303 /* SignInVC.swift */,
+				779903C42B0047FB00B63303 /* SignUpVC.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -242,6 +244,8 @@
 			isa = PBXGroup;
 			children = (
 				772D35A62AEA845300038AA6 /* CourtCasesVC.swift */,
+				77FBEC5A2AFFD30400D8FEC7 /* AddCourtCaseVC.swift */,
+				77FBEC5E2AFFD5AB00D8FEC7 /* CourtCaseInfoVC.swift */,
 			);
 			path = CourtCases;
 			sourceTree = "<group>";
@@ -273,6 +277,7 @@
 				77EB3F632AFACB4C002AB368 /* ProjectInfoTV.swift */,
 				77048A182AFBC42000824E5F /* ProjectDocumentsTV.swift */,
 				77048A2D2AFD2C7200824E5F /* ProjectsByClientTV.swift */,
+				77FBEC582AFFC6D400D8FEC7 /* PojectCourtCasesTV.swift */,
 			);
 			path = Projects;
 			sourceTree = "<group>";
@@ -319,6 +324,7 @@
 				77EB3F592AFA2D2A002AB368 /* Project.swift */,
 				77048A1C2AFC57DD00824E5F /* Client.swift */,
 				77CE085B2AFEEDAC002E3144 /* CourtCase.swift */,
+				779903BE2B001DA600B63303 /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -336,6 +342,8 @@
 			isa = PBXGroup;
 			children = (
 				77CE085E2AFEF0BF002E3144 /* CourtCasesTV.swift */,
+				77FBEC562AFFC2D900D8FEC7 /* CourtMeetsTV.swift */,
+				77FBEC5C2AFFD57C00D8FEC7 /* CourtCaseInfoTV.swift */,
 			);
 			path = CourtCases;
 			sourceTree = "<group>";
@@ -344,7 +352,6 @@
 			isa = PBXGroup;
 			children = (
 				77F9D5362AF3A9AD002132D1 /* TableViews */,
-				772D35982AE9DB0B00038AA6 /* Auth */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -461,11 +468,11 @@
 		77F9D5362AF3A9AD002132D1 /* TableViews */ = {
 			isa = PBXGroup;
 			children = (
-				77CE085D2AFEF09B002E3144 /* CourtCases */,
-				77048A2A2AFCDAE900824E5F /* Clients */,
 				7745833E2AF9B38000340CBB /* Projects */,
-				774583392AF9AD4100340CBB /* Tasks */,
+				77048A2A2AFCDAE900824E5F /* Clients */,
 				77F9D53B2AF3B9D9002132D1 /* Main */,
+				77CE085D2AFEF09B002E3144 /* CourtCases */,
+				774583392AF9AD4100340CBB /* Tasks */,
 			);
 			path = TableViews;
 			sourceTree = "<group>";
@@ -619,39 +626,43 @@
 				77F9D54D2AF7C424002132D1 /* CourtMeet.swift in Sources */,
 				777027A22AE28F5E007CA2B7 /* AppDelegate.swift in Sources */,
 				77F9D54F2AF7CBF2002132D1 /* RealmDBService.swift in Sources */,
-				772D359A2AE9DB4C00038AA6 /* ResetPasswordView.swift in Sources */,
+				779903C12B00228800B63303 /* ClientProjectsTV.swift in Sources */,
 				77EB3F5A2AFA2D2A002AB368 /* Project.swift in Sources */,
 				772D35AE2AEB2D8C00038AA6 /* FirebaseAuthService.swift in Sources */,
-				77DB27192AE597F400944822 /* SignUpView.swift in Sources */,
 				774583382AF85DA100340CBB /* AddTaskVC.swift in Sources */,
 				77F9D5432AF3C536002132D1 /* TaskTVC.swift in Sources */,
 				7745833B2AF9AF2E00340CBB /* DoneTasksTV.swift in Sources */,
 				77048A192AFBC42000824E5F /* ProjectDocumentsTV.swift in Sources */,
 				774583302AF823A700340CBB /* TasksViewModel.swift in Sources */,
+				77FBEC5F2AFFD5AB00D8FEC7 /* CourtCaseInfoVC.swift in Sources */,
 				77048A322AFD429A00824E5F /* TasksByClientTV.swift in Sources */,
-				77DB27332AE5DFD600944822 /* AuthVC.swift in Sources */,
 				77EB3F642AFACB4C002AB368 /* ProjectInfoTV.swift in Sources */,
 				772D35A72AEA845300038AA6 /* CourtCasesVC.swift in Sources */,
 				77EB3F5C2AFA40A2002AB368 /* ProjectsViewModel.swift in Sources */,
 				774583422AF9B40400340CBB /* ProjectTVC.swift in Sources */,
 				7717DFED2AFDAFF70010167A /* SegmentControllerView.swift in Sources */,
+				77FBEC592AFFC6D400D8FEC7 /* PojectCourtCasesTV.swift in Sources */,
 				772D359E2AEA82CC00038AA6 /* ProjectsVC.swift in Sources */,
 				772D35A32AEA83D400038AA6 /* ClientsVC.swift in Sources */,
+				779903C52B0047FB00B63303 /* SignUpVC.swift in Sources */,
+				77FBEC5B2AFFD30400D8FEC7 /* AddCourtCaseVC.swift in Sources */,
 				7745832C2AF8155900340CBB /* MainInfoView.swift in Sources */,
 				772D35AC2AEA871700038AA6 /* TabBarItemEnum.swift in Sources */,
 				774583322AF82C8000340CBB /* CourtsViewModel.swift in Sources */,
-				77DB26F52AE5537400944822 /* SignInView.swift in Sources */,
 				77EB3F622AFA71BC002AB368 /* ProjectInfoVC.swift in Sources */,
 				772D35AA2AEA84CC00038AA6 /* TasksVC.swift in Sources */,
 				772D35BA2AF05BE500038AA6 /* NavigationBarController.swift in Sources */,
 				77DB273D2AE72E9D00944822 /* Alert.swift in Sources */,
 				77048A212AFC5F0500824E5F /* ClientsTV.swift in Sources */,
+				77FBEC572AFFC2D900D8FEC7 /* CourtMeetsTV.swift in Sources */,
 				7717DFEB2AFDA1D80010167A /* SegmentController.swift in Sources */,
 				77DB26FB2AE5671900944822 /* DS.swift in Sources */,
 				77048A292AFCD5C800824E5F /* ClientInfoVC.swift in Sources */,
 				77F9D5382AF3A9C5002132D1 /* MainTV.swift in Sources */,
 				77DB273B2AE724DB00944822 /* AuthViewModel.swift in Sources */,
 				774583342AF84D6100340CBB /* TasksTV.swift in Sources */,
+				77FBEC5D2AFFD57C00D8FEC7 /* CourtCaseInfoTV.swift in Sources */,
+				779903BF2B001DA600B63303 /* User.swift in Sources */,
 				777027A42AE28F5E007CA2B7 /* SceneDelegate.swift in Sources */,
 				772D35972AE94F1100038AA6 /* ResetPasswordVC.swift in Sources */,
 				77F9D53D2AF3BA15002132D1 /* HeaderTVC.swift in Sources */,
@@ -667,6 +678,7 @@
 				77CE085C2AFEEDAC002E3144 /* CourtCase.swift in Sources */,
 				77048A2C2AFCDB1B00824E5F /* ClientInfoTV.swift in Sources */,
 				77EB3F602AFA5E01002AB368 /* AddProjectVC.swift in Sources */,
+				779903C32B0040AD00B63303 /* SignInVC.swift in Sources */,
 				772D359C2AEA5DC700038AA6 /* NavigateTabBarController.swift in Sources */,
 				7795AD9C2AE826E1007FC870 /* MainVC.swift in Sources */,
 				77EB3F5E2AFA5D57002AB368 /* DoneProjectsTV.swift in Sources */,

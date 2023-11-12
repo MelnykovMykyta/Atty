@@ -1,8 +1,8 @@
 //
-//  ClientsVC.swift
+//  CourtCaseInfoVC.swift
 //  Atty
 //
-//  Created by Nikita Melnikov on 26.10.2023.
+//  Created by Nikita Melnikov on 11.11.2023.
 //
 
 import Foundation
@@ -13,53 +13,46 @@ import RxCocoa
 import RxSwift
 import BetterSegmentedControl
 
-class ClientsVC: BaseViewContoller, ClientsTVDelegate {
+class CourtCaseInfoVC: BaseViewContoller {
     
     private var disposeBag = DisposeBag()
+    
+    var courtCase: CourtCase?
     
     private var valueLabel: UILabel!
     private var segmentController: SegmentControllerView!
     private var tableView: UITableView!
     
-    private var clients = ClientsTV()
-    private var archive = ArchiveClientsTV()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let courtCase_ = courtCase { courtCase = courtCase_ }
+        
+        navigationBar.addBackButton(with: courtCase?.caseNumber ?? "")
+        navigationBar.backButton.addTarget(self, action: #selector(back), for: .touchUpInside)
         addViews()
+        
         addSegmentController()
         
-        clients.delegateClient = self
-        archive.delegateClient = self
+        addTable(with: CourtCaseInfoTV())
         
-        addTable(with: clients)
-        
-        infoView.setAddView(title: "Додати клієнта")
+        infoView.setAddView(title: "Додати")
         infoView.addInfoButton()
-        infoView.infoButton.addTarget(self, action: #selector(addNewClient), for: .touchUpInside)
+        infoView.infoButton.addTarget(self, action: #selector(addCourtCase), for: .touchUpInside)
         
-        ClientsViewModel.shared.observeClients().subscribe(onNext: { event in
-            let allCount = event.count.description
-            self.valueLabel.text = allCount
+        CourtsViewModel.observeCases().subscribe(onNext: { event in
+            let count = event.filter { $0.status == false }.count.description
+            self.valueLabel.text = count
         }).disposed(by: disposeBag)
-    }
-    
-    func didSelectClient(_ client: Client) {
-        let clientInfoVC = ClientInfoVC()
-        clientInfoVC.client = client
-        navigationController?.pushViewController(clientInfoVC, animated: true)
     }
 }
 
-private extension ClientsVC {
+private extension CourtCaseInfoVC {
     
     func addViews() {
         
-        navigationBar.addTitle(with: Tabs.clients.itemTitle)
-        
         let label = UILabel()
-        label.text = "Кількість"
+        label.text = "Відстежується"
         label.textColor = DS.Colors.standartTextColor
         label.font = UIFont(name: "Manrope-Bold", size: 100)
         label.adjustsFontSizeToFitWidth = true
@@ -71,7 +64,6 @@ private extension ClientsVC {
         valueLabel.font = UIFont(name: "Manrope-Bold", size: 100)
         valueLabel.adjustsFontSizeToFitWidth = true
         infoView.mainInfoView.addSubview(valueLabel)
-        
         
         label.snp.makeConstraints {
             $0.height.equalToSuperview().multipliedBy(DS.SizeMultipliers.twentyPercent)
@@ -88,12 +80,12 @@ private extension ClientsVC {
     func addSegmentController() {
         
         segmentController = SegmentControllerView()
-        segmentController.addController(with: ["Всі", "Архів"])
+        segmentController.addController(with: ["Картка", "Рішення", "Засідання"])
         segmentController.controller.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
         contentView.addSubview(segmentController)
         
         segmentController.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(DS.SizeMultipliers.halfSize)
+            $0.width.equalToSuperview().multipliedBy(DS.SizeMultipliers.eightyPercent)
             $0.top.equalTo(infoView.snp.bottom).inset(-DS.Constraints.authViewLeadinTrailing)
             $0.leading.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
             $0.height.equalTo(contentView.snp.width).multipliedBy(DS.SizeMultipliers.tenPercent)
@@ -112,9 +104,13 @@ private extension ClientsVC {
         }
     }
     
-    @objc func addNewClient() {
-        let vc = AddClientVC()
+    @objc func addCourtCase() {
+        let vc = AddCourtCaseVC()
         present(vc, animated: true)
+    }
+    
+    @objc func back() {
+        navigationController?.popViewController(animated: true)
     }
     
     @objc func segmentedControlValueChanged(_ sender: BetterSegmentedControl) {
@@ -123,11 +119,14 @@ private extension ClientsVC {
         
         switch sender.index {
         case 0:
-            addTable(with: clients)
+            addTable(with: CourtCaseInfoTV())
         case 1:
-            addTable(with: archive)
+            addTable(with: ProjectDocumentsTV())
+        case 2:
+            addTable(with: PojectCourtCasesTV())
         default:
             return
         }
     }
 }
+

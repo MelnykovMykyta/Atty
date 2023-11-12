@@ -68,4 +68,12 @@ class RealmDBService {
             project.client = client
         }
     }
+    
+    func addCourtCseToProject(_ courtCase: CourtCase, to project: Project) {
+        try! realm.write {
+            project.courtCases.append(courtCase)
+            courtCase.project = project
+            courtCase.client = project.client
+        }
+    }
 }

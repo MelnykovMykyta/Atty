@@ -23,7 +23,7 @@ class AddClientVC: UIViewController, UITextFieldDelegate {
     private var contactPerson: UITextField!
     private var email: UITextField!
     private var idCode: UITextField!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -72,7 +72,7 @@ private extension AddClientVC {
         
         contact = UITextField()
         contact.backgroundColor = .clear
-        contact.keyboardType = .namePhonePad
+        contact.keyboardType = .numberPad
         contact.placeholder = "Введіть контактний номер"
         contactView.addSubview(contact)
         
@@ -122,27 +122,18 @@ private extension AddClientVC {
             $0.leading.trailing.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
         }
         
-        clientNameView.snp.makeConstraints { $0.height.equalTo(DS.Sizes.authTFHeight) }
-        
-        contactView.snp.makeConstraints { $0.height.equalTo(DS.Sizes.authTFHeight) }
-        
-        contactPersonView.snp.makeConstraints { $0.height.equalTo(DS.Sizes.authTFHeight) }
-        
-        emailView.snp.makeConstraints { $0.height.equalTo(DS.Sizes.authTFHeight) }
-        
-        idCodeView.snp.makeConstraints { $0.height.equalTo(DS.Sizes.authTFHeight) }
-
-        clientName.snp.makeConstraints { $0.edges.equalToSuperview().inset(DS.Constraints.authTFInsets) }
-        
-        contact.snp.makeConstraints { $0.edges.equalToSuperview().inset(DS.Constraints.authTFInsets) }
-        
-        contactPerson.snp.makeConstraints { $0.edges.equalToSuperview().inset(DS.Constraints.authTFInsets) }
-        
-        email.snp.makeConstraints { $0.edges.equalToSuperview().inset(DS.Constraints.authTFInsets) }
-        
-        idCode.snp.makeConstraints { $0.edges.equalToSuperview().inset(DS.Constraints.authTFInsets) }
-       
-        addButton.snp.makeConstraints { $0.height.equalTo(DS.Sizes.authTFHeight) }
+        [clientNameView, contactView, contactPersonView, emailView, idCodeView, addButton]
+            .forEach { element in
+                element.snp.makeConstraints {
+                    $0.height.equalTo(DS.Sizes.authTFHeight)
+                }
+            }
+        [clientName, contact, contactPerson, email, idCode]
+            .forEach { element in
+                element.snp.makeConstraints {
+                    $0.edges.equalToSuperview().inset(DS.Constraints.authTFInsets)
+                }
+            }
     }
 }
 
@@ -156,21 +147,16 @@ extension AddClientVC {
               let email = email.text,
               let idCode = idCode.text
         else { return }
-
+        
         if !name.isEmpty {
             ClientsViewModel.shared.addClient(with: Client(name: name, contactPerson: contactPerson, contact: contact, email: email, idCode: idCode))
         }
         
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
     
     @objc private func tapClose() {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+        dismiss(animated: true)
     }
 }
 

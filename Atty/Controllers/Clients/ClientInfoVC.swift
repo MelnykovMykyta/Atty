@@ -19,9 +19,7 @@ class ClientInfoVC: BaseViewContoller {
     
     var client: Client = ClientsViewModel.currentClient
     
-    private var nextbtn: UIButton!
     private var valueLabel: UILabel!
-    private var valueFromLabel: UILabel!
     private var segmentController: SegmentControllerView!
     private var tableView: UITableView!
     
@@ -122,7 +120,7 @@ private extension ClientInfoVC {
         case 0:
             addTable(with: ClientInfoTV())
         case 1:
-            addTable(with: ProjectDocumentsTV())
+            addTable(with: ClientProjectsTV())
         case 2:
             addTable(with: DoneProjectsTV())
         default:

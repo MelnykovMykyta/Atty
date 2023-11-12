@@ -91,10 +91,13 @@ extension ProjectsByClientTV: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if !clients.isEmpty {
-            let project = self.clients[indexPath.section].projects.sorted {!$0.status && $1.status}[indexPath.row]
+        
+        let project = self.clients[indexPath.section].projects.sorted {!$0.status && $1.status}[indexPath.row]
+        
+        if !clients.isEmpty && project.status {
+            
             let swipe = UIContextualAction(style: .destructive, title: "Не завершено") { (action, view, success) in
-                ProjectsViewModel.shared.updateProjectStatus(with: project, status: false)
+                ProjectsViewModel.updateProjectStatus(with: project, status: false)
                 success(true)
             }
             return UISwipeActionsConfiguration(actions: [swipe])
@@ -104,10 +107,12 @@ extension ProjectsByClientTV: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 
-        if !clients.isEmpty {
-            let swipe = UIContextualAction(style: .normal, title: "Виконано") { (action, view, success) in
+        let project = self.clients[indexPath.section].projects.sorted {!$0.status && $1.status}[indexPath.row]
+        
+        if !clients.isEmpty && !project.status {
+            let swipe = UIContextualAction(style: .destructive, title: "Виконано") { (action, view, success) in
                 let project = self.clients[indexPath.section].projects.sorted {!$0.status && $1.status}[indexPath.row]
-                ProjectsViewModel.shared.updateProjectStatus(with: project, status: true)
+                ProjectsViewModel.updateProjectStatus(with: project, status: true)
                 success(true)
             }
             swipe.backgroundColor = DS.Colors.taskFinished

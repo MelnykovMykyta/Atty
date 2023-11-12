@@ -1,8 +1,8 @@
 //
-//  DoneProjectsTV.swift
+//  ClientProjectsTV.swift
 //  Atty
 //
-//  Created by Nikita Melnikov on 07.11.2023.
+//  Created by Nikita Melnikov on 11.11.2023.
 //
 
 import Foundation
@@ -11,15 +11,13 @@ import SnapKit
 import RxCocoa
 import RxSwift
 
-class DoneProjectsTV: UITableView {
+class ClientProjectsTV: UITableView {
     
     private var disposeBag = DisposeBag()
     
-    let project = "ProjectTVC"
+    private let project = "ProjectTVC"
     
-    var delegateProject: ProjectsTVDelegate?
-    
-    private var projects: [Project] = ProjectsViewModel.getProjects().filter { $0.status == true }
+    private var projects: [Project] = ClientsViewModel.getClientProjects().sorted { !$0.status && $1.status}
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -34,7 +32,7 @@ class DoneProjectsTV: UITableView {
         self.register(ProjectTVC.self, forCellReuseIdentifier: project)
         
         ProjectsViewModel.observeProjects().subscribe(onNext: { event in
-            self.projects = ProjectsViewModel.getProjects().filter { $0.status == true }
+            self.projects = ClientsViewModel.getClientProjects().sorted { !$0.status && $1.status}
             self.reloadData()
         }).disposed(by: disposeBag)
     }
@@ -44,7 +42,7 @@ class DoneProjectsTV: UITableView {
     }
 }
 
-extension DoneProjectsTV: UITableViewDelegate, UITableViewDataSource {
+extension ClientProjectsTV: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         projects.isEmpty ? 1 : projects.count
@@ -58,10 +56,9 @@ extension DoneProjectsTV: UITableViewDelegate, UITableViewDataSource {
         if projects.isEmpty {
             projectCell.emptyProjectsList()
         } else {
-            projectCell.addProject(projectName: projects[indexPath.row].name, clientName: "", category: projects[indexPath.row].category, completionStatus: projects[indexPath.row].status)
+            projectCell.addProject(projectName: projects[indexPath.row].name, clientName: projects[indexPath.row].client?.name ?? "", category: projects[indexPath.row].category, completionStatus: projects[indexPath.row].status)
             projectCell.selectionStyle = .none
         }
-        
         return projectCell
     }
     
@@ -69,9 +66,9 @@ extension DoneProjectsTV: UITableViewDelegate, UITableViewDataSource {
         
         let project = self.projects[indexPath.row]
         
-        if !projects.isEmpty && project.status{
-            let swipe = UIContextualAction(style: .destructive, title: "Не завершено") { (action, view, success) in
-                ProjectsViewModel.updateProjectStatus(with: project, status: false)
+        if !projects.isEmpty && !project.status {
+            let swipe = UIContextualAction(style: .destructive, title: "В архів") { (action, view, success) in
+                ProjectsViewModel.updateProjectStatus(with: project, status: true)
                 success(true)
             }
             return UISwipeActionsConfiguration(actions: [swipe])
@@ -83,9 +80,10 @@ extension DoneProjectsTV: UITableViewDelegate, UITableViewDataSource {
         
         let project = self.projects[indexPath.row]
         
-        if !projects.isEmpty && !project.status {
+        if !projects.isEmpty && project.status {
             let swipe = UIContextualAction(style: .destructive, title: "Виконано") { (action, view, success) in
-                ProjectsViewModel.updateProjectStatus(with: project, status: true)
+                
+                ProjectsViewModel.updateProjectStatus(with: project, status: false)
                 success(true)
             }
             swipe.backgroundColor = DS.Colors.taskFinished
@@ -94,15 +92,4 @@ extension DoneProjectsTV: UITableViewDelegate, UITableViewDataSource {
         }
         return UISwipeActionsConfiguration()
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if !projects.isEmpty {
-            let selectedProject = projects[indexPath.row]
-            delegateProject?.didSelectProject(selectedProject)
-            
-            ProjectsViewModel.currentProject = selectedProject
-        }
-    }
 }
-
-

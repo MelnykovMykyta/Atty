@@ -19,7 +19,7 @@ class CourtsViewModel {
     
     static var statusSubject = PublishSubject<Bool>()
     
-    static var statusFilter: Bool = true
+    static var statusFilter: Bool = false
     
     static func changeFilter() {
         statusFilter.toggle()
@@ -52,6 +52,11 @@ class CourtsViewModel {
     static func getTodayMeets() -> [CourtMeet] {
         return RealmDBService.shared.getObjects(CourtMeet.self)
             .filter { compareDates(date: $0.date) }
+            .sorted(by: { $0.date < $1.date })
+    }
+    
+    static func getAllMeets() -> [CourtMeet] {
+        return RealmDBService.shared.getObjects(CourtMeet.self)
             .sorted(by: { $0.date < $1.date })
     }
     

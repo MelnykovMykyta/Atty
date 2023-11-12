@@ -23,6 +23,18 @@ class TaskTVC: UITableViewCell {
         
         backgroundColor = .clear
         
+        setupViews()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+}
+
+extension TaskTVC {
+    
+    private func setupViews() {
+        
         view = UIView()
         view.layer.cornerRadius = DS.CornerRadius.baseCornerRadiusLayers
         view.layer.masksToBounds = true
@@ -33,13 +45,6 @@ class TaskTVC: UITableViewCell {
             $0.leading.trailing.equalToSuperview().inset(DS.Constraints.baseInsetViews)
         }
     }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-}
-
-extension TaskTVC {
     
     func emptyTodayTasksList() {
         

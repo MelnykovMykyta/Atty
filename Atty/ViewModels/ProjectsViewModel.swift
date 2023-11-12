@@ -17,26 +17,29 @@ class ProjectsViewModel {
     
     static var currentProject: Project = Project()
     
-    let realm = try! Realm()
+    static let realm = try! Realm()
     
-    private init() {}
-    
-    func observeProjects() -> Observable<[Project]> {
+    static func observeProjects() -> Observable<[Project]> {
         return Observable.collection(from: realm.objects(Project.self))
             .map { results in
                 return results.toArray()
             }
     }
     
-    func addProject(with project: Project) {
+    static func addProject(with project: Project) {
         RealmDBService.shared.addObject(object: project)
     }
     
-    func getProjects() -> [Project] {
+    static func getProjects() -> [Project] {
         return RealmDBService.shared.getObjects(Project.self).sorted { !$0.status && $1.status}
     }
     
-    func updateProjectStatus(with project: Project, status: Bool) {
+    static func getProjectCourtCases() -> [CourtCase] {
+        return RealmDBService.shared.getObjects(CourtCase.self)
+            .filter { $0.project == currentProject}
+    }
+    
+    static func updateProjectStatus(with project: Project, status: Bool) {
         RealmDBService.shared.updateProjectStatus(with: project, status: status)
     }
 }

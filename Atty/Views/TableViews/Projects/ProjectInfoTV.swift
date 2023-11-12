@@ -35,7 +35,7 @@ class ProjectInfoTV: UITableView {
         self.register(HeaderTVC.self, forCellReuseIdentifier: header)
         self.register(TaskTVC.self, forCellReuseIdentifier: task)
         
-        ProjectsViewModel.shared.observeProjects().subscribe(onNext: { event in
+        ProjectsViewModel.observeProjects().subscribe(onNext: { event in
             self.projectItem = ProjectsViewModel.currentProject
             self.reloadData()
         }).disposed(by: disposeBag)
@@ -108,9 +108,8 @@ extension ProjectInfoTV {
     private func swipe(indexPath: IndexPath, status: Bool) -> UISwipeActionsConfiguration {
         guard indexPath.section == 2 && !projectItem.tasks.isEmpty else {  return UISwipeActionsConfiguration() }
         let title = status ? "Виконано" : "Не виконано"
-        let style: UIContextualAction.Style = status ? .normal : .destructive
         
-        let swipe = UIContextualAction(style: style, title: title) { (action, view, success) in
+        let swipe = UIContextualAction(style: .destructive, title: title) { (action, view, success) in
             let tasks = self.projectItem.tasks.sorted { $0.date < $1.date }.sorted { !$0.status && $1.status}
             let task = tasks[indexPath.row]
             TasksViewModel.shared.updateTaskStatus(with: task, status: status)

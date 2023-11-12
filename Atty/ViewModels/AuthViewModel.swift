@@ -10,9 +10,9 @@ import UIKit
 
 class AuthViewModel {
     
-    func signInUser(view: UIView) {
-        guard let view = view as? SignInView else { return }
-        guard let email = view.userEmailTF.text, let password = view.userPasswordTF.text else { return }
+    static var currentUserEmail = String()
+    
+    static func signInUser(email: String, password: String) {
         let checkTF = checkTextFields(textFields: [email, password])
         let checkEmail = checkEmail(email: email)
         
@@ -21,9 +21,7 @@ class AuthViewModel {
         }
     }
     
-    func signUpUser(view: UIView) {
-        guard let view = view as? SignUpView else { return }
-        guard let name = view.userNameTF.text, let email = view.userEmailTF.text, let password = view.userPasswordTF.text else { return }
+    static func signUpUser(name: String, email: String, password: String) {
         
         let checkTF = checkTextFields(textFields: [name, email, password])
         let checkEmail = checkEmail(email: email)
@@ -33,22 +31,19 @@ class AuthViewModel {
         }
     }
     
-    func forgotPassword(view: UIView) {
-        
-        guard let view = view as? ResetPasswordView else { return }
-        guard let email = view.userEmailTF.text else { return }
+    static func forgotPassword(email: String) {
         
         let checkTF = checkTextFields(textFields: [email])
         let checkEmail = checkEmail(email: email)
         
         if checkTF && checkEmail {
             FirebaseAuthService.shared.resetPassword(email: email)
-            FirebaseAuthService.shared.changeVCAuth(vc: AuthVC())
+            FirebaseAuthService.shared.changeVCAuth(vc: SignInVC())
             Alert.shared.showAlert(title: DS.AlertMessages.attention, message: DS.AlertMessages.forgotPassword)
         }
     }
     
-    func checkTextFields(textFields: [String]) -> Bool {
+    static func checkTextFields(textFields: [String]) -> Bool {
         let emptyTextFieldsValue = textFields.filter { $0.isEmpty }
         
         if emptyTextFieldsValue.isEmpty {
@@ -59,7 +54,7 @@ class AuthViewModel {
         }
     }
     
-    func checkEmail(email: String) -> Bool {
+    static func checkEmail(email: String) -> Bool {
         let checkEmail = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
         let emailChecker = NSPredicate(format: "SELF MATCHES %@", checkEmail)
         guard emailChecker.evaluate(with: email) else {

@@ -19,7 +19,6 @@ class InfoView: UIView {
         super.init(frame: frame)
         
         setupViews()
-        setupConstraintViews()
     }
     
     required init?(coder: NSCoder) {
@@ -44,9 +43,6 @@ extension InfoView {
         additionallyInfoView.layer.cornerRadius = DS.CornerRadius.baseCornerRadiusLayers
         additionallyInfoView.layer.masksToBounds = true
         addSubview(additionallyInfoView)
-    }
-    
-    private func setupConstraintViews(){
         
         mainInfoView.snp.makeConstraints {
             $0.top.leading.bottom.equalToSuperview().inset(DS.Constraints.baseInsetViews)
