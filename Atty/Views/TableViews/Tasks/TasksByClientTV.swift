@@ -17,7 +17,7 @@ class TasksByClientTV: UITableView {
 
     private let task = "TaskTVC"
     
-    private var clients: [Client] = ClientsViewModel.shared.getClients().filter { !$0.projects.isEmpty}
+    private var clients: [Client] = ClientsViewModel.getClients().filter { !$0.projects.isEmpty}
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -31,8 +31,8 @@ class TasksByClientTV: UITableView {
         
         self.register(TaskTVC.self, forCellReuseIdentifier: task)
         
-        ClientsViewModel.shared.observeClients().subscribe(onNext: { event in
-            self.clients = ClientsViewModel.shared.getClients().filter { !$0.projects.isEmpty}
+        ClientsViewModel.observeClients().subscribe(onNext: { event in
+            self.clients = ClientsViewModel.getClients().filter { !$0.projects.isEmpty}
             self.reloadData()
         }).disposed(by: disposeBag)
     }
@@ -102,7 +102,7 @@ extension TasksByClientTV: UITableViewDelegate, UITableViewDataSource {
             self.clients[indexPath.section].projects.forEach { project in
                 project.tasks.forEach { tasks.append($0) }
             }
-            TasksViewModel.shared.updateTaskStatus(with: tasks[indexPath.row], status: false)
+            TasksViewModel.updateTaskStatus(with: tasks[indexPath.row], status: false)
             success(true)
         }
         return UISwipeActionsConfiguration(actions: [swipe])
@@ -115,7 +115,7 @@ extension TasksByClientTV: UITableViewDelegate, UITableViewDataSource {
             self.clients[indexPath.section].projects.forEach { project in
                 project.tasks.forEach { tasks.append($0) }
             }
-            TasksViewModel.shared.updateTaskStatus(with: tasks[indexPath.row], status: true)
+            TasksViewModel.updateTaskStatus(with: tasks[indexPath.row], status: true)
             success(true)
         }
         swipe.backgroundColor = DS.Colors.taskFinished

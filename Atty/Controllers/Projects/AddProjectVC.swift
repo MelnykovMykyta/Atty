@@ -142,17 +142,18 @@ extension AddProjectVC {
               let shortDesc = projectShortDesc.text,
               let additionalDesc = projectAdditionalDesc.text,
               let category = projectCategory.text,
-              !name.isEmpty
+              !name.isEmpty,
+              let user = AuthViewModel.getCurrentUser()
         else { return }
-        let project = Project(name: name, shortDesc: shortDesc, additionalDesc: additionalDesc, category: category)
+        
+        let project = Project(name: name, shortDesc: shortDesc, additionalDesc: additionalDesc, category: category, user: user)
         
         if let client_ = client {
-            RealmDBService.shared.addProjectToClient(project, to: client_)
+            RealmDBService.addProjectToClient(project, to: client_)
             
         } else {
             ProjectsViewModel.addProject(with: project)
         }
-        
         
         dismiss(animated: true)
     }

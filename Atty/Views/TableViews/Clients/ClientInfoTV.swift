@@ -20,7 +20,7 @@ class ClientInfoTV: UITableView {
     let task = "TaskTVC"
     
     private var clientItem: Client = ClientsViewModel.currentClient
-    private var clientTasks = ClientsViewModel.shared.getClientProjectsTasks()
+    private var clientTasks = ClientsViewModel.getClientProjectsTasks()
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -36,9 +36,9 @@ class ClientInfoTV: UITableView {
         self.register(HeaderTVC.self, forCellReuseIdentifier: header)
         self.register(TaskTVC.self, forCellReuseIdentifier: task)
         
-        ClientsViewModel.shared.observeClients().subscribe(onNext: { event in
+        ClientsViewModel.observeClients().subscribe(onNext: { event in
             self.clientItem = ClientsViewModel.currentClient
-            self.clientTasks = ClientsViewModel.shared.getClientProjectsTasks()
+            self.clientTasks = ClientsViewModel.getClientProjectsTasks()
             self.reloadData()
         }).disposed(by: disposeBag)
         
@@ -118,7 +118,7 @@ extension ClientInfoTV {
         
         let swipe = UIContextualAction(style: .destructive, title: title) { (action, view, success) in
             let task = self.clientTasks[indexPath.row]
-            TasksViewModel.shared.updateTaskStatus(with: task, status: status)
+            TasksViewModel.updateTaskStatus(with: task, status: status)
             success(true)
         }
         if status { swipe.backgroundColor = DS.Colors.taskFinished }

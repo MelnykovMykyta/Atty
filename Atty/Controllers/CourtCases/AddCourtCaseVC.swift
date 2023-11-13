@@ -108,18 +108,18 @@ extension AddCourtCaseVC {
         
         guard let caseNumber = courtCaseNumber.text, !caseNumber.isEmpty else { return }
         
-        //        let project = Project(name: name, shortDesc: shortDesc, additionalDesc: additionalDesc, category: category)
-        
-        if let project_ = project {
-            print("FOR PROJECT: \(project_.name)")
-            let a = CourtCase(caseNumber: "PROJECTTT", courtName: "Господарський", plaintiff: "ТОВ НООО", defendant: "ТОВ АААА", disputeSubject: "Стягнення коштыв 100000", judge: "ТИП")
-            RealmDBService.shared.addCourtCseToProject(a, to: project_)
-        } else {
-            print("SIMPLE")
-            let a = CourtCase(caseNumber: "112/1212/1223", courtName: "Господарський", plaintiff: "ТОВ НООО", defendant: "ТОВ АААА", disputeSubject: "Стягнення коштыв 100000", judge: "ТИП")
-            RealmDBService.shared.addObject(object: a)
-            //            ProjectsViewModel.addProject(with: project)
-        }
+//                let project = Project(name: name, shortDesc: shortDesc, additionalDesc: additionalDesc, category: category)
+//
+//        if let project_ = project {
+//            print("FOR PROJECT: \(project_.name)")
+//            let a = CourtCase(caseNumber: "PROJECTTT", courtName: "Господарський", plaintiff: "ТОВ НООО", defendant: "ТОВ АААА", disputeSubject: "Стягнення коштыв 100000", judge: "ТИП")
+//            RealmDBService.addCourtCaseToProject(a, to: project_)
+//        } else {
+//            print("SIMPLE")
+//            let a = CourtCase(caseNumber: "112/1212/1223", courtName: "Господарський", plaintiff: "ТОВ НООО", defendant: "ТОВ АААА", disputeSubject: "Стягнення коштыв 100000", judge: "ТИП")
+//            RealmDBService.addObject(object: a)
+//                        ProjectsViewModel.addProject(with: project)
+//        }
         
         dismiss(animated: true)
     }

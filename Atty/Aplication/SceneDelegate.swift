@@ -28,12 +28,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func checkAuthentication() {
-        
-        if Auth.auth().currentUser == nil {
+        guard Auth.auth().currentUser != nil else {
             FirebaseAuthService.shared.changeVCAuth(vc: SignInVC())
-        } else {
-            FirebaseAuthService.shared.changeVCAuth(vc: NavigateTabBarController())
+            return
         }
+        
+        FirebaseAuthService.shared.checkUserDataOnDevice()
     }
 }
-

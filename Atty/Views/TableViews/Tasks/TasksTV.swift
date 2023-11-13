@@ -17,13 +17,13 @@ class TasksTV: UITableView {
     
     private let task = "TaskTVC"
     
-    private var tasks: [Task] = TasksViewModel.shared.getTasks().filter {$0.status == false }
+    private var tasks: [Task] = TasksViewModel.getTasks().filter {$0.status == false }
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         
-        TasksViewModel.shared.observeTasks().subscribe(onNext: { event in
-            self.tasks = TasksViewModel.shared.getTasks().filter {$0.status == false }
+        TasksViewModel.observeTasks().subscribe(onNext: { event in
+            self.tasks = TasksViewModel.getTasks().filter {$0.status == false }
             self.reloadData()
         }).disposed(by: disposeBag)
         
@@ -69,7 +69,7 @@ extension TasksTV: UITableViewDelegate, UITableViewDataSource {
         
         guard !tasks.isEmpty && task.status else { return UISwipeActionsConfiguration() }
         let swipe = UIContextualAction(style: .destructive, title: "Не виконано") { (action, view, success) in
-            TasksViewModel.shared.updateTaskStatus(with: task, status: false)
+            TasksViewModel.updateTaskStatus(with: task, status: false)
             success(true)
         }
         return UISwipeActionsConfiguration(actions: [swipe])
@@ -80,7 +80,7 @@ extension TasksTV: UITableViewDelegate, UITableViewDataSource {
         
         guard !tasks.isEmpty && !task.status else { return UISwipeActionsConfiguration() }
         let swipe = UIContextualAction(style: .destructive, title: "Виконано") { (action, view, success) in
-            TasksViewModel.shared.updateTaskStatus(with: task, status: true)
+            TasksViewModel.updateTaskStatus(with: task, status: true)
             success(true)
         }
         swipe.backgroundColor = DS.Colors.taskFinished

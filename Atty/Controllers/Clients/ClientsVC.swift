@@ -39,7 +39,7 @@ class ClientsVC: BaseViewContoller, ClientsTVDelegate {
         infoView.addInfoButton()
         infoView.infoButton.addTarget(self, action: #selector(addNewClient), for: .touchUpInside)
         
-        ClientsViewModel.shared.observeClients().subscribe(onNext: { event in
+        ClientsViewModel.observeClients().subscribe(onNext: { event in
             let allCount = event.count.description
             self.valueLabel.text = allCount
         }).disposed(by: disposeBag)

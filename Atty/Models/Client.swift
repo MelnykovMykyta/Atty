@@ -19,14 +19,16 @@ class Client: Object {
     @Persisted var projects: List<Project> = List<Project>()
     @Persisted var courtCases: List<CourtCase> = List<CourtCase>()
     @Persisted var status: Bool = false
+    @Persisted var user: User?
     
-    convenience init(name: String, contactPerson: String, contact: String, email: String, idCode: String) {
+    convenience init(name: String, contactPerson: String, contact: String, email: String, idCode: String, user: User) {
         self.init()
         self.name = name
         self.contactPerson = contactPerson
         self.contact = contact
         self.email = email
         self.idCode = idCode
+        self.user = user
     }
 }
 

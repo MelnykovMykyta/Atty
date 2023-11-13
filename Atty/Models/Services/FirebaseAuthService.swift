@@ -13,34 +13,51 @@ class FirebaseAuthService {
     
     static let shared = FirebaseAuthService()
     
-    func createUser(name: String, email: String, password: String) {
+    func createUser(name: String, userStatus: String, email: String, password: String) {
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             if let error = error {
-                Alert.shared.showAlert(title: DS.AlertMessages.attention, message: error.localizedDescription)
+                Alert.showAlert(title: DS.AlertMessages.attention, message: error.localizedDescription)
             } else {
+                let newUser = User(email: email, name: name, status: userStatus)
+                RealmDBService.addObject(object: newUser)
                 self.signIn(email: email, password: password)
-                self.changeVCAuth(vc: NavigateTabBarController())
             }
         }
     }
     
     func signIn(email: String, password: String) {
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
-            guard let strongSelf = self else { return }
+            guard self != nil else { return }
             if let authResult = authResult {
+                AuthViewModel.resetAllCurrentParameters()
                 AuthViewModel.currentUserEmail = authResult.user.email ?? ""
-                self?.changeVCAuth(vc: NavigateTabBarController())
+                self?.checkUserDataOnDevice()
             } else {
-                Alert.shared.showAlert(title: "Упс", message: "Помилка авторизації")
+                Alert.showAlert(title: "Упс", message: "Помилка авторизації")
             }
+        }
+    }
+    
+    func checkUserDataOnDevice() {
+        let user = RealmDBService.getObjects(User.self)
+            .filter { $0.email == Auth.auth().currentUser?.email }.first
+        
+        if user != nil {
+            AuthViewModel.currentUserEmail = Auth.auth().currentUser?.email ?? ""
+            FirebaseAuthService.shared.changeVCAuth(vc: NavigateTabBarController())
+        } else {
+            FirebaseAuthService.shared.changeVCAuth(vc: SignUpVC())
+            Alert.showAlert(title: "Відстуні дані", message: "Пройдіть реєстрацію")
         }
     }
     
     func logout() {
         let firebaseAuth = Auth.auth()
+        
         do {
             try firebaseAuth.signOut()
             self.changeVCAuth(vc: SignInVC())
+            AuthViewModel.resetAllCurrentParameters()
             
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)

@@ -19,12 +19,14 @@ class Project: Object {
     @Persisted var tasks: List<Task> = List<Task>()
     @Persisted var courtCases: List<CourtCase> = List<CourtCase>()
     @Persisted var client: Client?
+    @Persisted var user: User?
     
-    convenience init(name: String, shortDesc: String, additionalDesc: String, category: String) {
+    convenience init(name: String, shortDesc: String, additionalDesc: String, category: String, user: User) {
         self.init()
         self.name = name
         self.shortDesc = shortDesc
         self.additionalDesc = additionalDesc
         self.category = category
+        self.user = user
     }
 }

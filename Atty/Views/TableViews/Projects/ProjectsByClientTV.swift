@@ -19,7 +19,7 @@ class ProjectsByClientTV: UITableView {
     
     private let project = "ProjectTVC"
     
-    private var clients: [Client] = ClientsViewModel.shared.getClients().filter { !$0.projects.isEmpty}
+    private var clients: [Client] = ClientsViewModel.getClients().filter { !$0.projects.isEmpty}
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -33,8 +33,8 @@ class ProjectsByClientTV: UITableView {
         
         self.register(ProjectTVC.self, forCellReuseIdentifier: project)
         
-        ClientsViewModel.shared.observeClients().subscribe(onNext: { event in
-            self.clients = ClientsViewModel.shared.getClients().filter { !$0.projects.isEmpty}
+        ClientsViewModel.observeClients().subscribe(onNext: { event in
+            self.clients = ClientsViewModel.getClients().filter { !$0.projects.isEmpty}
             self.reloadData()
         }).disposed(by: disposeBag)
     }

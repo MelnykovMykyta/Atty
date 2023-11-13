@@ -38,7 +38,7 @@ class TasksVC: BaseViewContoller {
         infoView.addInfoButton()
         infoView.infoButton.addTarget(self, action: #selector(addNewTask), for: .touchUpInside)
         
-        TasksViewModel.shared.observeTasks().subscribe(onNext: { event in
+        TasksViewModel.observeTasks().subscribe(onNext: { event in
             let count = event.filter { $0.status == true }.count.description
             let allCount = event.count.description
             self.valueLabel.text = count

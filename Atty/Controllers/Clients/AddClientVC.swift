@@ -145,11 +145,13 @@ extension AddClientVC {
               let contact = contact.text,
               let contactPerson = contactPerson.text,
               let email = email.text,
-              let idCode = idCode.text
+              let idCode = idCode.text,
+              !name.isEmpty,
+              let user = AuthViewModel.getCurrentUser()
         else { return }
         
         if !name.isEmpty {
-            ClientsViewModel.shared.addClient(with: Client(name: name, contactPerson: contactPerson, contact: contact, email: email, idCode: idCode))
+            ClientsViewModel.addClient(with: Client(name: name, contactPerson: contactPerson, contact: contact, email: email, idCode: idCode, user: user))
         }
         
         dismiss(animated: true)
@@ -159,4 +161,3 @@ extension AddClientVC {
         dismiss(animated: true)
     }
 }
-

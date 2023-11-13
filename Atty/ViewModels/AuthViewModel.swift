@@ -12,6 +12,11 @@ class AuthViewModel {
     
     static var currentUserEmail = String()
     
+    static func getCurrentUser() -> User? {
+        return RealmDBService.getObjects(User.self)
+            .first(where: {$0.email == currentUserEmail} )
+    }
+    
     static func signInUser(email: String, password: String) {
         let checkTF = checkTextFields(textFields: [email, password])
         let checkEmail = checkEmail(email: email)
@@ -21,13 +26,13 @@ class AuthViewModel {
         }
     }
     
-    static func signUpUser(name: String, email: String, password: String) {
+    static func signUpUser(name: String, userStatus: String, email: String, password: String) {
         
         let checkTF = checkTextFields(textFields: [name, email, password])
         let checkEmail = checkEmail(email: email)
         
         if checkTF && checkEmail {
-            FirebaseAuthService.shared.createUser(name: name, email: email, password: password)
+            FirebaseAuthService.shared.createUser(name: name, userStatus: userStatus, email: email, password: password)
         }
     }
     
@@ -39,7 +44,7 @@ class AuthViewModel {
         if checkTF && checkEmail {
             FirebaseAuthService.shared.resetPassword(email: email)
             FirebaseAuthService.shared.changeVCAuth(vc: SignInVC())
-            Alert.shared.showAlert(title: DS.AlertMessages.attention, message: DS.AlertMessages.forgotPassword)
+            Alert.showAlert(title: DS.AlertMessages.attention, message: DS.AlertMessages.forgotPassword)
         }
     }
     
@@ -49,16 +54,23 @@ class AuthViewModel {
         if emptyTextFieldsValue.isEmpty {
             return true
         } else {
-            Alert.shared.showAlert(title: DS.AlertMessages.attention, message: DS.AlertMessages.emptyLine)
+            Alert.showAlert(title: DS.AlertMessages.attention, message: DS.AlertMessages.emptyLine)
             return false
         }
+    }
+    
+    static func resetAllCurrentParameters() {
+        AuthViewModel.currentUserEmail = ""
+        CourtsViewModel.currentCase = CourtCase()
+        ProjectsViewModel.currentProject = Project()
+        ClientsViewModel.currentClient = Client()
     }
     
     static func checkEmail(email: String) -> Bool {
         let checkEmail = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
         let emailChecker = NSPredicate(format: "SELF MATCHES %@", checkEmail)
         guard emailChecker.evaluate(with: email) else {
-            Alert.shared.showAlert(title: DS.AlertMessages.attention, message: DS.AlertMessages.wrongEmail)
+            Alert.showAlert(title: DS.AlertMessages.attention, message: DS.AlertMessages.wrongEmail)
             return false
         }
         return true

@@ -37,7 +37,7 @@ class ClientInfoVC: BaseViewContoller {
         infoView.addInfoButton()
         infoView.infoButton.addTarget(self, action: #selector(addNewProject), for: .touchUpInside)
         
-        ClientsViewModel.shared.observeClients().subscribe(onNext: { event in
+        ClientsViewModel.observeClients().subscribe(onNext: { event in
             let element = event.first(where: { $0.id == self.client.id })
             let count = element?.projects.filter {$0.status == false}.count.description
             self.valueLabel.text = count
@@ -122,10 +122,9 @@ private extension ClientInfoVC {
         case 1:
             addTable(with: ClientProjectsTV())
         case 2:
-            addTable(with: DoneProjectsTV())
+            Alert.showAlert(title: "Скоро", message: "Цей розділ в розробці")
         default:
             return
         }
     }
 }
-

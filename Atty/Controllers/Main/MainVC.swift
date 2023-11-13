@@ -21,12 +21,14 @@ class MainVC: UIViewController, UITextFieldDelegate {
     private var infoView: MainInfoView!
     private var tableView: MainTV!
     
+    private var user: User = AuthViewModel.getCurrentUser() ?? User()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupViews()
         
-        TasksViewModel.shared.observeTasks().subscribe(onNext: { event in
+        TasksViewModel.observeDeadlineTasks().subscribe(onNext: { event in
             let count = event.filter { $0.status == false }.count.description
             self.infoView.tasksValue.text = count
         }).disposed(by: disposeBag)
@@ -53,13 +55,13 @@ private extension MainVC {
         contentView.layer.masksToBounds = true
         view.addSubview(contentView)
         
-        navigationBar.addUser(name: "Микита Мельников", status: "Адвокат", icon: nil)
+        navigationBar.addUser(name: user.name, status: user.status, icon: nil)
         navigationBar.userIcon.addTarget(self, action: #selector(logouttap), for: .touchUpInside)
         
         infoView = MainInfoView()
         contentView.addSubview(infoView)
         
-        infoView.dateLabel.text = formatDate(Date())
+        infoView.dateLabel.text = DateHelper.formatDate(Date())
         infoView.costsButton.addTarget(self, action: #selector(tapCostsInfo), for: .touchUpInside)
         
         tableView = MainTV()
@@ -95,13 +97,6 @@ private extension MainVC {
     }
     
     @objc func tapCostsInfo() {
-        Alert.shared.showAlert(title: "Скоро", message: "Цей розділ ще в розробці")
-    }
-    
-    func formatDate(_ date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd MMMM yyyy"
-        dateFormatter.locale = Locale(identifier: "uk_UA")
-        return dateFormatter.string(from: date)
+        Alert.showAlert(title: "Скоро", message: "Цей розділ ще в розробці")
     }
 }

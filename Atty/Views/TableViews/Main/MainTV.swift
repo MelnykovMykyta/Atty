@@ -19,14 +19,14 @@ class MainTV: UITableView {
     private let task = "TaskTVC"
     private let meet = "CourtMeetTVC"
     
-    private var tasks: [Task] = TasksViewModel.shared.getTasks()
+    private var tasks: [Task] = TasksViewModel.getTasksWithTodayDeadline()
     private var courtMeets: [CourtMeet] = CourtsViewModel.getTodayMeets()
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         
-        TasksViewModel.shared.observeTasks().subscribe(onNext: { event in
-            self.tasks = TasksViewModel.shared.getTasks()
+        TasksViewModel.observeTasks().subscribe(onNext: { event in
+            self.tasks = TasksViewModel.getTasksWithTodayDeadline()
             self.reloadData()
         }).disposed(by: disposeBag)
         
@@ -123,7 +123,7 @@ extension MainTV: UITableViewDelegate, UITableViewDataSource {
         guard indexPath.section == 1 && !tasks.isEmpty else {  return UISwipeActionsConfiguration() }
         let swipe = UIContextualAction(style: .destructive, title: "Не виконано") { (action, view, success) in
             let task = self.tasks[indexPath.row]
-            TasksViewModel.shared.updateTaskStatus(with: task, status: false)
+            TasksViewModel.updateTaskStatus(with: task, status: false)
             success(true)
         }
         return UISwipeActionsConfiguration(actions: [swipe])
@@ -133,7 +133,7 @@ extension MainTV: UITableViewDelegate, UITableViewDataSource {
         guard indexPath.section == 1 && !tasks.isEmpty  else {  return UISwipeActionsConfiguration() }
         let swipe = UIContextualAction(style: .destructive, title: "Виконано") { (action, view, success) in
             let task = self.tasks[indexPath.row]
-            TasksViewModel.shared.updateTaskStatus(with: task, status: true)
+            TasksViewModel.updateTaskStatus(with: task, status: true)
             success(true)
         }
         swipe.backgroundColor = DS.Colors.taskFinished

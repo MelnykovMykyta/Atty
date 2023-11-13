@@ -19,7 +19,7 @@ class ArchiveClientsTV: UITableView {
     
     private let client = "ClientTVC"
     
-    private var clients: [Client] = ClientsViewModel.shared.getClients().filter { $0.status == true }
+    private var clients: [Client] = ClientsViewModel.getClients().filter { $0.status == true }
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -33,8 +33,8 @@ class ArchiveClientsTV: UITableView {
         
         self.register(ClientTVC.self, forCellReuseIdentifier: client)
         
-        ClientsViewModel.shared.observeClients().subscribe(onNext: { event in
-            self.clients = ClientsViewModel.shared.getClients().filter { $0.status == true }
+        ClientsViewModel.observeClients().subscribe(onNext: { event in
+            self.clients = ClientsViewModel.getClients().filter { $0.status == true }
             self.reloadData()
         }).disposed(by: disposeBag)
     }
@@ -71,7 +71,7 @@ extension ArchiveClientsTV: UITableViewDelegate, UITableViewDataSource {
         
         if !clients.isEmpty && client.status {
             let swipe = UIContextualAction(style: .destructive, title: "Не завершено") { (action, view, success) in
-                ClientsViewModel.shared.updateClientStatus(with: client, status: false)
+                ClientsViewModel.updateClientStatus(with: client, status: false)
                 success(true)
             }
             return UISwipeActionsConfiguration(actions: [swipe])
@@ -85,7 +85,7 @@ extension ArchiveClientsTV: UITableViewDelegate, UITableViewDataSource {
         
         if !clients.isEmpty && !client.status {
             let swipe = UIContextualAction(style: .destructive, title: "Виконано") { (action, view, success) in
-                ClientsViewModel.shared.updateClientStatus(with: client, status: true)
+                ClientsViewModel.updateClientStatus(with: client, status: true)
                 success(true)
             }
             swipe.backgroundColor = DS.Colors.taskFinished

@@ -112,7 +112,7 @@ extension ProjectInfoTV {
         let swipe = UIContextualAction(style: .destructive, title: title) { (action, view, success) in
             let tasks = self.projectItem.tasks.sorted { $0.date < $1.date }.sorted { !$0.status && $1.status}
             let task = tasks[indexPath.row]
-            TasksViewModel.shared.updateTaskStatus(with: task, status: status)
+            TasksViewModel.updateTaskStatus(with: task, status: status)
             success(true)
         }
         if status { swipe.backgroundColor = DS.Colors.taskFinished }

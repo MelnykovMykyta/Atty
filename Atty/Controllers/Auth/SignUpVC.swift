@@ -13,6 +13,7 @@ class SignUpVC: UIViewController, UITextFieldDelegate {
     
     var signInButton: UIButton!
     var userNameTF: UITextField!
+    var userStatus: UITextField!
     var userEmailTF: UITextField!
     var userPasswordTF: UITextField!
     var signUpButton: AuthButton!
@@ -60,6 +61,17 @@ private extension SignUpVC {
         userNameTF.textContentType = .emailAddress
         userNameTF.keyboardType = .emailAddress
         nameView.addSubview(userNameTF)
+        
+        let userStatusView = AuthTFView()
+        tfStackView.addArrangedSubview(userStatusView)
+        
+        userStatus = UITextField()
+        userStatus.backgroundColor = .clear
+        userStatus.placeholder = "Посада/статус"
+        userStatus.autocapitalizationType = .none
+        userStatus.textContentType = .emailAddress
+        userStatus.keyboardType = .emailAddress
+        userStatusView.addSubview(userStatus)
         
         let emailView = AuthTFView()
         tfStackView.addArrangedSubview(emailView)
@@ -132,6 +144,14 @@ private extension SignUpVC {
             $0.edges.equalToSuperview().inset(DS.Constraints.authTFInsets)
         }
         
+        userStatusView.snp.makeConstraints {
+            $0.height.equalTo(DS.Sizes.authTFHeight)
+        }
+        
+        userStatus.snp.makeConstraints {
+            $0.edges.equalToSuperview().inset(DS.Constraints.authTFInsets)
+        }
+        
         emailView.snp.makeConstraints {
             $0.height.equalTo(DS.Sizes.authTFHeight)
         }
@@ -163,11 +183,12 @@ extension SignUpVC {
     
     @objc private func tapSignUn() {
         guard let name = userNameTF.text,
+              let userStatus = userStatus.text,
               let email = userEmailTF.text,
               let password = userPasswordTF.text
         else { return }
         
-        AuthViewModel.signUpUser(name: name, email: email, password: password)
+        AuthViewModel.signUpUser(name: name, userStatus: userStatus, email: email, password: password)
     }
     
     @objc private func tapSignIn() {
