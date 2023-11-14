@@ -21,15 +21,6 @@ class CourtsViewModel {
     
     static var allMeets: [CourtMeet] = [].sorted(by: { $0.date < $1.date })
     
-    static var statusSubject = PublishSubject<Bool>()
-    
-    static var statusFilter: Bool = false
-    
-    static func changeFilter() {
-        statusFilter.toggle()
-        statusSubject.onNext(statusFilter)
-    }
-    
     static func appendMeet(meet: CourtMeet) {
         allMeets.append(meet)
         meetsSubject.onNext(allMeets)
@@ -48,41 +39,6 @@ class CourtsViewModel {
                 return results.toArray()
                     .filter { $0.user == AuthViewModel.getCurrentUser() }
             }
-    }
-    
-    static func observeTodayMeets() -> Observable<[CourtMeet]> {
-        return Observable.collection(from: realm.objects(CourtMeet.self))
-            .map { results in
-                return results.toArray()
-                    .sorted(by: { $0.date < $1.date })
-                    .filter { DateHelper.compareDates(date: $0.date) }
-            }
-    }
-    
-    static func getAllCourtCasesData() -> [CourtCaseDataApi] {
-        var courtCases: [CourtCaseDataApi] = []
-        NetworkService.fetchData(url: "https://testapiat.free.beeceptor.com/courtcase", completion: { (result: Result<[CourtCaseDataApi], Error>) in
-            switch result {
-            case .success(let data):
-                courtCases = data
-            case .failure(let error):
-                print("Error: \(error)")
-            }
-        })
-        return courtCases
-    }
-    
-    static func getTodayMeets() -> [CourtMeet] {
-        return RealmDBService.getObjects(CourtMeet.self)
-            .filter { DateHelper.compareDates(date: $0.date) }
-            .sorted(by: { $0.date < $1.date })
-    }
-    
-    static func getAllMeets() -> [CourtMeet] {
-        guard let user = AuthViewModel.getCurrentUser() else { return [] }
-        return RealmDBService.getObjects(CourtMeet.self)
-            .filter { user.courtCases.contains($0.caseNumber) }
-            .sorted(by: { $0.date < $1.date })
     }
     
     static func getCourtCases() -> [CourtCase] {

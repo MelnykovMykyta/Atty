@@ -122,7 +122,6 @@ private extension CourtCasesVC {
         
         switch sender.index {
         case 0:
-            CourtsViewModel.changeFilter()
             addTable(with: casesTV)
         case 1:
             addTable(with: courtMeets)

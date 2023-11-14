@@ -64,6 +64,7 @@ private extension MainVC {
         
         infoView.dateLabel.text = DateHelper.formatDate(Date())
         infoView.costsButton.addTarget(self, action: #selector(tapCostsInfo), for: .touchUpInside)
+        infoView.courtMeetsValue.text = "0"
         
         tableView = MainTV()
         contentView.addSubview(tableView)

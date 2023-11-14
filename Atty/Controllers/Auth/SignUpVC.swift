@@ -57,7 +57,7 @@ private extension SignUpVC {
         userNameTF = UITextField()
         userNameTF.backgroundColor = .clear
         userNameTF.placeholder = "Введіть ім'я"
-        userNameTF.autocapitalizationType = .none
+        userNameTF.autocapitalizationType = .sentences
         userNameTF.textContentType = .name
         nameView.addSubview(userNameTF)
         
@@ -67,7 +67,7 @@ private extension SignUpVC {
         userStatus = UITextField()
         userStatus.backgroundColor = .clear
         userStatus.placeholder = "Посада/статус"
-        userStatus.autocapitalizationType = .none
+        userStatus.autocapitalizationType = .sentences
         userStatusView.addSubview(userStatus)
         
         let emailView = AuthTFView()

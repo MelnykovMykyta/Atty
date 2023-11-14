@@ -17,7 +17,7 @@ class CourtMeetsTV: UITableView {
     
     private let meet = "CourtMeetTVC"
     
-    private var courtMeets: [CourtMeet] = CourtsViewModel.allMeets
+    private var courtMeets: [CourtMeet] = CourtsViewModel.allMeets.sorted(by: { $0.date < $1.date })
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -33,7 +33,7 @@ class CourtMeetsTV: UITableView {
         self.register(CourtMeetTVC.self, forCellReuseIdentifier: meet)
         
         CourtsViewModel.meetsSubject.subscribe(onNext: { event in
-            self.courtMeets = CourtsViewModel.allMeets
+            self.courtMeets = CourtsViewModel.allMeets.sorted(by: { $0.date < $1.date })
             self.reloadData()
         }).disposed(by: disposeBag)
     }
