@@ -8,6 +8,16 @@
 import Foundation
 import RealmSwift
 
+
+struct CourtCaseDataApi: Decodable {
+     var caseNumber: String
+     var courtName: String
+     var plaintiff: String
+     var defendant: String
+     var disputeSubject: String
+     var judge: String
+}
+
 class CourtCase: Object {
     
     @Persisted(primaryKey: true) var id: String = UUID().uuidString
@@ -21,8 +31,9 @@ class CourtCase: Object {
     @Persisted var courtMeet: List<CourtMeet> = List<CourtMeet>()
     @Persisted var judge: String = ""
     @Persisted var status: Bool = false
+    @Persisted var user: User?
     
-    convenience init(caseNumber: String, courtName: String, plaintiff: String, defendant: String, disputeSubject: String, judge: String) {
+    convenience init(caseNumber: String, courtName: String, plaintiff: String, defendant: String, disputeSubject: String, judge: String, user: User) {
         self.init()
         self.caseNumber = caseNumber
         self.courtName = courtName
@@ -30,5 +41,6 @@ class CourtCase: Object {
         self.defendant = defendant
         self.disputeSubject = disputeSubject
         self.judge = judge
+        self.user = user
     }
 }

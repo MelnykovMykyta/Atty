@@ -42,6 +42,13 @@ class ClientsViewModel {
         return sortedClientTasks
     }
     
+    static func getClientCourts() -> [CourtCase] {
+        let cases: [CourtCase] = CourtsViewModel.getCourtCases()
+            .filter { $0.client == ClientsViewModel.currentClient }
+            .sorted { !$0.status && $1.status}
+        return cases
+    }
+    
     static func updateClientStatus(with client: Client, status: Bool) {
         RealmDBService.updateClientStatus(with: client, status: status)
     }

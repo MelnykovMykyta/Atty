@@ -15,12 +15,14 @@ class ClientInfoTV: UITableView {
     
     private var disposeBag = DisposeBag()
     
-    let client = "ClientTVC"
-    let header = "HeaderTVC"
-    let task = "TaskTVC"
+    private let client = "ClientTVC"
+    private let header = "HeaderTVC"
+    private let task = "TaskTVC"
+    private let meet = "CourtMeetTVC"
     
     private var clientItem: Client = ClientsViewModel.currentClient
     private var clientTasks = ClientsViewModel.getClientProjectsTasks()
+    private var clientCourts: [CourtCase] = ClientsViewModel.getClientCourts()
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -35,6 +37,7 @@ class ClientInfoTV: UITableView {
         self.register(ClientTVC.self, forCellReuseIdentifier: client)
         self.register(HeaderTVC.self, forCellReuseIdentifier: header)
         self.register(TaskTVC.self, forCellReuseIdentifier: task)
+        self.register(CourtMeetTVC.self, forCellReuseIdentifier: meet)
         
         ClientsViewModel.observeClients().subscribe(onNext: { event in
             self.clientItem = ClientsViewModel.currentClient
@@ -42,6 +45,10 @@ class ClientInfoTV: UITableView {
             self.reloadData()
         }).disposed(by: disposeBag)
         
+        CourtsViewModel.observeCases().subscribe(onNext: { event in
+            self.clientCourts = ClientsViewModel.getClientCourts()
+            self.reloadData()
+        }).disposed(by: disposeBag)
     }
     
     required init?(coder: NSCoder) {
@@ -65,6 +72,8 @@ extension ClientInfoTV: UITableViewDelegate, UITableViewDataSource {
             return clientTasks.isEmpty ? 1 : clientTasks.count
         case 3:
             return 1
+        case 4:
+            return clientCourts.isEmpty ? 1 : clientCourts.count
         default:
             return 1
         }
@@ -73,18 +82,22 @@ extension ClientInfoTV: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let clientCell = tableView.dequeueReusableCell(withIdentifier: "ClientTVC") as? ClientTVC,
               let clientHeaderCell = tableView.dequeueReusableCell(withIdentifier: "HeaderTVC") as? HeaderTVC,
-              let tasksCell = tableView.dequeueReusableCell(withIdentifier: "TaskTVC") as? TaskTVC
+              let tasksCell = tableView.dequeueReusableCell(withIdentifier: "TaskTVC") as? TaskTVC,
+              let meetCell = tableView.dequeueReusableCell(withIdentifier: "CourtMeetTVC") as? CourtMeetTVC
         else { return UITableViewCell() }
         
         switch indexPath.section {
+            
         case 0:
             clientCell.addFullClient(clientName: clientItem.name, contactPerson: clientItem.contactPerson, contact: clientItem.contact, email: clientItem.email, idCode: clientItem.idCode)
             clientCell.selectionStyle = .none
             return clientCell
+            
         case 1:
             clientHeaderCell.addTitle(title: "Задачі")
             clientHeaderCell.selectionStyle = .none
             return clientHeaderCell
+            
         case 2:
             if clientTasks.isEmpty {
                 tasksCell.emptyTasksList()
@@ -94,9 +107,22 @@ extension ClientInfoTV: UITableViewDelegate, UITableViewDataSource {
             }
             tasksCell.selectionStyle = .none
             return tasksCell
+            
         case 3:
             clientHeaderCell.addTitle(title: "Суди")
+            clientHeaderCell.selectionStyle = .none
             return clientHeaderCell
+            
+        case 4:
+            if clientCourts.isEmpty {
+                meetCell.emptyCourtMeetsList(with: "По клієнту справи не відстежуються")
+            } else {
+                let caseItem = clientCourts[indexPath.row]
+                meetCell.addCourtCase(courtName: caseItem.courtName, caseNumber: caseItem.caseNumber, plaintiff: caseItem.plaintiff, defendant: caseItem.defendant, judge: caseItem.judge, status: caseItem.status)
+            }
+            meetCell.selectionStyle = .none
+            return meetCell
+            
         default:
             return UITableViewCell()
         }

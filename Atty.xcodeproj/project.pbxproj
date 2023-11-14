@@ -73,6 +73,7 @@
 		77EB3F622AFA71BC002AB368 /* ProjectInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EB3F612AFA71BC002AB368 /* ProjectInfoVC.swift */; };
 		77EB3F642AFACB4C002AB368 /* ProjectInfoTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EB3F632AFACB4C002AB368 /* ProjectInfoTV.swift */; };
 		77F1BDA52B01A9A400F0862A /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F1BDA42B01A9A400F0862A /* DateHelper.swift */; };
+		77F1BDA72B02CA7000F0862A /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F1BDA62B02CA7000F0862A /* NetworkService.swift */; };
 		77F9D5382AF3A9C5002132D1 /* MainTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F9D5372AF3A9C5002132D1 /* MainTV.swift */; };
 		77F9D53D2AF3BA15002132D1 /* HeaderTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F9D53C2AF3BA15002132D1 /* HeaderTVC.swift */; };
 		77F9D5432AF3C536002132D1 /* TaskTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F9D5422AF3C536002132D1 /* TaskTVC.swift */; };
@@ -157,6 +158,7 @@
 		77EB3F612AFA71BC002AB368 /* ProjectInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInfoVC.swift; sourceTree = "<group>"; };
 		77EB3F632AFACB4C002AB368 /* ProjectInfoTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInfoTV.swift; sourceTree = "<group>"; };
 		77F1BDA42B01A9A400F0862A /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
+		77F1BDA62B02CA7000F0862A /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		77F9D5372AF3A9C5002132D1 /* MainTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTV.swift; sourceTree = "<group>"; };
 		77F9D53C2AF3BA15002132D1 /* HeaderTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTVC.swift; sourceTree = "<group>"; };
 		77F9D5422AF3C536002132D1 /* TaskTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTVC.swift; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 			children = (
 				772D35AD2AEB2D8C00038AA6 /* FirebaseAuthService.swift */,
 				77F9D54E2AF7CBF2002132D1 /* RealmDBService.swift */,
+				77F1BDA62B02CA7000F0862A /* NetworkService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -644,6 +647,7 @@
 				772D35A72AEA845300038AA6 /* CourtCasesVC.swift in Sources */,
 				77EB3F5C2AFA40A2002AB368 /* ProjectsViewModel.swift in Sources */,
 				774583422AF9B40400340CBB /* ProjectTVC.swift in Sources */,
+				77F1BDA72B02CA7000F0862A /* NetworkService.swift in Sources */,
 				7717DFED2AFDAFF70010167A /* SegmentControllerView.swift in Sources */,
 				77FBEC592AFFC6D400D8FEC7 /* PojectCourtCasesTV.swift in Sources */,
 				772D359E2AEA82CC00038AA6 /* ProjectsVC.swift in Sources */,

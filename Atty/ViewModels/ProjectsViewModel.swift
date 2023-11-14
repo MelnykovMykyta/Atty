@@ -37,7 +37,6 @@ class ProjectsViewModel {
     
     static func getProjectCourtCases() -> [CourtCase] {
         return RealmDBService.getObjects(CourtCase.self)
-//            .filter { $0.user == AuthViewModel.getCurrentUser() }
             .filter { $0.project == currentProject}
     }
     

@@ -106,22 +106,43 @@ extension AddCourtCaseVC {
     
     @objc private func addCourtCase() {
         
-        guard let caseNumber = courtCaseNumber.text, !caseNumber.isEmpty else { return }
+        guard let caseNumber = courtCaseNumber.text,
+              !caseNumber.isEmpty,
+              let user = AuthViewModel.getCurrentUser()
+        else { return }
         
-//                let project = Project(name: name, shortDesc: shortDesc, additionalDesc: additionalDesc, category: category)
-//
-//        if let project_ = project {
-//            print("FOR PROJECT: \(project_.name)")
-//            let a = CourtCase(caseNumber: "PROJECTTT", courtName: "Господарський", plaintiff: "ТОВ НООО", defendant: "ТОВ АААА", disputeSubject: "Стягнення коштыв 100000", judge: "ТИП")
-//            RealmDBService.addCourtCaseToProject(a, to: project_)
-//        } else {
-//            print("SIMPLE")
-//            let a = CourtCase(caseNumber: "112/1212/1223", courtName: "Господарський", plaintiff: "ТОВ НООО", defendant: "ТОВ АААА", disputeSubject: "Стягнення коштыв 100000", judge: "ТИП")
-//            RealmDBService.addObject(object: a)
-//                        ProjectsViewModel.addProject(with: project)
-//        }
-        
-        dismiss(animated: true)
+        if !(CourtsViewModel.getCourtCases()
+            .filter { $0.caseNumber == caseNumber })
+            .isEmpty {
+            
+            dismiss(animated: true)
+            Alert.showAlert(title: "", message: "Зазначена справа вже відстежується")
+            
+        } else {
+            
+            NetworkService.fetchData(url: "https://attyapp2.free.beeceptor.com/CourtCases", completion: { (result: Result<[CourtCaseDataApi], Error>) in
+                switch result {
+                case .success(let data):
+                    guard let courtItem = data.filter ({ $0.caseNumber == caseNumber }).first else {
+                        Alert.showAlert(title: "Хм..", message: "Справу не знайдено")
+                        return
+                    }
+                    
+                    let courtCase = CourtCase(caseNumber: courtItem.caseNumber, courtName: courtItem.courtName, plaintiff: courtItem.plaintiff, defendant: courtItem.defendant, disputeSubject: courtItem.disputeSubject, judge: courtItem.judge, user: user)
+                    
+                    if let project_ = self.project  {
+                        RealmDBService.addCourtCaseToProject(courtCase, to: project_)
+                    } else {
+                        CourtsViewModel.addCourtCase(with: courtCase)
+                    }
+                    
+                case .failure(let error):
+                    print("Error: \(error)")
+                }
+                
+            })
+            dismiss(animated: true)
+        }
     }
     
     @objc private func tapClose() {

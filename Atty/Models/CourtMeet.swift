@@ -8,6 +8,16 @@
 import Foundation
 import RealmSwift
 
+class CourtMeetJSON: Decodable {
+    
+     var courtName: String
+     var caseNumber: String
+     var plaintiff: String
+     var defendant: String
+     var judge: String
+     var date: String
+}
+
 class CourtMeet: Object {
     
     @Persisted(primaryKey: true) var id: String = UUID().uuidString
