@@ -11,4 +11,5 @@ struct ApiUrls {
     
     static var courtCases = "https://testapiat.free.beeceptor.com/courtmeets"
     static var courtMeets = "https://testapiat.free.beeceptor.com/courtmeets"
+    
 }
