@@ -87,12 +87,12 @@ private extension CourtCasesVC {
     func addSegmentController() {
         
         segmentController = SegmentControllerView()
-        segmentController.addController(with: ["Всі", "Засідання", "Архів"])
+        segmentController.addController(with: ["Всі", "Засідання"])
         segmentController.controller.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
         contentView.addSubview(segmentController)
         
         segmentController.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(DS.SizeMultipliers.eightyPercent)
+            $0.width.equalToSuperview().multipliedBy(DS.SizeMultipliers.halfSize)
             $0.top.equalTo(infoView.snp.bottom).inset(-DS.Constraints.authViewLeadinTrailing)
             $0.leading.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
             $0.height.equalTo(contentView.snp.width).multipliedBy(DS.SizeMultipliers.tenPercent)
@@ -126,9 +126,6 @@ private extension CourtCasesVC {
             addTable(with: casesTV)
         case 1:
             addTable(with: courtMeets)
-        case 2:
-            CourtsViewModel.changeFilter()
-            addTable(with: casesTV)
         default:
             return
         }

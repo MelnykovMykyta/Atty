@@ -72,6 +72,7 @@
 		77EB3F602AFA5E01002AB368 /* AddProjectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EB3F5F2AFA5E01002AB368 /* AddProjectVC.swift */; };
 		77EB3F622AFA71BC002AB368 /* ProjectInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EB3F612AFA71BC002AB368 /* ProjectInfoVC.swift */; };
 		77EB3F642AFACB4C002AB368 /* ProjectInfoTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EB3F632AFACB4C002AB368 /* ProjectInfoTV.swift */; };
+		77EBE0B32B03980800336999 /* CourtCaseInfoMeetsTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EBE0B22B03980800336999 /* CourtCaseInfoMeetsTV.swift */; };
 		77F1BDA52B01A9A400F0862A /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F1BDA42B01A9A400F0862A /* DateHelper.swift */; };
 		77F1BDA72B02CA7000F0862A /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F1BDA62B02CA7000F0862A /* NetworkService.swift */; };
 		77F9D5382AF3A9C5002132D1 /* MainTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F9D5372AF3A9C5002132D1 /* MainTV.swift */; };
@@ -157,6 +158,7 @@
 		77EB3F5F2AFA5E01002AB368 /* AddProjectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProjectVC.swift; sourceTree = "<group>"; };
 		77EB3F612AFA71BC002AB368 /* ProjectInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInfoVC.swift; sourceTree = "<group>"; };
 		77EB3F632AFACB4C002AB368 /* ProjectInfoTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInfoTV.swift; sourceTree = "<group>"; };
+		77EBE0B22B03980800336999 /* CourtCaseInfoMeetsTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourtCaseInfoMeetsTV.swift; sourceTree = "<group>"; };
 		77F1BDA42B01A9A400F0862A /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		77F1BDA62B02CA7000F0862A /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		77F9D5372AF3A9C5002132D1 /* MainTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTV.swift; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 				77CE085E2AFEF0BF002E3144 /* CourtCasesTV.swift */,
 				77FBEC562AFFC2D900D8FEC7 /* CourtMeetsTV.swift */,
 				77FBEC5C2AFFD57C00D8FEC7 /* CourtCaseInfoTV.swift */,
+				77EBE0B22B03980800336999 /* CourtCaseInfoMeetsTV.swift */,
 			);
 			path = CourtCases;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 		77DB26F32AE5531000944822 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				77DB26FF2AE5812C00944822 /* CustomComponents */,
 				77F9D5362AF3A9AD002132D1 /* TableViews */,
 			);
 			path = Views;
@@ -367,7 +371,6 @@
 				77DB26FA2AE5671900944822 /* DS.swift */,
 				77F1BDA42B01A9A400F0862A /* DateHelper.swift */,
 				772D35AB2AEA871700038AA6 /* TabBarItemEnum.swift */,
-				77DB26FF2AE5812C00944822 /* CustomComponents */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -399,12 +402,8 @@
 		77DB26FF2AE5812C00944822 /* CustomComponents */ = {
 			isa = PBXGroup;
 			children = (
+				77EBE0B42B03A12C00336999 /* TableViewCells */,
 				77DB26FC2AE56D1100944822 /* CustomViews */,
-				774583412AF9B40400340CBB /* ProjectTVC.swift */,
-				77048A222AFC60DC00824E5F /* ClientTVC.swift */,
-				77F9D5422AF3C536002132D1 /* TaskTVC.swift */,
-				77F9D53C2AF3BA15002132D1 /* HeaderTVC.swift */,
-				77F9D54A2AF7BE16002132D1 /* CourtMeetTVC.swift */,
 				77DB27002AE5814D00944822 /* AuthButton.swift */,
 				77DB273C2AE72E9D00944822 /* Alert.swift */,
 				7717DFEA2AFDA1D80010167A /* SegmentController.swift */,
@@ -469,6 +468,18 @@
 				777027A32AE28F5E007CA2B7 /* SceneDelegate.swift */,
 			);
 			path = Aplication;
+			sourceTree = "<group>";
+		};
+		77EBE0B42B03A12C00336999 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				774583412AF9B40400340CBB /* ProjectTVC.swift */,
+				77048A222AFC60DC00824E5F /* ClientTVC.swift */,
+				77F9D5422AF3C536002132D1 /* TaskTVC.swift */,
+				77F9D53C2AF3BA15002132D1 /* HeaderTVC.swift */,
+				77F9D54A2AF7BE16002132D1 /* CourtMeetTVC.swift */,
+			);
+			path = TableViewCells;
 			sourceTree = "<group>";
 		};
 		77F9D5362AF3A9AD002132D1 /* TableViews */ = {
@@ -653,6 +664,7 @@
 				772D359E2AEA82CC00038AA6 /* ProjectsVC.swift in Sources */,
 				772D35A32AEA83D400038AA6 /* ClientsVC.swift in Sources */,
 				779903C52B0047FB00B63303 /* SignUpVC.swift in Sources */,
+				77EBE0B32B03980800336999 /* CourtCaseInfoMeetsTV.swift in Sources */,
 				77FBEC5B2AFFD30400D8FEC7 /* AddCourtCaseVC.swift in Sources */,
 				7745832C2AF8155900340CBB /* MainInfoView.swift in Sources */,
 				772D35AC2AEA871700038AA6 /* TabBarItemEnum.swift in Sources */,

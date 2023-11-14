@@ -44,6 +44,7 @@ class FirebaseAuthService {
         
         if user != nil {
             AuthViewModel.currentUserEmail = Auth.auth().currentUser?.email ?? ""
+            CourtsViewModel.fetchCourtMeets()
             FirebaseAuthService.shared.changeVCAuth(vc: NavigateTabBarController())
         } else {
             FirebaseAuthService.shared.changeVCAuth(vc: SignUpVC())

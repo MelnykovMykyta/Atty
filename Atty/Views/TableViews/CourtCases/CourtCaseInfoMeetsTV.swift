@@ -1,8 +1,8 @@
 //
-//  CourtMeetsTV.swift
+//  CourtCaseInfoMeetsTV.swift
 //  Atty
 //
-//  Created by Nikita Melnikov on 11.11.2023.
+//  Created by Nikita Melnikov on 14.11.2023.
 //
 
 import Foundation
@@ -11,13 +11,14 @@ import SnapKit
 import RxCocoa
 import RxSwift
 
-class CourtMeetsTV: UITableView {
+class CourtCaseInfoMeetsTV: UITableView {
     
     private var disposeBag = DisposeBag()
     
     private let meet = "CourtMeetTVC"
     
     private var courtMeets: [CourtMeet] = CourtsViewModel.allMeets
+        .filter { $0.caseNumber == CourtsViewModel.currentCase.caseNumber }
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -34,6 +35,7 @@ class CourtMeetsTV: UITableView {
         
         CourtsViewModel.meetsSubject.subscribe(onNext: { event in
             self.courtMeets = CourtsViewModel.allMeets
+                .filter { $0.caseNumber == CourtsViewModel.currentCase.caseNumber }
             self.reloadData()
         }).disposed(by: disposeBag)
     }
@@ -43,7 +45,7 @@ class CourtMeetsTV: UITableView {
     }
 }
 
-extension CourtMeetsTV: UITableViewDelegate, UITableViewDataSource {
+extension CourtCaseInfoMeetsTV: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         courtMeets.isEmpty ? 1 : courtMeets.count
@@ -63,3 +65,4 @@ extension CourtMeetsTV: UITableViewDelegate, UITableViewDataSource {
         return meetCell
     }
 }
+

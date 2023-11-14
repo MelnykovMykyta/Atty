@@ -17,6 +17,10 @@ class CourtsViewModel {
     
     static var currentCase: CourtCase = CourtCase()
     
+    static var meetsSubject = PublishSubject<[CourtMeet]>()
+    
+    static var allMeets: [CourtMeet] = [].sorted(by: { $0.date < $1.date })
+    
     static var statusSubject = PublishSubject<Bool>()
     
     static var statusFilter: Bool = false
@@ -24,6 +28,11 @@ class CourtsViewModel {
     static func changeFilter() {
         statusFilter.toggle()
         statusSubject.onNext(statusFilter)
+    }
+    
+    static func appendMeet(meet: CourtMeet) {
+        allMeets.append(meet)
+        meetsSubject.onNext(allMeets)
     }
     
     static func observeMeets() -> Observable<[CourtMeet]> {
@@ -52,7 +61,7 @@ class CourtsViewModel {
     
     static func getAllCourtCasesData() -> [CourtCaseDataApi] {
         var courtCases: [CourtCaseDataApi] = []
-        NetworkService.fetchData(url: "https://attyapp2.free.beeceptor.com/CourtCases", completion: { (result: Result<[CourtCaseDataApi], Error>) in
+        NetworkService.fetchData(url: "https://testapiat.free.beeceptor.com/courtcase", completion: { (result: Result<[CourtCaseDataApi], Error>) in
             switch result {
             case .success(let data):
                 courtCases = data
@@ -70,13 +79,16 @@ class CourtsViewModel {
     }
     
     static func getAllMeets() -> [CourtMeet] {
+        guard let user = AuthViewModel.getCurrentUser() else { return [] }
         return RealmDBService.getObjects(CourtMeet.self)
+            .filter { user.courtCases.contains($0.caseNumber) }
             .sorted(by: { $0.date < $1.date })
     }
     
     static func getCourtCases() -> [CourtCase] {
         return RealmDBService.getObjects(CourtCase.self)
-            .filter {$0.user == AuthViewModel.getCurrentUser() }
+            .filter { $0.user == AuthViewModel.getCurrentUser() }
+            .sorted { !$0.status && $1.status}
     }
     
     static func addCourtCase(with courtCase: CourtCase) {
@@ -86,5 +98,28 @@ class CourtsViewModel {
     static func updateCourtCaseStatus(with courtCase: CourtCase, status: Bool) {
         RealmDBService.updateCourtCaseStatus(with: courtCase, status: status)
     }
+    
+    static func fetchCourtMeets() {
+        
+        guard let user = AuthViewModel.getCurrentUser() else { return }
+        
+        if !user.courtCases.isEmpty {
+            NetworkService.fetchData(url: "https://testapiat.free.beeceptor.com/courtmeets", completion: { (result: Result<[CourtMeetApi], Error>) in
+                switch result {
+                case .success(let data):
+                    
+                    let meetApiItems = data
+                        .filter { user.courtCases.contains($0.caseNumber) }
+                    allMeets = []
+                    meetApiItems.forEach { meet in
+                        appendMeet(meet: CourtMeet(courtName: meet.courtName, caseNumber: meet.caseNumber, plaintiff: meet.plaintiff, defendant: meet.defendant, judge: meet.judge, date: DateHelper.formateDateFromApi(date: meet.date) ?? Date()))
+                    }
+                    
+                case .failure(let error):
+                    print("Error: \(error)")
+                }
+                
+            })
+        }
+    }
 }
-

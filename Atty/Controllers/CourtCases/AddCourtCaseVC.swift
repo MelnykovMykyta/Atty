@@ -136,11 +136,15 @@ extension AddCourtCaseVC {
                         CourtsViewModel.addCourtCase(with: courtCase)
                     }
                     
+                    RealmDBService.addCourtCaseToUser(courtCase.caseNumber, to: user)
+                    CourtsViewModel.fetchCourtMeets()
+                    
                 case .failure(let error):
                     print("Error: \(error)")
                 }
                 
             })
+            
             dismiss(animated: true)
         }
     }

@@ -20,7 +20,9 @@ class MainTV: UITableView {
     private let meet = "CourtMeetTVC"
     
     private var tasks: [Task] = TasksViewModel.getTasksWithTodayDeadline()
-    private var courtMeets: [CourtMeet] = CourtsViewModel.getTodayMeets()
+    private var courtMeets: [CourtMeet] = CourtsViewModel.allMeets
+        .sorted(by: { $0.date < $1.date })
+        .filter { DateHelper.compareDates(date: $0.date) }
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -30,8 +32,10 @@ class MainTV: UITableView {
             self.reloadData()
         }).disposed(by: disposeBag)
         
-        CourtsViewModel.observeMeets().subscribe(onNext: { event in
-            self.courtMeets = CourtsViewModel.getTodayMeets()
+        CourtsViewModel.meetsSubject.subscribe(onNext: { event in
+            self.courtMeets = CourtsViewModel.allMeets
+                .sorted(by: { $0.date < $1.date })
+                .filter { DateHelper.compareDates(date: $0.date) }
             self.reloadData()
         }).disposed(by: disposeBag)
         

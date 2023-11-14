@@ -9,6 +9,8 @@ import Foundation
 
 class DateHelper {
     
+    static let dateFormatter = DateFormatter()
+    
     static func compareDates(date: Date) -> Bool {
         let calendar = Calendar.current
         let components = calendar.dateComponents([.day, .month, .year], from: date)
@@ -18,10 +20,15 @@ class DateHelper {
     }
     
     static func formatDate(_ date: Date) -> String {
-        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd MMMM yyyy"
         dateFormatter.locale = Locale(identifier: "uk_UA")
         return dateFormatter.string(from: date)
+    }
+    
+    static func formateDateFromApi(date: String) -> Date? {
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        let date = dateFormatter.date(from: date)
+        return date
     }
 }
 

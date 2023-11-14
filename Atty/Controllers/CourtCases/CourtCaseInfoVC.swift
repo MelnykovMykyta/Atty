@@ -121,9 +121,9 @@ private extension CourtCaseInfoVC {
         case 0:
             addTable(with: CourtCaseInfoTV())
         case 1:
-            addTable(with: ProjectDocumentsTV())
+            Alert.showAlert(title: "Скоро", message: "Цей розділ в розробці")
         case 2:
-            addTable(with: PojectCourtCasesTV())
+            addTable(with: CourtCaseInfoMeetsTV())
         default:
             return
         }

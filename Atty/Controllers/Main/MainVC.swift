@@ -33,9 +33,10 @@ class MainVC: UIViewController, UITextFieldDelegate {
             self.infoView.tasksValue.text = count
         }).disposed(by: disposeBag)
         
-        CourtsViewModel.observeTodayMeets().subscribe(onNext: { event in
-            let count = event.count.description
-            self.infoView.courtMeetsValue.text = count
+        CourtsViewModel.meetsSubject.subscribe(onNext: { event in
+            let count = CourtsViewModel.allMeets.filter { DateHelper.compareDates(date: $0.date) }.count
+                    
+            self.infoView.courtMeetsValue.text = count.description
         }).disposed(by: disposeBag)
     }
 }

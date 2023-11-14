@@ -23,7 +23,7 @@ class CourtCasesTV: UITableView {
     
     private let meet = "CourtMeetTVC"
     
-    private var courtCases: [CourtCase] = CourtsViewModel.getCourtCases().filter { $0.status == CourtsViewModel.statusFilter }
+    private var courtCases: [CourtCase] = CourtsViewModel.getCourtCases()
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -36,14 +36,14 @@ class CourtCasesTV: UITableView {
         backgroundColor = .clear
         
         self.register(CourtMeetTVC.self, forCellReuseIdentifier: meet)
-
+        
         CourtsViewModel.statusSubject.subscribe({ event in
-            self.courtCases = CourtsViewModel.getCourtCases().filter { $0.status == CourtsViewModel.statusFilter }
+            self.courtCases = CourtsViewModel.getCourtCases()
             self.reloadData()
         }).disposed(by: disposeBag)
         
         CourtsViewModel.observeCases().subscribe(onNext: { event in
-            self.courtCases = CourtsViewModel.getCourtCases().filter { $0.status == CourtsViewModel.statusFilter }
+            self.courtCases = CourtsViewModel.getCourtCases()
             self.reloadData()
         }).disposed(by: disposeBag)
     }
@@ -75,9 +75,10 @@ extension CourtCasesTV: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if !courtCases.isEmpty && !CourtsViewModel.statusFilter  {
+        let caseItem = self.courtCases[indexPath.row]
+        
+        if !courtCases.isEmpty && !caseItem.status {
             let swipe = UIContextualAction(style: .destructive, title: "В архів") { (action, view, success) in
-                let caseItem = self.courtCases[indexPath.row]
                 CourtsViewModel.updateCourtCaseStatus(with: caseItem, status: true)
                 success(true)
             }
@@ -87,10 +88,10 @@ extension CourtCasesTV: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let caseItem = self.courtCases[indexPath.row]
         
-        if !courtCases.isEmpty && CourtsViewModel.statusFilter {
+        if !courtCases.isEmpty && caseItem.status {
             let swipe = UIContextualAction(style: .destructive, title: "Актуально") { (action, view, success) in
-                let caseItem = self.courtCases[indexPath.row]
                 CourtsViewModel.updateCourtCaseStatus(with: caseItem, status: false)
                 success(true)
             }

@@ -94,7 +94,7 @@ extension CourtMeetTVC {
         plaintiffLabel = UILabel()
         plaintiffLabel.text = "Позивач: \(plaintiff)"
         plaintiffLabel.textColor = DS.Colors.darkedTextColor
-        plaintiffLabel.numberOfLines = 0
+        plaintiffLabel.numberOfLines = 2
         plaintiffLabel.font = UIFont(name: "Manrope-ExtraLight", size: 10)
         view.addSubview(plaintiffLabel)
         
@@ -144,11 +144,13 @@ extension CourtMeetTVC {
         plaintiffLabel.snp.makeConstraints {
             $0.top.equalTo(caseNumberLabel.snp.bottom).inset(-DS.Constraints.baseInsetViews)
             $0.leading.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+            $0.width.equalToSuperview().multipliedBy(DS.SizeMultipliers.seventyPercent)
         }
         
         defendantLabel.snp.makeConstraints {
             $0.top.equalTo(plaintiffLabel.snp.bottom)
             $0.leading.equalToSuperview().inset(DS.Constraints.authViewLeadinTrailing)
+            $0.width.equalToSuperview().multipliedBy(DS.SizeMultipliers.seventyPercent)
         }
         
         judgeLabel.snp.makeConstraints {

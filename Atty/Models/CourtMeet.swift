@@ -8,14 +8,14 @@
 import Foundation
 import RealmSwift
 
-class CourtMeetJSON: Decodable {
+struct CourtMeetApi: Decodable {
     
-     var courtName: String
-     var caseNumber: String
-     var plaintiff: String
-     var defendant: String
-     var judge: String
-     var date: String
+    var courtName: String
+    var caseNumber: String
+    var plaintiff: String
+    var defendant: String
+    var judge: String
+    var date: String
 }
 
 class CourtMeet: Object {
