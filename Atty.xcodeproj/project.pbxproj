@@ -19,6 +19,7 @@
 		77048A2C2AFCDB1B00824E5F /* ClientInfoTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77048A2B2AFCDB1B00824E5F /* ClientInfoTV.swift */; };
 		77048A2E2AFD2C7200824E5F /* ProjectsByClientTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77048A2D2AFD2C7200824E5F /* ProjectsByClientTV.swift */; };
 		77048A322AFD429A00824E5F /* TasksByClientTV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77048A312AFD429A00824E5F /* TasksByClientTV.swift */; };
+		770C5D022B03EEE400AA91FE /* ApiUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770C5D012B03EEE400AA91FE /* ApiUrls.swift */; };
 		7717DFEB2AFDA1D80010167A /* SegmentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7717DFEA2AFDA1D80010167A /* SegmentController.swift */; };
 		7717DFED2AFDAFF70010167A /* SegmentControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7717DFEC2AFDAFF70010167A /* SegmentControllerView.swift */; };
 		772D35972AE94F1100038AA6 /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772D35962AE94F1100038AA6 /* ResetPasswordVC.swift */; };
@@ -103,6 +104,7 @@
 		77048A2B2AFCDB1B00824E5F /* ClientInfoTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientInfoTV.swift; sourceTree = "<group>"; };
 		77048A2D2AFD2C7200824E5F /* ProjectsByClientTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsByClientTV.swift; sourceTree = "<group>"; };
 		77048A312AFD429A00824E5F /* TasksByClientTV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksByClientTV.swift; sourceTree = "<group>"; };
+		770C5D012B03EEE400AA91FE /* ApiUrls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiUrls.swift; sourceTree = "<group>"; };
 		7717DFEA2AFDA1D80010167A /* SegmentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentController.swift; sourceTree = "<group>"; };
 		7717DFEC2AFDAFF70010167A /* SegmentControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentControllerView.swift; sourceTree = "<group>"; };
 		772D35962AE94F1100038AA6 /* ResetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
@@ -371,6 +373,7 @@
 				77DB26FA2AE5671900944822 /* DS.swift */,
 				77F1BDA42B01A9A400F0862A /* DateHelper.swift */,
 				772D35AB2AEA871700038AA6 /* TabBarItemEnum.swift */,
+				770C5D012B03EEE400AA91FE /* ApiUrls.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -680,6 +683,7 @@
 				77048A292AFCD5C800824E5F /* ClientInfoVC.swift in Sources */,
 				77F9D5382AF3A9C5002132D1 /* MainTV.swift in Sources */,
 				77DB273B2AE724DB00944822 /* AuthViewModel.swift in Sources */,
+				770C5D022B03EEE400AA91FE /* ApiUrls.swift in Sources */,
 				774583342AF84D6100340CBB /* TasksTV.swift in Sources */,
 				77FBEC5D2AFFD57C00D8FEC7 /* CourtCaseInfoTV.swift in Sources */,
 				779903BF2B001DA600B63303 /* User.swift in Sources */,

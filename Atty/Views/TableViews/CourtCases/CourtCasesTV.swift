@@ -37,11 +37,6 @@ class CourtCasesTV: UITableView {
         
         self.register(CourtMeetTVC.self, forCellReuseIdentifier: meet)
         
-        CourtsViewModel.statusSubject.subscribe({ event in
-            self.courtCases = CourtsViewModel.getCourtCases()
-            self.reloadData()
-        }).disposed(by: disposeBag)
-        
         CourtsViewModel.observeCases().subscribe(onNext: { event in
             self.courtCases = CourtsViewModel.getCourtCases()
             self.reloadData()

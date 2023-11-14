@@ -60,7 +60,7 @@ class CourtsViewModel {
         guard let user = AuthViewModel.getCurrentUser() else { return }
         
         if !user.courtCases.isEmpty {
-            NetworkService.fetchData(url: "https://testapiat.free.beeceptor.com/courtmeets", completion: { (result: Result<[CourtMeetApi], Error>) in
+            NetworkService.fetchData(url: ApiUrls.courtMeets, completion: { (result: Result<[CourtMeetApi], Error>) in
                 switch result {
                 case .success(let data):
                     

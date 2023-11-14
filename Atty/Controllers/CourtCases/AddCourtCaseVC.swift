@@ -120,7 +120,7 @@ extension AddCourtCaseVC {
             
         } else {
             
-            NetworkService.fetchData(url: "https://testapiat.free.beeceptor.com/courtcase", completion: { (result: Result<[CourtCaseDataApi], Error>) in
+            NetworkService.fetchData(url: ApiUrls.courtCases, completion: { (result: Result<[CourtCaseDataApi], Error>) in
                 switch result {
                 case .success(let data):
                     guard let courtItem = data.filter ({ $0.caseNumber == caseNumber }).first else {
