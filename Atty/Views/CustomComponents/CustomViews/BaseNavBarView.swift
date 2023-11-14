@@ -25,10 +25,6 @@ class BaseNavBarView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
-    @objc func mock() {
-        RealmDBService.addMockDate()
-    }
 }
 
 extension BaseNavBarView {
@@ -40,7 +36,6 @@ extension BaseNavBarView {
         notificationButton = UIButton(type: .system)
         notificationButton.setImage(UIImage(named: "notificationButton"), for: .normal)
         notificationButton.tintColor = DS.Colors.standartTextColor
-        notificationButton.addTarget(self, action: #selector(mock), for: .touchUpInside)
         addSubview(notificationButton)
         
         notificationButton.snp.makeConstraints {
